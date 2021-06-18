@@ -8,8 +8,11 @@
 
         &-inner {
             max-width: @consonantDesktopMinWidth;
+            width: 83.3%;
 
             .margin-auto;
+
+            border: 1px solid red;
 
             > *:last-of-type {
                 display: block;
@@ -19,6 +22,21 @@
             }
         }
 
+        &-inner-unlimit {
+            width: 83.3%;
+
+            .margin-auto;
+
+            border: 2px solid pink;
+        }
+
+        &-inner-margins {
+            width: 100%;
+            margin: 0;
+            padding: 0 32px;
+            border: 2px solid green;
+        }
+
         @media @consonant-tablet-up {
             &-inner > *:last-of-type {
                 min-height: 625px;
@@ -26,17 +44,17 @@
         }
 
         @media @consonant-desktop-up {
-            &-inner {
-                display: grid;
-                grid-template-columns: 204px auto;
-                justify-content: center;
-                gap: 32px;
+            // &-inner {
+            //     display: grid;
+            //     grid-template-columns: 204px auto;
+            //     justify-content: center;
+            //     gap: 32px;
 
-                > *:only-child {
-                    grid-column: ~ "1/-1";
-                    width: 100vw;
-                }
-            }
+            //     > *:only-child {
+            //         grid-column: ~ "1/-1";
+            //         width: 100vw;
+            //     }
+            // }
         }
     }
 }
