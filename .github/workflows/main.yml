@@ -1,6 +1,7 @@
 on:
   push:
-  
+    branches: [ new_grid_layout ]
+    
   workflow_dispatch:
 
 jobs:
