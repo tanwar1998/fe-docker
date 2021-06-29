@@ -5,7 +5,7 @@ import {
     getSelectedItemsCount,
 } from './general';
 
-import { DEFAULT_CONFIG } from './constants';
+import { DEFAULT_CONFIG, SORT_TYPES } from './constants';
 
 
 /**
@@ -43,8 +43,10 @@ export const makeConfigGetter = config => (object, key) => {
  */
 export function getDefaultSortOption(config, query) {
     const sortOptions = makeConfigGetter(config)('sort', 'options');
+    const getSortConstant = SORT_TYPES[query.toUpperCase()];
+
     return sortOptions.find(option => option.sort === query) || {
-        label: 'Featured',
-        sort: 'featured',
+        label: getSortConstant || 'Featured',
+        sort: getSortConstant || 'featured',
     };
 }
