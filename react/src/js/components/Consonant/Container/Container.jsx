@@ -118,6 +118,7 @@ const Container = (props) => {
     const collectionIdentifier = getConfig('analytics', 'collectionIdentifier');
     const authoredMode = getConfig('collection', 'mode');
     const authoredLayoutContainer = getConfig('collection', 'layout.container');
+    const authoredHideCardBordersForThemes = getConfig('collection', 'hideCardBordersForThemes');
 
     /**
      **** Constants ****
@@ -735,13 +736,14 @@ const Container = (props) => {
     /**
      * Class name for the authored theme:
      * light, dark, darkest;
+     * defines themes for which card borders should be hidden;
      * @type {String}
      */
     const themeClass = classNames({
         'consonant-u-themeLight': authoredMode === THEME_TYPE.LIGHT,
         'consonant-u-themeDark': authoredMode === THEME_TYPE.DARK,
         'consonant-u-themeDarkest': authoredMode === THEME_TYPE.DARKEST,
-    });
+    }, authoredHideCardBordersForThemes.map(el => `consonant-u-hideCardBorders${el[0].toUpperCase() + el.slice(1)}`));
 
     /**
      * Class name for the consonant wrapper:
