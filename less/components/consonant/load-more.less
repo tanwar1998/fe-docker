@@ -21,32 +21,6 @@
             .font(@line-height: 1.1875rem, @color: @consonantDarkGrey400, @align: center);
         }
 
-        &-btn {
-            max-width: 75%;
-            box-sizing: border-box;
-            padding: 5px 13px;
-
-            .font(@line-height: 1.1875rem, @color: @consonantDarkGrey400, @align: center);
-
-            text-transform: capitalize;
-            background-color: transparent;
-            border: 2px solid @consonantDarkGrey400;
-            border-radius: 30px;
-            outline: 0;
-            user-select: none;
-            transition:
-                color @consonantTransitionTime @consonantTransitionFunc,
-                background-color @consonantTransitionTime @consonantTransitionFunc;
-
-            &:hover,
-            &:active {
-                background-color: @consonantDarkGrey500;
-                color: @consonantWhite;
-            }
-
-            .focused;
-        }
-
         @media @consonant-tablet-up {
             padding-bottom: 121px;
         }

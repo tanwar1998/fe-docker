@@ -10,6 +10,7 @@ import { parseToPrimitive } from './components/Consonant/Helpers/general';
 // import ConsonantPageDOM from './components/Page/ConsonantPageDOM';
 import Container from './components/Consonant/Container/Container';
 import consonantPageRDC from './components/Page/ConsonantPageDOM';
+import { Provider, defaultTheme } from '@adobe/react-spectrum';
 
 // // const searchPage = new SearchPageDOM();
 // const collectionPage = new CollectionPageDOM();
@@ -25,7 +26,9 @@ class ConsonantCardCollection {
     constructor(config, element) {
         ReactDOM.render((
             <React.Fragment>
-                <Container config={parseToPrimitive(config)} />
+                <Provider theme={defaultTheme}>
+                    <Container config={parseToPrimitive(config)} />
+                </Provider>
             </React.Fragment>), element);
     }
 }

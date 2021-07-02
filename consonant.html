@@ -53,14 +53,19 @@
             collection: {
                 mode: "dark", // Can be "lightest", "light", "dark", "darkest";
                 layout: {
-                    type: '4up', // Can be "2up", "3up", "4up", "5up";
+                    type: '3up', // Can be "2up", "3up", "4up", "5up";
                     gutter: '4x', // Can be "2x", "3x", "4x";
                     container: '1200MaxWidth', // Can be "83Percent", "1200MaxWidth", "32Margin";
                 },
                 resultsPerPage: '10',
                 endpoint: "./tests/card-collection/json-response-tests/smoke-tests/success-stories.json",
                 totalCardsToShow: '100',
-                cardStyle: "3:4", // available options: "1:2", "3:4", "full-card", "half-height", "custom-card", "double-wide";
+                cardStyle: "1:2", // available options: "1:2", "3:4", "full-card", "half-height", "custom-card", "double-wide";
+                button: {
+                    style: 'cta', // Can be "cta", "overBackground", "primary", "secondary", "negative";
+                    modifier: 'isQuiet',
+                    state: 'enabled',
+                },
                 showTotalResults: 'true',
                 i18n: {
                     prettyDateIntervalFormat: '{LLL} {dd} | {timeRange} {timeZone}',
@@ -71,7 +76,84 @@
                 },
                 hideCardBordersForThemes: ['dark', 'darkest'], // Can be 'lightest', 'light', 'dark', 'darkest';
             },
-            featuredCards: [],
+            featuredCards: [
+            {
+                "id": "a667716a-ae81-3986-b354-f728b6ff8b47",
+                "showCard": {
+                    "from": "2020-10-01T20:00:00Z",
+                    "until": "2025-10-31T21:45:00Z"
+                },
+                "styles": {
+                    "typeOverride": "",
+                    "backgroundImage": "https://www.adobe.com/content/dam/www/us/en/customer-success-stories/thumbnails/DOTCOM-17549_CustomerStory-HellyHansen-384x220.jpg"
+                },
+                "overlays": {
+                    "banner": {
+                        "backgroundColor": "",
+                        "fontColor": "",
+                        "description": "",
+                        "icon": ""
+                    },
+                    "logo": {},
+                    "label": {},
+                    "videoButton": {}
+                },
+                "tags": [
+                    {
+                        "id": "adobe-com-enterprise:content-type/customer-story"
+                    },
+                    {
+                        "id": "adobe-com-enterprise:business-size/enterprise"
+                    },
+                    {
+                        "id": "adobe-com-enterprise:product/experience-manager"
+                    },
+                    {
+                        "id": "adobe-com-enterprise:topic/content-management"
+                    },
+                    {
+                        "id": "adobe-com-enterprise:industry/retail"
+                    },
+                    {
+                        "id": "adobe-com-enterprise:topic/commerce"
+                    },
+                    {
+                        "id": "adobe-com-enterprise:product/magento-commerce"
+                    }
+                ],
+                "contentArea": {
+                    "detailText": "Retail",
+                    "description": "Featured card",
+                    "title": "Helly Hansen boosted revenue by 45% with Magento Commerce.",
+                    "dateDetailText": {}
+                },
+                "footer": [
+                    {
+                        "divider": true,
+                        "left": [
+                            {
+                                "type": "bookmark",
+                                "saveCardIcon": "https://caas-chimera.s3-us-west-1.amazonaws.com/icons/saved_bookmark.svg",
+                                "unsaveCardIcon": "https://caas-chimera.s3-us-west-1.amazonaws.com/icons/unsaved_bookmark.svg",
+                                "cardSaveText": "Save Card",
+                                "cardUnsaveText": "Unsave Card"
+                            }
+                        ],
+                        "center": [],
+                        "right": [
+                            {
+                                "type": "button",
+                                "text": "Read",
+                                "href": "https://www.adobe.com/customer-success-stories/helly-hansen-case-study.html",
+                                "iconSrc": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-WOH8hVPFdbijqJwu2opUeCH06LdsSWgP2Q&usqp=CAU",
+                                "iconPos": "aftertext",
+                            }
+                        ]
+                    }
+                ],
+                "cardDate": "2020-07-23T05:44:14.745Z"
+            }
+            ],
             filterPanel: {
                 enabled: 'true',
                 type: 'top',

@@ -4,6 +4,8 @@ import {
     func,
 } from 'prop-types';
 
+import { Button as ButtonSpectrum } from '@adobe/react-spectrum';
+
 import { useConfig } from '../Helpers/hooks';
 
 const loadMoreType = {
@@ -67,14 +69,14 @@ const LoadMore = ({
                     {summaryText}
                 </p>
                 {shouldDisplayLoadMoreBtn &&
-                    <button
+                    <ButtonSpectrum
                         type="button"
+                        variant="primary"
                         data-testid="consonant-LoadMore-btn"
-                        className="consonant-LoadMore-btn"
-                        onClick={onClick}
+                        onPress={onClick}
                         tabIndex="0">
                         {loadMoreButtonText}
-                    </button>
+                    </ButtonSpectrum>
                 }
             </div>
         </div>)

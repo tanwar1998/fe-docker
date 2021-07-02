@@ -12,3 +12,49 @@ button {
 
     cursor: pointer;
 }
+
+/* Changes to styles of Spectrum Button component */
+
+button[class *= spectrum-Button],
+a[class *= spectrum-Button] {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 32px;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+    cursor: pointer;
+
+    .focused;
+
+    span {
+        .line-clamp(2);
+
+        font-size: 14px;
+        line-height: 15px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .consonant-Button-ico {
+        width: auto;
+        height: auto;
+        max-width: 24px;
+        max-height: 24px;
+        margin-right: 8px;
+        overflow: hidden;
+        object-fit: cover;
+        user-select: none;
+
+        &.consonant-Button-ico--last {
+            order: 1;
+            margin-left: 8px;
+            margin-right: 0;
+        }
+
+        &:only-child {
+            margin: 0;
+        }
+    }
+}

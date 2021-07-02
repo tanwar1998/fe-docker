@@ -2,15 +2,13 @@ import React from 'react';
 import className from 'classnames';
 import { string } from 'prop-types';
 
-const BUTTON_STYLE = {
-    PRIMARY: 'primary',
-    CTA: 'call-to-action',
-};
+import { Button as ButtonSpectrum } from '@adobe/react-spectrum';
+
+import { useConfig } from '../../Helpers/hooks';
 
 const buttonType = {
     text: string,
     href: string,
-    style: string,
     iconSrc: string,
     iconAlt: string,
     iconPos: string,
@@ -22,61 +20,63 @@ const defaultProps = {
     iconSrc: '',
     iconAlt: '',
     iconPos: '',
-    style: BUTTON_STYLE.CTA,
 };
 
 /**
- * Button Infobit (shown in 3:2 Card Footer)
+ * Button Infobit (shown in 1:2 Card Footer)
  *
  * @component
  * @example
  * const props= {
-    style: String,
     href: String,
     text: String,
+    iconSrc: String,
+    iconAlt: String,
+    iconPos: String,
  * }
  * return (
  *   <Button {...props}/>
  * )
  */
 const Button = ({
-    style,
     text,
     href,
     iconSrc,
     iconAlt,
     iconPos,
 }) => {
-    const isCtaButton = style === BUTTON_STYLE.CTA;
-    const buttonClass = className({
-        'consonant-BtnInfobit': true,
-        'consonant-BtnInfobit--cta': isCtaButton,
-    });
+    const getConfig = useConfig();
+    const buttonStyle = getConfig('collection', 'button');
+
     const iconClass = className({
-        'consonant-BtnInfobit-ico': true,
-        'consonant-BtnInfobit-ico--last': iconPos.toLowerCase() === 'aftertext',
+        'consonant-Button-ico': true,
+        'consonant-Button-ico--last': iconPos.toLowerCase() === 'aftertext',
     });
 
     return (
-        <a
-            className={buttonClass}
+        <ButtonSpectrum
+            variant={buttonStyle.style || 'cta'}
+            type="button"
+            elementType="a"
+            className="consonant-BtnInfobit"
             data-testid="consonant-BtnInfobit"
             tabIndex="0"
-            rel="noopener noreferrer"
             target="_blank"
-            href={href}>
+            href={href}
+            isQuiet={buttonStyle.modifier === 'isQuiet'}
+            isDisabled={buttonStyle.state === 'disabled'}
+            {...buttonStyle.props}>
             {iconSrc &&
-            <img
-                data-testid="consonant-BtnInfobit-ico"
-                src={iconSrc}
-                width="20"
-                height="20"
-                className={iconClass}
-                alt={iconAlt}
-                loading="lazy" />
-            }
+                <img
+                    data-testid="consonant-BtnInfobit-ico"
+                    src={iconSrc}
+                    width="20"
+                    height="20"
+                    className={iconClass}
+                    alt={iconAlt}
+                    loading="lazy" />}
             <span>{text}</span>
-        </a>
+        </ButtonSpectrum>
     );
 };
 
