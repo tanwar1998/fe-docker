@@ -1,6 +1,9 @@
 import React from 'react';
 import className from 'classnames';
 import { string } from 'prop-types';
+import { Button as ButtonSpectrum } from '@adobe/react-spectrum';
+
+import { useConfig } from '../../Helpers/hooks';
 
 const BUTTON_STYLE = {
     PRIMARY: 'primary',
@@ -47,36 +50,39 @@ const Button = ({
     iconAlt,
     iconPos,
 }) => {
-    const isCtaButton = style === BUTTON_STYLE.CTA;
-    const buttonClass = className({
-        'consonant-BtnInfobit': true,
-        'consonant-BtnInfobit--cta': isCtaButton,
-    });
+    const getConfig = useConfig();
+    const buttonStyle = getConfig('collection', 'button');
+
+    const isCtaButton = style === BUTTON_STYLE.CTA ? 'cta' : 'primary';
+
     const iconClass = className({
         'consonant-BtnInfobit-ico': true,
         'consonant-BtnInfobit-ico--last': iconPos.toLowerCase() === 'aftertext',
     });
 
     return (
-        <a
-            className={buttonClass}
+        <ButtonSpectrum
+            {...buttonStyle}
+            variant={buttonStyle.style || isCtaButton}
+            type="button"
             data-testid="consonant-BtnInfobit"
             tabIndex="0"
+            UNSAFE_style={{ cursor: 'pointer' }}
             rel="noopener noreferrer"
             target="_blank"
             href={href}>
             {iconSrc &&
-            <img
-                data-testid="consonant-BtnInfobit-ico"
-                src={iconSrc}
-                width="20"
-                height="20"
-                className={iconClass}
-                alt={iconAlt}
-                loading="lazy" />
+                <img
+                    data-testid="consonant-BtnInfobit-ico"
+                    src={iconSrc}
+                    width="20"
+                    height="20"
+                    className={iconClass}
+                    alt={iconAlt}
+                    loading="lazy" />
             }
-            <span>{text}</span>
-        </a>
+            {text}
+        </ButtonSpectrum>
     );
 };
 

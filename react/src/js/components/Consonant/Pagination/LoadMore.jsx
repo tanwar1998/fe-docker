@@ -3,6 +3,7 @@ import {
     number,
     func,
 } from 'prop-types';
+import { Button } from '@adobe/react-spectrum';
 
 import { useConfig } from '../Helpers/hooks';
 
@@ -67,14 +68,15 @@ const LoadMore = ({
                     {summaryText}
                 </p>
                 {shouldDisplayLoadMoreBtn &&
-                    <button
+                    <Button
+                        variant="primary"
                         type="button"
+                        UNSAFE_style={{ cursor: 'pointer' }}
                         data-testid="consonant-LoadMore-btn"
-                        className="consonant-LoadMore-btn"
                         onClick={onClick}
                         tabIndex="0">
                         {loadMoreButtonText}
-                    </button>
+                    </Button>
                 }
             </div>
         </div>)
