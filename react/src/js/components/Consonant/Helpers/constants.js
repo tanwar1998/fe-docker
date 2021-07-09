@@ -70,6 +70,7 @@ export const SORT_TYPES = {
     FEATURED: 'featured',
     TITLEASC: 'titleasc',
     TITLEDESC: 'titledesc',
+    RANDOM: 'random',
 };
 
 /**
