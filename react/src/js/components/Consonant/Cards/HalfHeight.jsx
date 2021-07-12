@@ -3,8 +3,12 @@ import {
     string,
     shape,
 } from 'prop-types';
+import classNames from 'classnames';
 
-import { useLazyLoading } from '../Helpers/hooks';
+import {
+    useConfig,
+    useLazyLoading,
+} from '../Helpers/hooks';
 import {
     stylesType,
     contentAreaType,
@@ -67,6 +71,22 @@ const HalfHeightCard = (props) => {
         },
     } = props;
 
+    const getConfig = useConfig();
+
+    /**
+     **** Authored Configs ****
+    */
+    const setCardBorders = getConfig('collection', 'setCardBorders');
+
+    /**
+     * Class name for the card:
+     * @type {String}
+    */
+    const cardClass = classNames({
+        'consonant-HalfHeightCard': true,
+        'consonant-noneBorders': !setCardBorders,
+    });
+
     /**
      * Creates a card image DOM reference
      * @returns {Object} - card image DOM reference
@@ -89,7 +109,7 @@ const HalfHeightCard = (props) => {
             href={ctaLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="consonant-HalfHeightCard"
+            className={cardClass}
             title=""
             daa-lh={lh}
             tabIndex="0"

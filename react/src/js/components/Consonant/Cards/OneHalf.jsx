@@ -7,6 +7,7 @@ import {
     func,
     arrayOf,
 } from 'prop-types';
+import classNames from 'classnames';
 
 import CardFooter from './CardFooter/CardFooter';
 import prettyFormatDate from '../Helpers/prettyFormat';
@@ -114,6 +115,16 @@ const OneHalfCard = (props) => {
      */
     const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
+    const setCardBorders = getConfig('collection', 'setCardBorders');
+
+    /**
+     * Class name for the card:
+     * @type {String}
+    */
+    const cardClass = classNames({
+        'consonant-OneHalfCard': true,
+        'consonant-noneBorders': !setCardBorders,
+    });
 
     /**
      * Creates a card image DOM reference
@@ -175,7 +186,7 @@ const OneHalfCard = (props) => {
     return (
         <div
             daa-lh={lh}
-            className="consonant-OneHalfCard"
+            className={cardClass}
             data-testid="consonant-OneHalfCard"
             id={id}>
             <div

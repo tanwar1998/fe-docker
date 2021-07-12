@@ -3,8 +3,12 @@ import {
     string,
     shape,
 } from 'prop-types';
+import classNames from 'classnames';
 
-import { useLazyLoading } from '../Helpers/hooks';
+import {
+    useConfig,
+    useLazyLoading,
+} from '../Helpers/hooks';
 import {
     stylesType,
     contentAreaType,
@@ -80,6 +84,22 @@ const FullCard = (props) => {
         },
     } = props;
 
+    const getConfig = useConfig();
+
+    /**
+     **** Authored Configs ****
+     */
+    const setCardBorders = getConfig('collection', 'setCardBorders');
+
+    /**
+     * Class name for the card:
+     * @type {String}
+    */
+    const cardClass = classNames({
+        'consonant-FullCard': true,
+        'consonant-noneBorders': !setCardBorders,
+    });
+
     /**
      * Creates a card image DOM reference
      * @returns {Object} - card image DOM reference
@@ -100,7 +120,7 @@ const FullCard = (props) => {
     return (
         <div
             daa-lh={lh}
-            className="consonant-FullCard"
+            className={cardClass}
             data-testid="consonant-FullCard"
             id={id}>
             <div
@@ -136,7 +156,7 @@ const FullCard = (props) => {
                     </span>
                 }
 
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-FullCard-videoIco" /> }
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-FullCard-videoIco" />}
                 {logoSrc &&
                     <div
                         style={({

@@ -3,8 +3,12 @@ import {
     string,
     shape,
 } from 'prop-types';
+import classNames from 'classnames';
 
-import { useLazyLoading } from '../Helpers/hooks';
+import {
+    useConfig,
+    useLazyLoading,
+} from '../Helpers/hooks';
 import {
     stylesType,
     contentAreaType,
@@ -55,6 +59,22 @@ const DoubleWideCard = (props) => {
         },
     } = props;
 
+    const getConfig = useConfig();
+
+    /**
+     **** Authored Configs ****
+    */
+    const setCardBorders = getConfig('collection', 'setCardBorders');
+
+    /**
+     * Class name for the card:
+     * @type {String}
+    */
+    const cardClass = classNames({
+        'consonant-DoubleWideCard': true,
+        'consonant-noneBorders': !setCardBorders,
+    });
+
     /**
      * Creates a card image DOM reference
      * @returns {Object} - card image DOM reference
@@ -74,7 +94,7 @@ const DoubleWideCard = (props) => {
 
     return (
         <div
-            className="consonant-DoubleWideCard"
+            className={cardClass}
             daa-lh={lh}
             id={id}>
             <div

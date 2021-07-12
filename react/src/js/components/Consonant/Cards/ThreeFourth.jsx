@@ -3,6 +3,7 @@ import {
     string,
     shape,
 } from 'prop-types';
+import classNames from 'classnames';
 
 import prettyFormatDate from '../Helpers/prettyFormat';
 import {
@@ -95,6 +96,16 @@ const ThreeFourthCard = (props) => {
      */
     const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
+    const setCardBorders = getConfig('collection', 'setCardBorders');
+
+    /**
+     * Class name for the card:
+     * @type {String}
+    */
+    const cardClass = classNames({
+        'consonant-ThreeFourthCard': true,
+        'consonant-noneBorders': !setCardBorders,
+    });
 
     /**
      * Creates a card image DOM reference
@@ -128,7 +139,7 @@ const ThreeFourthCard = (props) => {
     return (
         <div
             daa-lh={lh}
-            className="consonant-ThreeFourthCard"
+            className={cardClass}
             data-testid="consonant-ThreeFourthCard"
             id={id}>
             <div
