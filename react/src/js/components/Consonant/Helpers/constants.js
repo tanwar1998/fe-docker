@@ -162,6 +162,9 @@ export const DEFAULT_CONFIG = {
     pagination: {
         enabled: true,
         type: 'loadMore',
+        loadMoreButton: {
+            style: 'primary',
+        },
         paginatorQuantityText: 'Showing {}-{} of {} Results',
         paginatorPrevLabel: 'Previous',
         paginatorNextLabel: 'Next',
