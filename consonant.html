@@ -51,13 +51,13 @@
     <script type="text/javascript">
         var config = {
             collection: {
-                mode: "darkest", // Can be empty, "light", "dark", "darkest";
+                mode: "light", // Can be empty, "light", "dark", "darkest";
                 layout: {
                     type: '3up', // Can be "2up", "3up", "4up", "5up";
                     gutter: '4x', // Can be "2x", "3x", "4x";
                     container: '1200MaxWidth', // Can be "83Percent", "1200MaxWidth", "32Margin";
                 },
-                resultsPerPage: '20',
+                resultsPerPage: '5',
                 endpoint: "./tests/card-collection/json-response-tests/smoke-tests/smoke.json",
                 totalCardsToShow: '100',
                 cardStyle: "1:2", // available options: "1:2", "3:4", "full-card", "half-height", "custom-card", "double-wide";
@@ -215,6 +215,9 @@
             pagination: {
                 enabled: 'true',
                 type: 'loadMore',
+                loadMoreButton: {
+                  style: "primary", // Can be "primary", "over-background";
+                },
                 i18n: {
                     loadMore: {
                         btnText: 'Load More',

@@ -1,3 +1,7 @@
+/* Available modifiers:
+- .consonant-LoadMore--overBg;
+*/
+
 .consonant {
     &-LoadMore {
         display: block;
@@ -18,7 +22,7 @@
             max-width: 75%;
             margin: 0 0 14px;
 
-            .font(@line-height: 1.1875rem, @color: @consonantDarkGrey400, @align: center);
+            .font(@line-height: 1.1875rem, @color: @consonantGray800, @align: center);
         }
 
         &-btn {
@@ -26,25 +30,49 @@
             box-sizing: border-box;
             padding: 5px 13px;
 
-            .font(@line-height: 1.1875rem, @color: @consonantDarkGrey400, @align: center);
+            .font(@line-height: 1.1875rem, @weight: 700, @color: @consonantGray800, @align: center);
 
             text-transform: capitalize;
             background-color: transparent;
-            border: 2px solid @consonantDarkGrey400;
+            border: 2px solid @consonantGray800;
             border-radius: 30px;
             outline: 0;
             user-select: none;
             transition:
                 color @consonantTransitionTime @consonantTransitionFunc,
-                background-color @consonantTransitionTime @consonantTransitionFunc;
+                background-color @consonantTransitionTime @consonantTransitionFunc,
+                border-color @consonantTransitionTime @consonantTransitionFunc;
 
-            &:hover,
+            &:hover {
+                background-color: @consonantGray800;
+                color: @consonantGray50;
+            }
+
             &:active {
-                background-color: @consonantDarkGrey500;
-                color: @consonantWhite;
+                background-color: @consonantGray900;
+                border-color: @consonantGray900;
+                color: @consonantGray50;
             }
 
             .focused;
+        }
+
+        /* Related to the modificators */
+
+        &--overBg &-btn {
+            border-color: @consonantBaseColor;
+            color: @consonantBaseColor;
+
+            &:hover,
+            &:active {
+                background-color: @consonantBaseColor;
+                border-color: @consonantBaseColor;
+                color: @consonantGray800;
+            }
+        }
+
+        &--overBg &-text {
+            color: @consonantBaseColor;
         }
 
         @media @consonant-tablet-up {
