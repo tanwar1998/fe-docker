@@ -1,18 +1,11 @@
-import {
-    DateTime,
-    Interval,
-} from 'luxon';
-
 /**
 * Gets the Localized Local Time Zone
 * @param {Date} someTimeUTC - An authored time in UTC
 * @returns {Date} - Locale Time Zone in abbreviated named offset
 * @example - EST
 */
-const getLocalTimeZone = (someTimeUTC) => {
-    const someTime = DateTime.fromISO(someTimeUTC);
-    return someTime.toFormat('ZZZZ');
-};
+const getLocalTimeZone = someTimeUTC => new Date(someTimeUTC)
+    .toLocaleTimeString('en-us', { timeZoneName: 'short' }).split(' ')[2];
 
 /**
 * Gets the Local Time Interval
@@ -23,10 +16,12 @@ const getLocalTimeZone = (someTimeUTC) => {
 * @example - 13:00 - 14:45
 */
 const getTimeInterval = (startTimeUTC, endTimeUTC, someLocale) => {
-    const start = DateTime.fromISO(startTimeUTC, { locale: someLocale });
-    const end = DateTime.fromISO(endTimeUTC, { locale: someLocale });
-    const i = Interval.fromDateTimes(start, end);
-    return i.toFormat('T', { locale: someLocale });
+    const options = { hour: '2-digit', minute: '2-digit' };
+
+    const startTime = new Date(startTimeUTC).toLocaleTimeString(someLocale, options);
+    const endTime = new Date(endTimeUTC).toLocaleTimeString(someLocale, options);
+
+    return `${startTime} - ${endTime}`;
 };
 
 /**
@@ -35,10 +30,8 @@ const getTimeInterval = (startTimeUTC, endTimeUTC, someLocale) => {
 * @returns {Date} - A day of the month, padded to 2
 * @example - 06
 */
-const getDay = (someTimeUTC, someLocale) => {
-    const start = DateTime.fromISO(someTimeUTC, { locale: someLocale });
-    return start.toFormat('dd', { locale: someLocale });
-};
+const getDay = (someTimeUTC, someLocale) => new Date(someTimeUTC)
+    .toLocaleDateString(someLocale, { day: '2-digit' });
 
 /**
 * Gets the localized month
@@ -46,10 +39,8 @@ const getDay = (someTimeUTC, someLocale) => {
 * @returns {Date} - Month as an abbreviated localized string
 * @example - Aug
 */
-const getMonth = (someTimeUTC, someLocale) => {
-    const start = DateTime.fromISO(someTimeUTC, { locale: someLocale });
-    return start.toFormat('LLL', { locale: someLocale });
-};
+const getMonth = (someTimeUTC, someLocale) => new Date(someTimeUTC)
+    .toLocaleDateString(someLocale, { month: 'short' });
 
 /**
 * Gets Date Interval for Infobit in pretty format
@@ -64,6 +55,6 @@ const getPrettyDateInterval = (startDateUTC, endDateUTC, locale, i18nFormat) => 
     .replace('{LLL}', getMonth(startDateUTC, locale))
     .replace('{dd}', getDay(startDateUTC, locale))
     .replace('{timeRange}', getTimeInterval(startDateUTC, endDateUTC, locale))
-    .replace('{timeZone}', getLocalTimeZone(endDateUTC));
+    .replace('{timeZone}', getLocalTimeZone(startDateUTC));
 
 export default getPrettyDateInterval;
