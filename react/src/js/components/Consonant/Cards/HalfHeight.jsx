@@ -1,7 +1,9 @@
 import React from 'react';
+import classNames from 'classnames';
 import {
     string,
     shape,
+    bool,
 } from 'prop-types';
 
 import { useLazyLoading } from '../Helpers/hooks';
@@ -18,6 +20,7 @@ const halfHeightCardType = {
     styles: shape(stylesType),
     overlays: shape(overlaysType),
     contentArea: shape(contentAreaType),
+    renderBorder: bool,
 };
 
 const defaultProps = {
@@ -26,6 +29,7 @@ const defaultProps = {
     ctaLink: '',
     overlays: {},
     contentArea: {},
+    renderBorder: true,
 };
 
 /**
@@ -39,6 +43,7 @@ const defaultProps = {
     styles: Object,
     contentArea: Object,
     overlays: Object,
+    renderBorder: Boolean,
  * }
  * return (
  *   <HalfHeightCard {...props}/>
@@ -65,7 +70,18 @@ const HalfHeightCard = (props) => {
                 icon: bannerIcon,
             },
         },
+        renderBorder,
     } = props;
+
+    /**
+     * Class name for the card:
+     * whether card border should be rendered or no;
+     * @type {String}
+     */
+    const cardClassName = classNames({
+        'consonant-HalfHeightCard': true,
+        'consonant-u-noBorders': !renderBorder,
+    });
 
     /**
      * Creates a card image DOM reference
@@ -89,7 +105,7 @@ const HalfHeightCard = (props) => {
             href={ctaLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="consonant-HalfHeightCard"
+            className={cardClassName}
             title=""
             daa-lh={lh}
             tabIndex="0"

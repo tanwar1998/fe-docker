@@ -71,6 +71,7 @@ const Grid = (props) => {
     const collectionStyleOverride = getConfig('collection', 'cardStyle');
     const cardsGridLayout = getConfig('collection', 'layout.type');
     const cardsGridGutter = getConfig('collection', 'layout.gutter');
+    const renderCardsBorders = getConfig('collection', 'setCardBorders');
     const dateFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
     const paginationType = getConfig('pagination', 'type');
@@ -145,7 +146,8 @@ const Grid = (props) => {
                         <FullCard
                             lh={`Card ${index} | ${card.contentArea.title}`}
                             key={card.id}
-                            {...card} />
+                            {...card}
+                            renderBorder={renderCardsBorders} />
                     );
                 } else if (cardStyle === CARD_STYLES.SQUARE) {
                     return (
@@ -153,21 +155,24 @@ const Grid = (props) => {
                             lh={`Card ${index} | ${card.contentArea.title}`}
                             key={card.id}
                             isSmallDevice={isSmallDevice}
-                            {...card} />
+                            {...card}
+                            renderBorder={renderCardsBorders} />
                     );
                 } else if (cardStyle === CARD_STYLES.HALF_HEIGHT) {
                     return (
                         <HalfHeightCard
                             lh={`Card ${index} | ${card.contentArea.title}`}
                             key={card.id}
-                            {...card} />
+                            {...card}
+                            renderBorder={renderCardsBorders} />
                     );
                 } else if (cardStyle === CARD_STYLES.DOUBLE_WIDE) {
                     return (
                         <DoubleWideCard
                             lh={`Card ${index} | ${card.contentArea.title}`}
                             key={card.id}
-                            {...card} />
+                            {...card}
+                            renderBorder={renderCardsBorders} />
                     );
                 } else if (cardStyle === CARD_STYLES.CUSTOM) {
                     return parseHTML(customCard(card));
@@ -180,7 +185,8 @@ const Grid = (props) => {
                         isSmallDevice={isSmallDevice}
                         onClick={onCardBookmark}
                         dateFormat={dateFormat}
-                        locale={locale} />
+                        locale={locale}
+                        renderBorder={renderCardsBorders} />
                 );
             })}
         </div>

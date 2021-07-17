@@ -1,7 +1,9 @@
 import React from 'react';
+import classNames from 'classnames';
 import {
     string,
     shape,
+    bool,
 } from 'prop-types';
 
 import { useLazyLoading } from '../Helpers/hooks';
@@ -16,6 +18,7 @@ const doubleWideCardType = {
     lh: string,
     styles: shape(stylesType),
     contentArea: shape(contentAreaType),
+    renderBorder: bool,
 };
 
 const defaultProps = {
@@ -23,6 +26,7 @@ const defaultProps = {
     lh: '',
     ctaLink: '',
     contentArea: {},
+    renderBorder: true,
 };
 
 /**
@@ -35,6 +39,7 @@ const defaultProps = {
     ctaLink: String,
     styles: Object,
     contentArea: Object,
+    renderBorder: Boolean,
  * }
  * return (
  *   <DoubleWideCard {...props}/>
@@ -53,7 +58,18 @@ const DoubleWideCard = (props) => {
             description,
             detailText: label,
         },
+        renderBorder,
     } = props;
+
+    /**
+     * Class name for the card:
+     * whether card border should be rendered or no;
+     * @type {String}
+     */
+    const cardClassName = classNames({
+        'consonant-DoubleWideCard': true,
+        'consonant-u-noBorders': !renderBorder,
+    });
 
     /**
      * Creates a card image DOM reference
@@ -74,7 +90,7 @@ const DoubleWideCard = (props) => {
 
     return (
         <div
-            className="consonant-DoubleWideCard"
+            className={cardClassName}
             daa-lh={lh}
             id={id}>
             <div

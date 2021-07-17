@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import {
     string,
     shape,
@@ -25,6 +26,7 @@ const threeFourthCardType = {
     styles: shape(stylesType),
     overlays: shape(overlaysType),
     contentArea: shape(contentAreaType),
+    renderBorder: bool,
 };
 
 const defaultProps = {
@@ -34,6 +36,7 @@ const defaultProps = {
     overlays: {},
     contentArea: {},
     lh: '',
+    renderBorder: true,
 };
 
 /**
@@ -48,6 +51,7 @@ const defaultProps = {
     styles: Object,
     contentArea: Object,
     overlays: Object,
+    renderBorder: Boolean,
  * }
  * return (
  *   <ThreeFourthCard {...props}/>
@@ -91,6 +95,7 @@ const ThreeFourthCard = (props) => {
                 description: badgeText,
             },
         },
+        renderBorder,
     } = props;
 
     const getConfig = useConfig();
@@ -100,6 +105,16 @@ const ThreeFourthCard = (props) => {
      */
     const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
+
+    /**
+     * Class name for the card:
+     * whether card border should be rendered or no;
+     * @type {String}
+     */
+    const cardClassName = classNames({
+        'consonant-ThreeFourthCard': true,
+        'consonant-u-noBorders': !renderBorder,
+    });
 
     /**
      * Creates a card image DOM reference
@@ -133,7 +148,7 @@ const ThreeFourthCard = (props) => {
     return (
         <div
             daa-lh={lh}
-            className="consonant-ThreeFourthCard"
+            className={cardClassName}
             data-testid="consonant-ThreeFourthCard"
             id={id}>
             <div
