@@ -47,8 +47,17 @@
             }
         }
 
+        &-videoIco {
+            .video-button-styles;
+
+            top: -44px;
+            left: 24px;
+            right: auto;
+        }
+
         &-inner {
             display: flex;
+            position: relative;
             flex-direction: column;
             padding: 8px 24px 32px;
             text-decoration: none;
@@ -56,10 +65,11 @@
 
         &-title {
             margin: 0 0 5px;
+            max-height: 1.25rem * 2;
             padding: 0;
 
             .font(1rem, 1.25rem, 700, @consonantBaseColor);
-            .line-clamp(3);
+            .line-clamp(2);
 
             :only-child {
                 margin-bottom: 0;
@@ -67,6 +77,9 @@
         }
 
         &-label {
+            display: block;
+            max-height: 1.3125rem;
+
             .font(0.875rem, 1.3125rem, 400, @consonantBaseColor);
             .line-clamp(1);
         }
@@ -120,6 +133,8 @@
 
         @media @consonant-600px-up {
             &-title {
+                max-height: 1.375rem * 2;
+
                 .font(1.125rem, 1.375rem, 700, @consonantBaseColor);
             }
         }

@@ -10,6 +10,7 @@ import {
     contentAreaType,
     overlaysType,
 } from '../types/card';
+import VideoButton from '../Modal/videoButton';
 
 const halfHeightCardType = {
     ctaLink: string,
@@ -63,6 +64,9 @@ const HalfHeightCard = (props) => {
                 fontColor: bannerFontColor,
                 backgroundColor: bannerBackgroundColor,
                 icon: bannerIcon,
+            },
+            videoButton: {
+                url: videoURL,
             },
         },
     } = props;
@@ -124,6 +128,7 @@ const HalfHeightCard = (props) => {
                 {title &&
                     <h2 className="consonant-HalfHeightCard-title">{title}</h2>
                 }
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" /> }
             </div>
         </a>
     );
