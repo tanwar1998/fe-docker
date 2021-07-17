@@ -119,33 +119,7 @@
             }
 
             &-videoIco {
-                display: block;
-                position: absolute;
-                width: @consonantCardVideoIcoSize;
-                height: @consonantCardVideoIcoSize;
-                right: 24px;
-                bottom: 18px;
-
-                .no-font;
-
-                background: transparent url(@consonantCardPlayIcoData) no-repeat 0 0;
-                background-size: cover;
-                z-index: 1;
-                transform-origin: 50% 50%;
-                opacity: 0;
-                transition: opacity @consonantTransitionTime @consonantTransitionFunc;
-                transition-delay: @consonantTransitionTime * 2;
-
-                &:hover,
-                &:active,
-                &:focus {
-                    opacity: 1;
-                    transform: scale(1.1);
-                    transition: transform @consonantTransitionTime @consonantTransitionFunc;
-                    transition-delay: 0;
-                }
-
-                .focused;
+                .video-button-styles;
             }
 
             &:hover &-videoIco {
