@@ -147,7 +147,6 @@
             }
         }
 
-<<<<<<< HEAD
         &-badge {
             position: absolute;
             display: block;
@@ -156,118 +155,6 @@
             top: 24px;
             left: 24px;
             padding: 4px 11px;
-=======
-        @media @consonant-600px-up {
-            grid-column: auto;
-            flex-direction: column;
-            align-items: stretch;
-            min-width: @consonantCardMinWidth;
-            max-width: @consonantCardMaxWidth;
-            height: @consonantCardHeight;
-            padding-bottom: 7px;
-            text-align: left;
-            overflow: visible;
-
-            &-inner {
-                display: flex;
-                flex-direction: column;
-                padding: 16px;
-                border-bottom-left-radius: 4px;
-                border-bottom-right-radius: 4px;
-            }
-
-            &-img {
-                flex-grow: 1;
-                width: 100%;
-                min-height: @consonant-OneHalfCard-imgHeigh;
-                border-top-left-radius: 4px;
-                border-top-right-radius: 4px;
-            }
-
-            &-videoIco {
-                .video-button-styles;
-            }
-
-            &:hover &-videoIco {
-                opacity: 1;
-            }
-
-            &-logo {
-                display: block;
-                position: absolute;
-                bottom: 16px;
-                left: 0;
-                padding: 7px 24px;
-                border: 1px solid transparent;
-                border-top-right-radius: 4px;
-                border-bottom-right-radius: 4px;
-                z-index: 1;
-
-                .no-font;
-
-                img {
-                    width: auto;
-                    height: auto;
-                    max-width: @consonantCardLogoImgMaxWidth;
-                    max-height: @consonant-cardLogoImgMaxHeight;
-                    object-fit: contain;
-                    user-select: none;
-                }
-            }
-
-            &-label {
-                max-width: 100%;
-                max-height: 1rem;
-                margin-bottom: 4px;
-
-                .font(@color: @consonantGray800);
-                .line-clamp(1);
-
-                text-decoration: none;
-            }
-
-            &-title {
-                margin-bottom: 7px;
-                max-height: 1.375rem * 2;
-
-                .line-clamp(2);
-            }
-
-            &-text {
-                max-height: 1.3125rem * 3;
-                margin: 0 0 14px;
-                padding: 0;
-
-                .font(0.875rem, 1.3125rem, 400, @consonantGray700);
-                .line-clamp(3);
-
-                &:empty {
-                    display: none;
-                }
-            }
-
-            &-badge {
-                display: block;
-                position: absolute;
-                max-width: 25%;
-                max-height: 43%;
-                top: 24px;
-                left: 24px;
-                padding: 4px 11px;
-
-                .font(0.75rem, 1rem, 400, @consonantGray700);
-
-                border: 1px solid @consonantGray600;
-                border-radius: 4px;
-                background-color: @consonantBaseColor;
-                overflow-y: auto;
-                z-index: 1;
-
-                &:first-child {
-                    max-width: calc(100% - 48px);
-                }
-            }
->>>>>>> fa34471... video button, make it visible all the time
 
             .font(0.75rem, 1rem, 400, @consonantGray700);
 
