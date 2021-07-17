@@ -158,15 +158,15 @@
             position: absolute;
             display: flex;
             justify-content: flex-start;
-            max-width: 56%;
-            max-height: 70%;
+            max-width: 60%;
+            max-height: 43%;
             top: 24px;
             right: 0;
             padding: 8px 13px 7px;
 
             .font(0.75rem, 1.0625rem, 700, @consonantBaseColor);
 
-            letter-spacing: 0.72px;
+            letter-spacing: 0.6px;
             text-transform: uppercase;
             border-top-left-radius: 4px;
             border-bottom-left-radius: 4px;
@@ -188,8 +188,8 @@
         &-badge {
             position: absolute;
             display: block;
-            max-width: 36%;
-            max-height: 50%;
+            max-width: 25%;
+            max-height: 43%;
             top: 24px;
             left: 24px;
             padding: 4px 11px;
@@ -201,6 +201,10 @@
             background-color: @consonantBaseColor;
             overflow-y: auto;
             z-index: 1;
+
+            &:first-child {
+                max-width: calc(100% - 48px);
+            }
         }
 
         @media @consonant-IE11-only {

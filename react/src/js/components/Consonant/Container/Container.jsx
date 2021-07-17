@@ -38,6 +38,7 @@ import {
     SORT_POPUP_LOCATION,
     THEME_TYPE,
     LAYOUT_CONTAINER,
+    SMALL_DEVICES_MAX_WIDTH,
 } from '../Helpers/constants';
 import {
     ConfigContext,
@@ -729,6 +730,12 @@ const Container = (props) => {
     const isLeftFilterPanel = filterPanelType === FILTER_PANEL.LEFT;
 
     /**
+     * Whether viewport width is less 600px
+     * @type {Boolean}
+     */
+    const isSmallDevice = windowWidth < SMALL_DEVICES_MAX_WIDTH;
+
+    /**
      **** Class names ****
      */
 
@@ -865,6 +872,7 @@ const Container = (props) => {
                                 <Fragment>
                                     <Grid
                                         resultsPerPage={resultsPerPage}
+                                        isSmallDevice={isSmallDevice}
                                         pages={currentPage}
                                         cards={gridCards}
                                         onCardBookmark={handleCardBookmarking} />

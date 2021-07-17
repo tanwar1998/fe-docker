@@ -4,6 +4,7 @@ import {
     func,
     shape,
     number,
+    bool,
     arrayOf,
 } from 'prop-types';
 import parseHTML from 'html-react-parser';
@@ -26,6 +27,7 @@ import {
 
 const cardsGridType = {
     pages: number,
+    isSmallDevice: bool,
     resultsPerPage: number,
     cards: arrayOf(shape(cardType)),
     onCardBookmark: func.isRequired,
@@ -33,6 +35,7 @@ const cardsGridType = {
 
 const defaultProps = {
     pages: 1,
+    isSmallDevice: true,
     cards: [],
     resultsPerPage: DEFAULT_SHOW_ITEMS_PER_PAGE,
 };
@@ -55,6 +58,7 @@ const defaultProps = {
 const Grid = (props) => {
     const {
         resultsPerPage,
+        isSmallDevice,
         pages,
         onCardBookmark,
         cards,
@@ -148,6 +152,7 @@ const Grid = (props) => {
                         <ThreeFourthCard
                             lh={`Card ${index} | ${card.contentArea.title}`}
                             key={card.id}
+                            isSmallDevice={isSmallDevice}
                             {...card} />
                     );
                 } else if (cardStyle === CARD_STYLES.HALF_HEIGHT) {
@@ -172,6 +177,7 @@ const Grid = (props) => {
                         lh={`Card ${index} | ${card.contentArea.title}`}
                         key={card.id}
                         {...card}
+                        isSmallDevice={isSmallDevice}
                         onClick={onCardBookmark}
                         dateFormat={dateFormat}
                         locale={locale} />

@@ -25,6 +25,7 @@ import VideoButton from '../Modal/videoButton';
 
 const oneHalfCardType = {
     isBookmarked: bool,
+    isSmallDevice: bool,
     dateFormat: string,
     id: string.isRequired,
     lh: string,
@@ -40,6 +41,7 @@ const defaultProps = {
     footer: [],
     styles: {},
     overlays: {},
+    isSmallDevice: true,
     dateFormat: '',
     contentArea: {},
     lh: '',
@@ -55,6 +57,7 @@ const defaultProps = {
  * const props= {
     id: String,
     ctaLink: String,
+    isSmallDevice: Boolean,
     styles: Object,
     contentArea: Object,
     overlays: Object,
@@ -70,6 +73,7 @@ const OneHalfCard = (props) => {
         lh,
         disableBookmarkIco,
         isBookmarked,
+        isSmallDevice,
         onClick,
         dateFormat,
         styles: {
@@ -204,14 +208,16 @@ const OneHalfCard = (props) => {
                         <span>{bannerDescription}</span>
                     </span>
                 }
-                {badgeText &&
+                {!isSmallDevice && badgeText &&
                     <span
                         className="consonant-OneHalfCard-badge">
                         {badgeText}
                     </span>
                 }
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-OneHalfCard-videoIco" /> }
-                {logoSrc &&
+                {!isSmallDevice && videoURL &&
+                    <VideoButton videoURL={videoURL} className="consonant-OneHalfCard-videoIco" />
+                }
+                {!isSmallDevice && logoSrc &&
                     <div
                         style={({
                             backgroundColor: logoBg,
@@ -228,7 +234,7 @@ const OneHalfCard = (props) => {
             </div>
             <div
                 className="consonant-OneHalfCard-inner">
-                {detailText &&
+                {!isSmallDevice && detailText &&
                     <span
                         data-testid="consonant-OneHalfCard-label"
                         className="consonant-OneHalfCard-label">
@@ -239,14 +245,13 @@ const OneHalfCard = (props) => {
                     className="consonant-OneHalfCard-title">
                     {title}
                 </h2>
-                {
-                    description &&
+                {!isSmallDevice && description &&
                     <p
                         className="consonant-OneHalfCard-text">
                         {description}
                     </p>
                 }
-                {footer.map(footerItem => (
+                {!isSmallDevice && footer.map(footerItem => (
                     <CardFooter
                         divider={footerItem.divider}
                         isFluid={footerItem.isFluid}

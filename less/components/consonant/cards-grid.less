@@ -45,28 +45,34 @@
         &--2up {
             grid-template-columns: repeat(auto-fit, minmax(@consonant-DoubleWideCard-mobileMinWidth, max-content));
 
-            .consonant-ThreeFourthCard,
-            .consonant-OneHalfCard,
             .consonant-HalfHeightCard,
             .consonant-DoubleWideCard,
             .consonant-FullCard {
-                max-width: @consonant-DoubleWideCard-maxWidth;
+                .grid-2-up-card-changes;
+            }
 
-                &-inner {
-                    width: @consonant-DoubleWideCard-maxWidth;
-                    max-width: 100%;
+            /* consonant-ThreeFourthCard and consonant-OneHalfCard follow specific layout below 600px */
+
+            @media @consonant-600px-up {
+                .consonant-ThreeFourthCard,
+                .consonant-OneHalfCard {
+                    .grid-2-up-card-changes;
                 }
             }
         }
 
         &--3up {
-            .consonant-ThreeFourthCard,
-            .consonant-OneHalfCard,
             .consonant-HalfHeightCard,
             .consonant-FullCard {
-                &-inner {
-                    width: @consonantCardMaxWidth;
-                    max-width: 100%;
+                .grid-3-up-card-changes;
+            }
+
+            /* consonant-ThreeFourthCard and consonant-OneHalfCard follow specific layout below 600px */
+
+            @media @consonant-600px-up {
+                .consonant-ThreeFourthCard,
+                .consonant-OneHalfCard {
+                    .grid-3-up-card-changes;
                 }
             }
         }
@@ -74,30 +80,30 @@
         &--4up {
             grid-template-columns: repeat(auto-fit, minmax(@consonant-CardsGrid-smallerCardMinWidth, max-content));
 
-            .consonant-ThreeFourthCard,
-            .consonant-OneHalfCard,
             .consonant-HalfHeightCard,
             .consonant-FullCard {
-                min-width: @consonant-CardsGrid-smallerCardMinWidth;
-                max-width: @consonant-CardsGrid-smallerCardMaxWidth;
-                height: @consonant-CardsGrid-smallerCardheight;
+                .grid-4-up-card-changes;
+            }
 
-                &-inner {
-                    width: @consonant-CardsGrid-smallerCardMaxWidth;
-                    max-width: 100%;
+            /* consonant-ThreeFourthCard and consonant-OneHalfCard follow specific layout below 600px */
+
+            @media @consonant-600px-up {
+                .consonant-ThreeFourthCard,
+                .consonant-OneHalfCard {
+                    .grid-4-up-card-changes;
                 }
-            }
 
-            .consonant-ThreeFourthCard .consonant-ThreeFourthCard-img {
-                min-height: @consonant-CardsGrid-smallerCardImgThreeFourthHeight;
-            }
+                .consonant-ThreeFourthCard .consonant-ThreeFourthCard-img {
+                    min-height: @consonant-CardsGrid-smallerCardImgThreeFourthHeight;
+                }
 
-            .consonant-OneHalfCard {
-                height: auto;
-            }
+                .consonant-OneHalfCard {
+                    height: auto;
+                }
 
-            .consonant-OneHalfCard .consonant-OneHalfCard-img {
-                min-height: @consonant-CardsGrid-smallerCardImgOneHalfHeight;
+                .consonant-OneHalfCard .consonant-OneHalfCard-img {
+                    min-height: @consonant-CardsGrid-smallerCardImgOneHalfHeight;
+                }
             }
 
             .consonant-HalfHeightCard {
@@ -108,30 +114,30 @@
         &--5up {
             grid-template-columns: repeat(auto-fit, minmax(@consonant-CardsGrid-smallestCardMinWidth, max-content));
 
-            .consonant-ThreeFourthCard,
-            .consonant-OneHalfCard,
             .consonant-HalfHeightCard,
             .consonant-FullCard {
-                min-width: @consonant-CardsGrid-smallestCardMinWidth;
-                max-width: @consonant-CardsGrid-smallestCardMaxWidth;
-                height: @consonant-CardsGrid-smallestCardHeight;
+                .grid-5-up-card-changes;
+            }
 
-                &-inner {
-                    width: @consonant-CardsGrid-smallestCardMaxWidth;
-                    max-width: 100%;
+            /* consonant-ThreeFourthCard and consonant-OneHalfCard follow specific layout below 600px */
+
+            @media @consonant-600px-up {
+                .consonant-ThreeFourthCard,
+                .consonant-OneHalfCard {
+                    .grid-5-up-card-changes;
                 }
-            }
 
-            .consonant-ThreeFourthCard .consonant-ThreeFourthCard-img {
-                min-height: @consonant-CardsGrid-smallestCardImgThreeFourthHeight;
-            }
+                .consonant-ThreeFourthCard .consonant-ThreeFourthCard-img {
+                    min-height: @consonant-CardsGrid-smallestCardImgThreeFourthHeight;
+                }
 
-            .consonant-OneHalfCard {
-                height: auto;
-            }
+                .consonant-OneHalfCard {
+                    height: auto;
+                }
 
-            .consonant-OneHalfCard .consonant-OneHalfCard-img {
-                min-height: @consonant-CardsGrid-smallestCardImgOneHalfHeight;
+                .consonant-OneHalfCard .consonant-OneHalfCard-img {
+                    min-height: @consonant-CardsGrid-smallestCardImgOneHalfHeight;
+                }
             }
 
             .consonant-HalfHeightCard {

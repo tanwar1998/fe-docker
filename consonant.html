@@ -53,9 +53,9 @@
             collection: {
                 mode: "light", // Can be empty, "light", "dark", "darkest";
                 layout: {
-                    type: '3up', // Can be "2up", "3up", "4up", "5up";
-                    gutter: '4x', // Can be "2x", "3x", "4x";
-                    container: '1200MaxWidth', // Can be "83Percent", "1200MaxWidth", "32Margin";
+                    type: '5up', // Can be "2up", "3up", "4up", "5up";
+                    gutter: '3x', // Can be "2x", "3x", "4x";
+                    container: '32Margin', // Can be "83Percent", "1200MaxWidth", "32Margin";
                 },
                 resultsPerPage: '5',
                 endpoint: "./tests/card-collection/json-response-tests/smoke-tests/smoke.json",
@@ -70,7 +70,85 @@
                     onErrorDescription: 'Please try reloading the page or try coming back to the page another time.',
                 }
             },
-            featuredCards: [],
+            featuredCards: [
+                {
+                    "id": "6d6438c8-5aa2-36be-bfd0-18a9f6e4cd9c",
+                    "showCard": {
+                        "from": "2020-10-01T20:00:00Z",
+                        "until": "2025-10-31T21:45:00Z"
+                    },
+                    "tags": [
+                        {
+                            "id": "adobe-com-enterprise:content-type/webinar"
+                        },
+                        {
+                            "id": "adobe-com-enterprise:availability/upcoming"
+                        },
+                        {
+                            "id": "adobe-com-enterprise:topic/digital-trends"
+                        }
+                    ],
+                    "overlays": {
+                        "banner": {
+                            "backgroundColor": "#CB6F10",
+                            "fontColor": "#FFFFFF",
+                            "description": "Upcoming",
+                            "icon": "https://upload.wikimedia.org/wikipedia/commons/9/92/Location_dot_red.svg",
+                        },
+                        "logo": {
+                            "src": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0ytskZCvmMqQ4Z4XesePPsUVk_4ILenmL4A&usqp=CAU",
+                            "alt": "Dummy logo for test",
+                            "backgroundColor": "white",
+                            "borderColor": "white",
+                        },
+                        "label": {
+                            "description": "New",
+                        },
+                        "videoButton": {
+                            "url": "https://youtu.be/JD0YvtDKRAw",
+                        }
+                    },
+                    "contentArea": {
+                        "detailText": "Detail Text",
+                        "title": "Featured card dummy text, Featured card dummy text, Featured card dummy text",
+                        "description": "Toverah nabili. Rarohapudi mamik neneh bor ti tado do. Decede de cebimolona moba yoten malizo norunecac ca mubun cun lube nek tebabi dezekexi pulu pa dunubec varec cet livo. Dibeloj ko reradir nomemason cinotojub bucicib qimabadal peponecig lepudonob besoku.",
+                        "dateDetailText": {}
+                    },
+                    "styles": {
+                        "typeOverride": "",
+                        "backgroundImage": "https://adobe.com/content/dam/www/uk/en/enterprise/events/webinars/marquee's/104643%20Adobe_Digital-Bites-web-graphics_marquee%201600x600.jpg"
+                    },
+                    "footer": [
+                        {
+                            "divider": true,
+                            "left": [
+                                {
+                                    "type": "bookmark",
+                                    "saveCardIcon": "https://caas-chimera.s3-us-west-1.amazonaws.com/icons/saved_bookmark.svg",
+                                    "unsaveCardIcon": "https://caas-chimera.s3-us-west-1.amazonaws.com/icons/unsaved_bookmark.svg",
+                                    "cardSaveText": "Save Card",
+                                    "cardUnsaveText": "Unsave Card"
+                                },
+                                {
+                                    "type": "date-interval",
+                                    "startTime": "2020-10-20T20:00:00Z",
+                                    "endTime": "2020-10-27T21:45:00Z"
+                                }
+                            ],
+                            "center": [],
+                            "right": [
+                                {
+                                    "type": "button",
+                                    "style": "primary",
+                                    "text": "Read More",
+                                    "href": "https://www.google.com"
+                                }
+                            ]
+                        }
+                    ],
+                    "cardDate": "2020-07-02T09:41:35.933Z"
+                }
+            ],
             filterPanel: {
                 enabled: 'false',
                 type: 'left',
