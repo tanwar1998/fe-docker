@@ -157,3 +157,41 @@
     -webkit-line-clamp: @lines;
     overflow: hidden;
 }
+
+.grid-2-up-card-changes {
+    max-width: @consonant-DoubleWideCard-maxWidth;
+
+    &-inner {
+        width: @consonant-DoubleWideCard-maxWidth;
+        max-width: 100%;
+    }
+}
+
+.grid-3-up-card-changes {
+    &-inner {
+        width: @consonantCardMaxWidth;
+        max-width: 100%;
+    }
+}
+
+.grid-4-up-card-changes {
+    min-width: @consonant-CardsGrid-smallerCardMinWidth;
+    max-width: @consonant-CardsGrid-smallerCardMaxWidth;
+    height: @consonant-CardsGrid-smallerCardheight;
+
+    &-inner {
+        width: @consonant-CardsGrid-smallerCardMaxWidth;
+        max-width: 100%;
+    }
+}
+
+.grid-5-up-card-changes {
+    min-width: @consonant-CardsGrid-smallestCardMinWidth;
+    max-width: @consonant-CardsGrid-smallestCardMaxWidth;
+    height: @consonant-CardsGrid-smallestCardHeight;
+
+    &-inner {
+        width: @consonant-CardsGrid-smallestCardMaxWidth;
+        max-width: 100%;
+    }
+}

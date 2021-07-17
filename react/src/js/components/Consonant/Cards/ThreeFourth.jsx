@@ -2,6 +2,7 @@ import React from 'react';
 import {
     string,
     shape,
+    bool,
 } from 'prop-types';
 
 import prettyFormatDate from '../Helpers/prettyFormat';
@@ -20,6 +21,7 @@ const threeFourthCardType = {
     ctaLink: string,
     id: string.isRequired,
     lh: string,
+    isSmallDevice: bool,
     styles: shape(stylesType),
     overlays: shape(overlaysType),
     contentArea: shape(contentAreaType),
@@ -28,6 +30,7 @@ const threeFourthCardType = {
 const defaultProps = {
     styles: {},
     ctaLink: '',
+    isSmallDevice: true,
     overlays: {},
     contentArea: {},
     lh: '',
@@ -41,6 +44,7 @@ const defaultProps = {
  * const props= {
     id: String,
     ctaLink: String,
+    isSmallDevice: Boolean,
     styles: Object,
     contentArea: Object,
     overlays: Object,
@@ -53,6 +57,7 @@ const ThreeFourthCard = (props) => {
     const {
         id,
         ctaLink,
+        isSmallDevice,
         lh,
         styles: {
             backgroundImage: image,
@@ -157,14 +162,16 @@ const ThreeFourthCard = (props) => {
                         <span>{bannerDescription}</span>
                     </span>
                 }
-                {badgeText &&
+                {!isSmallDevice && badgeText &&
                     <span
                         className="consonant-ThreeFourthCard-badge">
                         {badgeText}
                     </span>
                 }
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-ThreeFourthCard-videoIco" /> }
-                {logoSrc &&
+                {!isSmallDevice && videoURL &&
+                    <VideoButton videoURL={videoURL} className="consonant-ThreeFourthCard-videoIco" />
+                }
+                {!isSmallDevice && logoSrc &&
                     <div
                         style={({
                             backgroundColor: logoBg,
@@ -186,7 +193,7 @@ const ThreeFourthCard = (props) => {
                 title="Click to open in a new tab"
                 className="consonant-ThreeFourthCard-inner"
                 tabIndex="0">
-                {detailText &&
+                {!isSmallDevice && detailText &&
                     <span
                         data-testid="consonant-ThreeFourthCard-label"
                         className="consonant-ThreeFourthCard-label">
