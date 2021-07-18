@@ -1,5 +1,4 @@
-import React from 'react';
-import classNames from 'classnames';
+import React, { Fragment } from 'react';
 import cuid from 'cuid';
 import {
     string,
@@ -35,7 +34,7 @@ const oneHalfCardType = {
     overlays: shape(overlaysType),
     footer: arrayOf(shape(footerType)),
     contentArea: shape(contentAreaType),
-    renderBorder: bool,
+    isSmallDevice: bool,
 };
 
 const defaultProps = {
@@ -47,7 +46,7 @@ const defaultProps = {
     lh: '',
     isBookmarked: false,
     disableBookmarkIco: false,
-    renderBorder: true,
+    isSmallDevice: false,
 };
 
 /**
@@ -61,7 +60,7 @@ const defaultProps = {
     styles: Object,
     contentArea: Object,
     overlays: Object,
-    renderBorder: Boolean,
+    isSmallDevice: Boolean,
  * }
  * return (
  *   <OneHalfCard {...props}/>
@@ -76,6 +75,7 @@ const OneHalfCard = (props) => {
         isBookmarked,
         onClick,
         dateFormat,
+        isSmallDevice,
         styles: {
             backgroundImage: image,
         },
@@ -109,7 +109,6 @@ const OneHalfCard = (props) => {
                 description: badgeText,
             },
         },
-        renderBorder,
     } = props;
 
     const getConfig = useConfig();
@@ -119,16 +118,6 @@ const OneHalfCard = (props) => {
      */
     const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
-
-    /**
-     * Class name for the card:
-     * whether card border should be rendered or no;
-     * @type {String}
-     */
-    const cardClassName = classNames({
-        'consonant-OneHalfCard': true,
-        'consonant-u-noBorders': !renderBorder,
-    });
 
     /**
      * Creates a card image DOM reference
@@ -187,12 +176,32 @@ const OneHalfCard = (props) => {
         });
     }
 
-    return (
-        <div
-            daa-lh={lh}
-            className={cardClassName}
-            data-testid="consonant-OneHalfCard"
-            id={id}>
+    /**
+     * Loops through array of footer infobits and returns link for the mobile variant of the card
+     * @param {Array} data - Array of the infobits
+     * @return {String} - URI set in the last infobit via authored configs by user
+    */
+    function getMobileCardLink(data) {
+        let res = '';
+
+        if (data) {
+            for (let index = 0; index < data.length; index += 1) {
+                const infobits = [...data[index].left, ...data[index].center, ...data[index].right];
+
+                for (let idx = 0; idx < infobits.length; idx += 1) {
+                    if (infobits[idx].type === 'button') res = infobits[idx].href;
+                }
+            }
+        }
+
+        return res;
+    }
+
+    /**
+     * Inner HTML of the card, which will be included into either div or a tag;
+     */
+    const renderCardContent = () => (
+        <Fragment>
             <div
                 data-testid="consonant-OneHalfCard-img"
                 className="consonant-OneHalfCard-img"
@@ -219,14 +228,16 @@ const OneHalfCard = (props) => {
                         <span>{bannerDescription}</span>
                     </span>
                 }
-                {badgeText &&
+                {!isSmallDevice && badgeText &&
                     <span
                         className="consonant-OneHalfCard-badge">
                         {badgeText}
                     </span>
                 }
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-OneHalfCard-videoIco" />}
-                {logoSrc &&
+                {!isSmallDevice && videoURL &&
+                    <VideoButton videoURL={videoURL} className="consonant-OneHalfCard-videoIco" />
+                }
+                {!isSmallDevice && logoSrc &&
                     <div
                         style={({
                             backgroundColor: logoBg,
@@ -243,7 +254,7 @@ const OneHalfCard = (props) => {
             </div>
             <div
                 className="consonant-OneHalfCard-inner">
-                {detailText &&
+                {!isSmallDevice && detailText &&
                     <span
                         data-testid="consonant-OneHalfCard-label"
                         className="consonant-OneHalfCard-label">
@@ -254,13 +265,13 @@ const OneHalfCard = (props) => {
                     className="consonant-OneHalfCard-title">
                     {title}
                 </h2>
-                {description &&
+                {!isSmallDevice && description &&
                     <p
                         className="consonant-OneHalfCard-text">
                         {description}
                     </p>
                 }
-                {footer.map(footerItem => (
+                {!isSmallDevice && footer.map(footerItem => (
                     <CardFooter
                         divider={footerItem.divider}
                         isFluid={footerItem.isFluid}
@@ -270,7 +281,35 @@ const OneHalfCard = (props) => {
                         right={extendFooterData(footerItem.right)} />
                 ))}
             </div>
-        </div>
+        </Fragment>
+    );
+
+    /**
+     * Whether we need to detect mobile card link;
+     */
+    let mobileCardLink;
+
+    if (isSmallDevice) mobileCardLink = getMobileCardLink(footer);
+
+    return (
+        isSmallDevice ?
+            <a
+                href={mobileCardLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                daa-lh={lh}
+                title=""
+                data-testid="consonant-OneHalfCard"
+                className="consonant-OneHalfCard"
+                tabIndex="0"
+                id={id}>{renderCardContent()}
+            </a> :
+            <div
+                daa-lh={lh}
+                data-testid="consonant-OneHalfCard"
+                className="consonant-OneHalfCard"
+                id={id}>{renderCardContent()}
+            </div>
     );
 };
 
