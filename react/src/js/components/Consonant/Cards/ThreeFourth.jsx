@@ -150,7 +150,7 @@ const ThreeFourthCard = (props) => {
      */
     const renderCardInnerContent = () => (
         <Fragment>
-            {detailText &&
+            {!isSmallDevice && detailText &&
                 <span
                     data-testid="consonant-ThreeFourthCard-label"
                     className="consonant-ThreeFourthCard-label">
@@ -205,14 +205,15 @@ const ThreeFourthCard = (props) => {
                         <span>{bannerDescription}</span>
                     </span>
                 }
-                {badgeText &&
+                {!isSmallDevice && badgeText &&
                     <span
                         className="consonant-ThreeFourthCard-badge">
                         {badgeText}
                     </span>
                 }
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-ThreeFourthCard-videoIco" />}
-                {logoSrc &&
+                {!isSmallDevice && videoURL &&
+                    <VideoButton videoURL={videoURL} className="consonant-ThreeFourthCard-videoIco" />}
+                {!isSmallDevice && logoSrc &&
                     <div
                         style={({
                             backgroundColor: logoBg,

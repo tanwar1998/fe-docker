@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import classNames from 'classnames';
 import cuid from 'cuid';
 import {
     string,
@@ -34,6 +35,7 @@ const oneHalfCardType = {
     overlays: shape(overlaysType),
     footer: arrayOf(shape(footerType)),
     contentArea: shape(contentAreaType),
+    renderBorder: bool,
     isSmallDevice: bool,
 };
 
@@ -46,6 +48,7 @@ const defaultProps = {
     lh: '',
     isBookmarked: false,
     disableBookmarkIco: false,
+    renderBorder: true,
     isSmallDevice: false,
 };
 
@@ -60,6 +63,7 @@ const defaultProps = {
     styles: Object,
     contentArea: Object,
     overlays: Object,
+    renderBorder: Boolean,
     isSmallDevice: Boolean,
  * }
  * return (
@@ -109,6 +113,7 @@ const OneHalfCard = (props) => {
                 description: badgeText,
             },
         },
+        renderBorder,
     } = props;
 
     const getConfig = useConfig();
@@ -118,6 +123,16 @@ const OneHalfCard = (props) => {
      */
     const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
+
+    /**
+     * Class name for the card:
+     * whether card border should be rendered or no;
+     * @type {String}
+     */
+    const cardClassName = classNames({
+        'consonant-OneHalfCard': true,
+        'consonant-u-noBorders': !renderBorder,
+    });
 
     /**
      * Creates a card image DOM reference
@@ -300,14 +315,14 @@ const OneHalfCard = (props) => {
                 daa-lh={lh}
                 title=""
                 data-testid="consonant-OneHalfCard"
-                className="consonant-OneHalfCard"
+                className={cardClassName}
                 tabIndex="0"
                 id={id}>{renderCardContent()}
             </a> :
             <div
                 daa-lh={lh}
                 data-testid="consonant-OneHalfCard"
-                className="consonant-OneHalfCard"
+                className={cardClassName}
                 id={id}>{renderCardContent()}
             </div>
     );
