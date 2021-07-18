@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
     string,
     shape,
@@ -88,16 +88,11 @@ const HalfHeightCard = (props) => {
      */
     const [lazyLoadedImage] = useLazyLoading(imageRef, image);
 
-    return (
-        <a
-            href={ctaLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="consonant-HalfHeightCard"
-            title=""
-            daa-lh={lh}
-            tabIndex="0"
-            id={id}>
+    /**
+     * Inner HTML of the card, which will be included into either div or a tag;
+     */
+    const renderCardContent = () => (
+        <Fragment>
             {bannerDescription && bannerFontColor && bannerBackgroundColor &&
                 <span
                     className="consonant-HalfHeightCard-banner"
@@ -128,9 +123,28 @@ const HalfHeightCard = (props) => {
                 {title &&
                     <h2 className="consonant-HalfHeightCard-title">{title}</h2>
                 }
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" /> }
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" />}
             </div>
-        </a>
+        </Fragment>
+    );
+
+    return (
+        videoURL ?
+            <div
+                className="consonant-HalfHeightCard"
+                daa-lh={lh}
+                id={id}>{renderCardContent()}
+            </div> :
+            <a
+                href={ctaLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="consonant-HalfHeightCard"
+                title=""
+                daa-lh={lh}
+                tabIndex="0"
+                id={id}>{renderCardContent()}
+            </a>
     );
 };
 
