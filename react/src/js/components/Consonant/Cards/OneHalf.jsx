@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import cuid from 'cuid';
 import {
     string,
@@ -34,6 +35,7 @@ const oneHalfCardType = {
     overlays: shape(overlaysType),
     footer: arrayOf(shape(footerType)),
     contentArea: shape(contentAreaType),
+    renderBorder: bool,
 };
 
 const defaultProps = {
@@ -45,6 +47,7 @@ const defaultProps = {
     lh: '',
     isBookmarked: false,
     disableBookmarkIco: false,
+    renderBorder: true,
 };
 
 /**
@@ -58,6 +61,7 @@ const defaultProps = {
     styles: Object,
     contentArea: Object,
     overlays: Object,
+    renderBorder: Boolean,
  * }
  * return (
  *   <OneHalfCard {...props}/>
@@ -105,6 +109,7 @@ const OneHalfCard = (props) => {
                 description: badgeText,
             },
         },
+        renderBorder,
     } = props;
 
     const getConfig = useConfig();
@@ -114,6 +119,16 @@ const OneHalfCard = (props) => {
      */
     const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
+
+    /**
+     * Class name for the card:
+     * whether card border should be rendered or no;
+     * @type {String}
+     */
+    const cardClassName = classNames({
+        'consonant-OneHalfCard': true,
+        'consonant-u-noBorders': !renderBorder,
+    });
 
     /**
      * Creates a card image DOM reference
@@ -175,7 +190,7 @@ const OneHalfCard = (props) => {
     return (
         <div
             daa-lh={lh}
-            className="consonant-OneHalfCard"
+            className={cardClassName}
             data-testid="consonant-OneHalfCard"
             id={id}>
             <div
