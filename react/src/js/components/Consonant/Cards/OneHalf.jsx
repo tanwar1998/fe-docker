@@ -25,7 +25,6 @@ import VideoButton from '../Modal/videoButton';
 
 const oneHalfCardType = {
     isBookmarked: bool,
-    isSmallDevice: bool,
     dateFormat: string,
     id: string.isRequired,
     lh: string,
@@ -41,7 +40,6 @@ const defaultProps = {
     footer: [],
     styles: {},
     overlays: {},
-    isSmallDevice: true,
     dateFormat: '',
     contentArea: {},
     lh: '',
@@ -57,7 +55,6 @@ const defaultProps = {
  * const props= {
     id: String,
     ctaLink: String,
-    isSmallDevice: Boolean,
     styles: Object,
     contentArea: Object,
     overlays: Object,
@@ -73,7 +70,6 @@ const OneHalfCard = (props) => {
         lh,
         disableBookmarkIco,
         isBookmarked,
-        isSmallDevice,
         onClick,
         dateFormat,
         styles: {
@@ -208,16 +204,16 @@ const OneHalfCard = (props) => {
                         <span>{bannerDescription}</span>
                     </span>
                 }
-                {!isSmallDevice && badgeText &&
+                {badgeText &&
                     <span
                         className="consonant-OneHalfCard-badge">
                         {badgeText}
                     </span>
                 }
-                {!isSmallDevice && videoURL &&
+                {videoURL &&
                     <VideoButton videoURL={videoURL} className="consonant-OneHalfCard-videoIco" />
                 }
-                {!isSmallDevice && logoSrc &&
+                {logoSrc &&
                     <div
                         style={({
                             backgroundColor: logoBg,
@@ -234,7 +230,7 @@ const OneHalfCard = (props) => {
             </div>
             <div
                 className="consonant-OneHalfCard-inner">
-                {!isSmallDevice && detailText &&
+                {detailText &&
                     <span
                         data-testid="consonant-OneHalfCard-label"
                         className="consonant-OneHalfCard-label">
@@ -245,13 +241,13 @@ const OneHalfCard = (props) => {
                     className="consonant-OneHalfCard-title">
                     {title}
                 </h2>
-                {!isSmallDevice && description &&
+                {description &&
                     <p
                         className="consonant-OneHalfCard-text">
                         {description}
                     </p>
                 }
-                {!isSmallDevice && footer.map(footerItem => (
+                {footer.map(footerItem => (
                     <CardFooter
                         divider={footerItem.divider}
                         isFluid={footerItem.isFluid}

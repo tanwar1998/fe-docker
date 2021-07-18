@@ -11,12 +11,6 @@ export const DESKTOP_MIN_WIDTH = 1200;
 export const TABLET_MIN_WIDTH = 768;
 
 /**
- * Maximum viewport width to fit small devices;
- * @type {Number}
- */
-export const SMALL_DEVICES_MAX_WIDTH = 600;
-
-/**
  * Maximum allowed top filters displayed
  * before "More Filters" button shows up
  * @type {Number}
