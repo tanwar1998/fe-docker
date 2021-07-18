@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
     string,
     shape,
+    bool,
 } from 'prop-types';
 
 import prettyFormatDate from '../Helpers/prettyFormat';
@@ -23,6 +24,7 @@ const threeFourthCardType = {
     styles: shape(stylesType),
     overlays: shape(overlaysType),
     contentArea: shape(contentAreaType),
+    isSmallDevice: bool,
 };
 
 const defaultProps = {
@@ -31,6 +33,7 @@ const defaultProps = {
     overlays: {},
     contentArea: {},
     lh: '',
+    isSmallDevice: false,
 };
 
 /**
@@ -44,6 +47,7 @@ const defaultProps = {
     styles: Object,
     contentArea: Object,
     overlays: Object,
+    isSmallDevice: Boolean,
  * }
  * return (
  *   <ThreeFourthCard {...props}/>
@@ -54,6 +58,7 @@ const ThreeFourthCard = (props) => {
         id,
         ctaLink,
         lh,
+        isSmallDevice,
         styles: {
             backgroundImage: image,
         },
@@ -125,12 +130,40 @@ const ThreeFourthCard = (props) => {
      */
     const detailText = prettyDate || label;
 
-    return (
-        <div
-            daa-lh={lh}
-            className="consonant-ThreeFourthCard"
-            data-testid="consonant-ThreeFourthCard"
-            id={id}>
+    /**
+     * Inner HTML of the inner block of the card, which will be included into either div or a tag;
+     */
+    const renderCardInnerContent = () => (
+        <Fragment>
+            {!isSmallDevice && detailText &&
+                <span
+                    data-testid="consonant-ThreeFourthCard-label"
+                    className="consonant-ThreeFourthCard-label">
+                    {detailText}
+                </span>
+            }
+            {
+                title &&
+                <h2
+                    className="consonant-ThreeFourthCard-title">
+                    {title}
+                </h2>
+            }
+            {
+                description &&
+                <p
+                    className="consonant-ThreeFourthCard-text">
+                    {description}
+                </p>
+            }
+        </Fragment>
+    );
+
+    /**
+     * Inner HTML of the whole card, which will be included into either div or a tag;
+     */
+    const renderCardContent = () => (
+        <Fragment>
             <div
                 data-testid="consonant-ThreeFourthCard-img"
                 className="consonant-ThreeFourthCard-img"
@@ -157,16 +190,15 @@ const ThreeFourthCard = (props) => {
                         <span>{bannerDescription}</span>
                     </span>
                 }
-                {badgeText &&
+                {!isSmallDevice && badgeText &&
                     <span
                         className="consonant-ThreeFourthCard-badge">
                         {badgeText}
                     </span>
                 }
-                {videoURL &&
-                    <VideoButton videoURL={videoURL} className="consonant-ThreeFourthCard-videoIco" />
-                }
-                {logoSrc &&
+                {!isSmallDevice && videoURL &&
+                    <VideoButton videoURL={videoURL} className="consonant-ThreeFourthCard-videoIco" />}
+                {!isSmallDevice && logoSrc &&
                     <div
                         style={({
                             backgroundColor: logoBg,
@@ -181,36 +213,40 @@ const ThreeFourthCard = (props) => {
                     </div>
                 }
             </div>
+            {
+                isSmallDevice ?
+                    <div className="consonant-ThreeFourthCard-inner">{renderCardInnerContent()}</div> :
+                    <a
+                        href={ctaLink}
+                        target="_blank"
+                        className="consonant-ThreeFourthCard-inner"
+                        rel="noopener noreferrer"
+                        title="Click to open in a new tab"
+                        tabIndex="0">{renderCardInnerContent()}
+                    </a>
+            }
+        </Fragment>
+    );
+
+    return (
+        isSmallDevice ?
             <a
                 href={ctaLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 title="Click to open in a new tab"
-                className="consonant-ThreeFourthCard-inner"
-                tabIndex="0">
-                {detailText &&
-                    <span
-                        data-testid="consonant-ThreeFourthCard-label"
-                        className="consonant-ThreeFourthCard-label">
-                        {detailText}
-                    </span>
-                }
-                {
-                    title &&
-                    <h2
-                        className="consonant-ThreeFourthCard-title">
-                        {title}
-                    </h2>
-                }
-                {
-                    description &&
-                    <p
-                        className="consonant-ThreeFourthCard-text">
-                        {description}
-                    </p>
-                }
-            </a>
-        </div>
+                tabIndex="0"
+                daa-lh={lh}
+                className="consonant-ThreeFourthCard"
+                data-testid="consonant-ThreeFourthCard"
+                id={id}>{renderCardContent()}
+            </a> :
+            <div
+                daa-lh={lh}
+                className="consonant-ThreeFourthCard"
+                data-testid="consonant-ThreeFourthCard"
+                id={id}>{renderCardContent()}
+            </div>
     );
 };
 

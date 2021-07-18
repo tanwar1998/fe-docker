@@ -20,7 +20,7 @@ import cards from '../../Testing/Mocks/cards.json';
 
 setupIntersectionObserverMock();
 
-const MOBILE_WIDTH = 384;
+const MOBILE_WIDTH = 601;
 const DESKTOP_WIDTH = 1800;
 const TABLET_MIN_WIDTH = 768;
 
