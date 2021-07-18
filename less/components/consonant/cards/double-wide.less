@@ -1,5 +1,6 @@
 /* Available modificators:
 - .consonant-DoubleWideCard--contentTop;
+- .consonant-DoubleWideCard--noTextInfo;
 */
 
 .consonant {
@@ -19,10 +20,14 @@
         overflow: hidden;
 
         &-img {
+            position: relative;
             height: @consonant-DoubleWideCard-imgHeight;
             background-position: 50% 0;
             background-size: cover;
-            z-index: -1;
+        }
+
+        &-videoIco {
+            .video-button-styles;
         }
 
         &-inner {
@@ -33,6 +38,10 @@
             text-decoration: none;
             background-color: @consonantBaseColor;
             outline: 0;
+
+            &:empty {
+                display: none;
+            }
         }
 
         &-title {
@@ -84,6 +93,14 @@
             padding-top: 24px;
             background-color: transparent;
             z-index: 1;
+        }
+
+        &--noTextInfo &-img {
+            height: 100%;
+        }
+
+        &--noTextInfo &-inner {
+            display: none;
         }
 
         &.consonant-u-noBorders {
