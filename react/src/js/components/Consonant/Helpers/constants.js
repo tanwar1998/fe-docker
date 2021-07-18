@@ -127,6 +127,9 @@ export const DEFAULT_CONFIG = {
             gutter: '4x',
             container: '32Margin',
         },
+        button: {
+            style: '',
+        },
         resultsPerPage: 9,
         endpoint: '',
         title: '',
