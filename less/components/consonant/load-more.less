@@ -1,5 +1,6 @@
 /* Available modifiers:
 - .consonant-LoadMore--overBg;
+- .consonant-LoadMore--themeThree;
 */
 
 .consonant {
@@ -68,6 +69,19 @@
                 background-color: @consonantBaseColor;
                 border-color: @consonantBaseColor;
                 color: @consonantGray800;
+            }
+        }
+
+        &--themeThree &-btn {
+            color: @consonantGray800;
+            border-color: @consonantGray800;
+            background-color: transparent;
+
+            &:hover,
+            &:active {
+                color: @consonantBaseColor;
+                border-color: @consonantGray800;
+                background-color: @consonantGray800;
             }
         }
 
