@@ -41,6 +41,13 @@ const LoadMore = ({
     const loadMoreButtonStyle = getConfig('pagination', 'loadMoreButton.style');
 
     /**
+     * Whether we should apply theme "Three" for the load more button;
+     * @type {String}
+     */
+    const useThemeThree = getConfig('pagination', 'loadMoreButton.useThemeThree');
+    console.log(typeof useThemeThree);
+
+    /**
      * Authored Button Text
      * @type {String}
      */
@@ -59,7 +66,8 @@ const LoadMore = ({
      */
     const loadMoreClass = classNames({
         'consonant-LoadMore': true,
-        'consonant-LoadMore--overBg': loadMoreButtonStyle === 'over-background',
+        'consonant-LoadMore--overBg': loadMoreButtonStyle === 'over-background' && !useThemeThree,
+        'consonant-LoadMore--themeThree': useThemeThree,
     });
 
     /**

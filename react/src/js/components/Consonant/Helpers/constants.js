@@ -164,6 +164,7 @@ export const DEFAULT_CONFIG = {
         type: 'loadMore',
         loadMoreButton: {
             style: 'primary',
+            useThemeThree: false,
         },
         paginatorQuantityText: 'Showing {}-{} of {} Results',
         paginatorPrevLabel: 'Previous',
