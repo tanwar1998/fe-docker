@@ -45,7 +45,6 @@ const LoadMore = ({
      * @type {String}
      */
     const useThemeThree = getConfig('pagination', 'loadMoreButton.useThemeThree');
-    console.log(typeof useThemeThree);
 
     /**
      * Authored Button Text
