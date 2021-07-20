@@ -4,7 +4,10 @@ import {
     shape,
 } from 'prop-types';
 
-import { useLazyLoading } from '../Helpers/hooks';
+import {
+    useConfig,
+    useLazyLoading,
+} from '../Helpers/hooks';
 import {
     stylesType,
     contentAreaType,
@@ -67,6 +70,13 @@ const HalfHeightCard = (props) => {
         },
     } = props;
 
+    const getConfig = useConfig();
+
+    /**
+     **** Authored Configs ****
+     */
+    const disableBanners = getConfig('collection', 'disableBanners');
+
     /**
      * Creates a card image DOM reference
      * @returns {Object} - card image DOM reference
@@ -94,7 +104,7 @@ const HalfHeightCard = (props) => {
             daa-lh={lh}
             tabIndex="0"
             id={id}>
-            {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+            {bannerDescription && bannerFontColor && bannerBackgroundColor && !disableBanners &&
                 <span
                     className="consonant-HalfHeightCard-banner"
                     style={({

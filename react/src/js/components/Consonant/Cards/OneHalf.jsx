@@ -114,6 +114,7 @@ const OneHalfCard = (props) => {
      */
     const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
+    const disableBanners = getConfig('collection', 'disableBanners');
 
     /**
      * Creates a card image DOM reference
@@ -183,7 +184,7 @@ const OneHalfCard = (props) => {
                 className="consonant-OneHalfCard-img"
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }}>
-                {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+                {bannerDescription && bannerFontColor && bannerBackgroundColor && !disableBanners &&
                     <span
                         data-testid="consonant-OneHalfCard-banner"
                         className="consonant-OneHalfCard-banner"
@@ -210,7 +211,7 @@ const OneHalfCard = (props) => {
                         {badgeText}
                     </span>
                 }
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-OneHalfCard-videoIco" /> }
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-OneHalfCard-videoIco" />}
                 {logoSrc &&
                     <div
                         style={({

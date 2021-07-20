@@ -95,6 +95,7 @@ const ThreeFourthCard = (props) => {
      */
     const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
+    const disableBanners = getConfig('collection', 'disableBanners');
 
     /**
      * Creates a card image DOM reference
@@ -136,7 +137,7 @@ const ThreeFourthCard = (props) => {
                 className="consonant-ThreeFourthCard-img"
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }}>
-                {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+                {bannerDescription && bannerFontColor && bannerBackgroundColor && !disableBanners &&
                     <span
                         data-testid="consonant-ThreeFourthCard-banner"
                         className="consonant-ThreeFourthCard-banner"
@@ -163,7 +164,7 @@ const ThreeFourthCard = (props) => {
                         {badgeText}
                     </span>
                 }
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-ThreeFourthCard-videoIco" /> }
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-ThreeFourthCard-videoIco" />}
                 {logoSrc &&
                     <div
                         style={({

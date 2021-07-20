@@ -4,7 +4,10 @@ import {
     shape,
 } from 'prop-types';
 
-import { useLazyLoading } from '../Helpers/hooks';
+import {
+    useConfig,
+    useLazyLoading,
+} from '../Helpers/hooks';
 import {
     stylesType,
     contentAreaType,
@@ -80,6 +83,13 @@ const FullCard = (props) => {
         },
     } = props;
 
+    const getConfig = useConfig();
+
+    /**
+     **** Authored Configs ****
+     */
+    const disableBanners = getConfig('collection', 'disableBanners');
+
     /**
      * Creates a card image DOM reference
      * @returns {Object} - card image DOM reference
@@ -108,7 +118,7 @@ const FullCard = (props) => {
                 className="consonant-FullCard-img"
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }}>
-                {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+                {bannerDescription && bannerFontColor && bannerBackgroundColor && !disableBanners &&
                     <span
                         data-testid="consonant-FullCard-banner"
                         className="consonant-FullCard-banner"
@@ -136,7 +146,7 @@ const FullCard = (props) => {
                     </span>
                 }
 
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-FullCard-videoIco" /> }
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-FullCard-videoIco" />}
                 {logoSrc &&
                     <div
                         style={({
