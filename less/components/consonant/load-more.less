@@ -24,6 +24,8 @@
             margin: 0 0 14px;
 
             .font(@line-height: 1.1875rem, @color: @consonantGray800, @align: center);
+
+            transition: color @consonantTransitionTime @consonantTransitionFunc;
         }
 
         &-btn {
@@ -58,6 +60,28 @@
             .focused;
         }
 
+        @media @dark-theme {
+            &-btn {
+                color: @consonantDarkGrey100;
+                border-color: @consonantDarkGrey100;
+
+                &:hover {
+                    background-color: @consonantDarkGrey100;
+                    color: @consonantDarkGrey900;
+                }
+
+                &:active {
+                    background-color: @consonantLightGrey50;
+                    border-color: @consonantLightGrey50;
+                    color: @consonantDarkGrey900;
+                }
+            }
+
+            &-text {
+                color: @consonantDarkGrey100;
+            }
+        }
+
         /* Related to the modificators */
 
         &--overBg &-btn {
@@ -83,6 +107,10 @@
                 border-color: @consonantGray800;
                 background-color: @consonantGray800;
             }
+        }
+
+        &--themeThree &-text {
+            color: @consonantGray800;
         }
 
         &--overBg &-text {
