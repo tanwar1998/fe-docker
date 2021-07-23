@@ -58,9 +58,9 @@
                     container: '1200MaxWidth', // Can be "83Percent", "1200MaxWidth", "32Margin";
                 },
                 resultsPerPage: '20',
-                endpoint: "./tests/card-collection/json-response-tests/smoke-tests/smoke.json",
+                endpoint: "./tests/card-collection/json-response-tests/smoke-tests/custom-cards.json",
                 totalCardsToShow: '100',
-                cardStyle: "1:2", // available options: "1:2", "3:4", "full-card", "half-height", "custom-card", "double-wide";
+                cardStyle: "custom-card", // available options: "1:2", "3:4", "full-card", "half-height", "custom-card", "double-wide";
                 showTotalResults: 'true',
                 i18n: {
                     prettyDateIntervalFormat: '{LLL} {dd} | {timeRange} {timeZone}',
@@ -266,7 +266,31 @@
             customCard: (data) => {
                 /* example custom card */
                 if (data) {
-                    return `<div key="${data.id}">${data.contentArea.title} </div>`;
+                    return `<div class="consonant-CustomCard" key="${data.id}">
+                        <img src="${data.styles.backgroundImage}" class="consonant-CustomCard-bannerImg"></img>
+                        <div class="consonant-CustomCard-img">
+                            <img class="consonant-CustomCard-logo" src="${data.avatarUrl}"></img>
+                            <h4 class="consonant-CustomCard-title"> ${data.contentArea.title} </h4>
+                            ${data.badge ? `<span class="consonant-CustomCard-badge">${data.badge}</span>` : ''} 
+                        </div>
+                        <div class="consonant-CustomCard-text">
+                            <p>${data.contentArea.description}</p>
+                            <ul>
+                                ${data.contentArea.list
+                            .map(item => `<li key=${item.id}>${item.text}</li>`)
+                            .join('')}                              
+                            </ul>
+                        </div>
+                        <div class="consonant-CustomCard-footer">
+                            <div class="consonant-CustomCard-price">
+                                <label> penatibus at magnis </label>
+                                <div> ${data.contentArea.price}. </div>
+                            </div>
+                            <div>
+                                <button class="consonant-CustomCard-btn" type="button">Tempor ex</button>
+                            </div>
+                        </div>
+                    </div>`;
                 } else {
                     return `<div> There no data to display </div>`;
                 }
@@ -283,3 +307,87 @@
 <script type="text/javascript" src="./dependencies/publish.js"></script>
 
 </html>
+
+<style>
+    .consonant-CustomCard {
+        width: 306px;
+        border-radius: 5px;
+        color: #EFEFEF;
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        font-family: adobe-clean, Segoe UI, Roboto, sans-serif;
+        background-color: #1E1E1E;
+    }
+
+    .consonant-CustomCard-bannerImg {
+        width: 100%;
+        background-size: contain;
+        border-radius: 5px 5px 0 0;
+        height: 150px;
+        padding: 0;
+    }
+
+    .consonant-CustomCard-img {
+        padding-left: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .consonant-CustomCard-logo {
+        margin-right: 10px;
+        border-radius: 5px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .consonant-CustomCard-title {
+        flex: 1;
+    }
+
+    .consonant-CustomCard-badge {
+        background-color: orange;
+        padding: 5px 15px;
+        color: #1E1E1E;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .consonant-CustomCard-text {
+        margin: 0 10px;
+        border-bottom: 1px solid #a2a2a2;
+        color: #a2a2a2;
+        flex:1;
+        padding-bottom: 10px;
+    }
+
+    .consonant-CustomCard-text p {
+        margin: 0 0 10px;
+    }
+
+    .consonant-CustomCard-text strong {
+        color: #EFEFEF;
+    }
+
+    .consonant-CustomCard-footer {
+        padding: 15px 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .consonant-CustomCard-price {
+        flex: 1;
+        color: #a2a2a2
+    }
+
+    .consonant-CustomCard-price div {
+        font-weight: bold;
+        color: #EFEFEF;
+    }
+
+    .consonant-CustomCard-btn {
+        padding: 8px 16px;
+        border-radius: 15px;
+        background-color: rgba(38, 128, 235, 1);
+        color: white;
+    }
+</style>

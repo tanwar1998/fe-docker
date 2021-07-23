@@ -1,0 +1,166 @@
+{
+    "cards": [
+        {
+            "id": "cc2cc0a3-304d-3557-ba32-f691555ef0de",
+            "contentArea": {
+                "title": "Penatibus",
+                "description": "Et magnis dis parturient montes nascetur",
+                "price": "$9.99/mo",
+                "list": [
+                    {
+                        "listId": "adobe-com-enterprise:events/max/products/lightroom-on-mobile",
+                        "text": "Fusce efficitur ornare <strong> est ut finibus </strong>"
+                    },
+                    {
+                        "listId": "adobe-com-enterprise:content-type/event-speaker",
+                        "text": "Nulla id quam sit amet <strong> magna congue commodo </strong>"
+                    },
+                    {
+                        "listId": "adobe-com-enterprise:events/max/speaker-craft/photography",
+                        "text": "Sed consectetur tortor <strong> at viverra consequat </strong>"
+                    }
+                ]
+            },
+            "showCard": {
+                "from": "2020-10-01T20:00:00Z",
+                "until": "2025-10-31T21:45:00Z"
+            },
+            "cardDate": "2020-07-30T08:45:42.881Z",
+            "avatarUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1200px-Adobe_Photoshop_CC_icon.svg.png",
+            "badge": "Rellentesque",
+            "styles": {
+                "typeOverride": "",
+                "backgroundImage": "https://adobe.com/content/dam/www/uk/en/enterprise/events/webinars/marquee's/Adobe_Stock_Audio_Banner_1600x%20600.jpg"
+            }
+        },
+        {
+            "id": "cc2cc0a3-304d-3558-ba32-f691555ef0de",
+            "contentArea": {
+                "title": "Phasellus Odio",
+                "description": "Etiam vitae tempor augue, tempor posuere.",
+                "price": "$9.99/mo",
+                "list": [
+                    {
+                        "listId": "adobe-com-enterprise:events/max/products/lightroom-on-mobile",
+                        "text": "Aliquam vestibulum, <strong> liqula quis gravida laoreet </strong>"
+                    },
+                    {
+                        "listId": "adobe-com-enterprise:content-type/event-speaker",
+                        "text": "Etiam vitae tempor augue, <strong> tempor posuere </strong>"
+                    },
+                    {
+                        "listId": "adobe-com-enterprise:events/max/speaker-craft/photography",
+                        "text": "Morbi bibendum risus <strong> non dolor pellentesque </strong>"
+                    }
+                ]
+            },
+            "showCard": {
+                "from": "2020-10-01T20:00:00Z",
+                "until": "2025-10-31T21:45:00Z"
+            },
+            "cardDate": "2020-07-30T08:45:42.881Z",
+            "avatarUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1200px-Adobe_Photoshop_CC_icon.svg.png",
+            "styles": {
+                "typeOverride": "",
+                "backgroundImage": "https://adobe.com/content/dam/www/uk/en/enterprise/events/webinars/marquee's/Thumbnail__Create-and-Collaborate_small.jpg"
+            }
+        },
+        {
+            "id": "cc2cc0a3-304d-3548-ba32-f691555ef0de",
+            "contentArea": {
+                "title": "Cras Id Nunc Id Justo",
+                "description": "Integer augue 20+ dolor, porta sit amet arcu sed.",
+                "price": "$52.99/mo",
+                "list": [
+                    {
+                        "listId": "adobe-com-enterprise:events/max/products/lightroom-on-mobile",
+                        "text": "Aliquam vestibulum, <strong> liqula quis gravida laoreet </strong>"
+                    },
+                    {
+                        "listId": "adobe-com-enterprise:content-type/event-speaker",
+                        "text": "Mauris dapibus, <strong> dolor ac porttitor molestie </strong>"
+                    },
+                    {
+                        "listId": "adobe-com-enterprise:events/max/speaker-craft/photography",
+                        "text": "Integer ut hendrerit lacus, <strong> ut pulvinar magna </strong>"
+                    }
+                ]
+            },
+            "showCard": {
+                "from": "2020-10-01T20:00:00Z",
+                "until": "2025-10-31T21:45:00Z"
+            },
+            "cardDate": "2020-07-30T08:45:42.881Z",
+            "avatarUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1200px-Adobe_Photoshop_CC_icon.svg.png",
+            "styles": {
+                "typeOverride": "",
+                "backgroundImage": "https://adobe.com/content/dam/www/uk/en/enterprise/events/webinars/marquee's/104820%20Adobe%20pharma%20webinar%20web%20graphics_2400x800.png"
+            }
+        },
+        {
+            "id": "cc2cc0a4-304d-3548-ba32-f691555ef0de",
+            "contentArea": {
+                "title": "Phasellus Odio",
+                "description": "Etiam vitae tempor augue, tempor posuere.",
+                "price": "$9.99/mo",
+                "list": [
+                    {
+                        "listId": "adobe-com-enterprise:events/max/products/lightroom-on-mobile",
+                        "text": "Aliquam vestibulum, <strong> ligula quis gravida laoreet </strong>"
+                    },
+                    {
+                        "listId": "adobe-com-enterprise:content-type/event-speaker",
+                        "text": "Etiam vitae tempor augue, <strong> tempor posuere </strong>"
+                    },
+                    {
+                        "listId": "adobe-com-enterprise:events/max/speaker-craft/photography",
+                        "text": "Morbi bibendum risus, <strong> non dolor pellentesque </strong>"
+                    }
+                ]
+            },
+            "showCard": {
+                "from": "2020-10-01T20:00:00Z",
+                "until": "2025-10-31T21:45:00Z"
+            },
+            "cardDate": "2020-07-30T08:45:42.881Z",
+            "avatarUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1200px-Adobe_Photoshop_CC_icon.svg.png",
+            "badge": "Rellentesque",
+            "styles": {
+                "typeOverride": "",
+                "backgroundImage": "https://adobe.com/content/dam/www/de/de/enterprise/events/webinars/headers/104606-Adobe-Customer-Experience-graphicsMarquee%201600x600px.jpg"
+            }
+        },
+        {
+            "id": "cc2cc0a3-303d-3548-ba32-f691555ef0de",
+            "contentArea": {
+                "title": "Aenean Egestas",
+                "description": "Etiam vitae tempor augue, tempor posuere.",
+                "price": "$9.99/mo",
+                "list": [
+                    {
+                        "listId": "adobe-com-enterprise:events/max/products/lightroom-on-mobile",
+                        "text": "Aliquam vestibulum, <strong> ligula quis gravida laoreet </strong>"
+                    },
+                    {
+                        "listId": "adobe-com-enterprise:content-type/event-speaker",
+                        "text": "Etiam vitae tempor augue, <strong> tempor posuere </strong>"
+                    },
+                    {
+                        "listId": "adobe-com-enterprise:events/max/speaker-craft/photography",
+                        "text": "Morbi bibendum risus, <strong> non dolor pellentesque </strong>"
+                    }
+                ]
+            },
+            "showCard": {
+                "from": "2020-10-01T20:00:00Z",
+                "until": "2025-10-31T21:45:00Z"
+            },
+            "cardDate": "2020-07-30T08:45:42.881Z",
+            "avatarUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Adobe_Photoshop_CC_icon.svg/1200px-Adobe_Photoshop_CC_icon.svg.png",
+            "styles": {
+                "typeOverride": "",
+                "backgroundImage": "https://adobe.com/content/dam/www/uk/en/enterprise/events/webinars/business-continuity/mobile_image_1440x810_option%201c.jpg"
+            }
+        }
+    ]
+}
