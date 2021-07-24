@@ -1,3 +1,5 @@
+@default-mobile-arrow: extract(@consonant-LeftFilters-mobBack-data, 1);
+
 .consonant {
     &-LeftFilters {
         position: static;
@@ -7,7 +9,7 @@
         .full-width;
         .position-absolute-0;
 
-        background-color: @consonantWhite;
+        background-color: @consonantBaseColor;
         overflow: visible;
         user-select: none;
 
@@ -29,7 +31,7 @@
             .full-width;
 
             padding: 14px 12px;
-            border-bottom: 1px solid @consonantLightGrey200;
+            border-bottom: 1px solid @consonantGray300;
         }
 
         &-deskTitle {
@@ -38,7 +40,7 @@
 
             max-width: 70%;
 
-            .font(1rem, 1.1875rem, 700, @consonantDarkGrey800);
+            .font(1rem, 1.1875rem, 700, @consonantGray900);
         }
 
         &-mobTitle {
@@ -49,7 +51,7 @@
                 .font(
                     @size: 1rem,
                     @line-height: 1.1875rem,
-                    @color: @consonantDarkGrey400
+                    @color: @consonantGray800
                 );
             }
         }
@@ -62,10 +64,9 @@
 
             .no-font;
 
-            border: 1px solid #eaeaea;
+            border: 1px solid @consonantGray300;
             border-radius: 50%;
-            background: #fff url(@consonant-LeftFilters-mobBack-data) no-repeat 50% 50%;
-            background-position: contain;
+            background: @consonantBaseColor url(@default-mobile-arrow) no-repeat 50% 50%;
             outline: 0;
         }
 
@@ -74,7 +75,7 @@
 
             padding: 0;
 
-            .font(0.875rem, 1rem, 700, @consonantLightGrey600);
+            .font(0.875rem, 1rem, 700, @consonantGray500);
 
             text-transform: capitalize;
             background-color: transparent;
@@ -96,7 +97,7 @@
             display: none;
             align-items: center;
             padding: 16px;
-            border-top: 1px solid @consonantLightGrey200;
+            border-top: 1px solid @consonantGray300;
             order: 2;
         }
 
@@ -107,7 +108,7 @@
 
             .font(
                 @weight: 700,
-                @color: @consonantDarkGrey400
+                @color: @consonantGray800
             );
 
             text-transform: capitalize;
@@ -120,7 +121,7 @@
 
             .font(
                 @weight: 700,
-                @color: @consonantLightBlue100
+                @color: @consonantBlue600
             );
 
             background-color: transparent;
@@ -143,12 +144,12 @@
 
             .font(
                 @weight: 700,
-                @color: @consonantWhite,
+                @color: @consonantBaseColor,
                 @align: center
             );
 
             text-transform: capitalize;
-            background-color: @consonantLightBlue100;
+            background-color: @consonantBlue600;
             border-radius: 20px;
 
             .no-border-no-outline;
@@ -215,7 +216,7 @@
                 display: block;
                 margin-bottom: 0;
                 padding: 0;
-                border-top: 1px solid @consonantLightGrey200;
+                border-top: 1px solid @consonantGray300;
                 overflow: hidden;
                 z-index: 1;
             }
@@ -228,7 +229,7 @@
                 display: flex;
                 margin-top: -6px;
                 padding: 0 0 24px;
-                border-bottom: 1px solid @consonantLightGrey200;
+                border-bottom: 1px solid @consonantGray300;
                 order: -3;
             }
 
@@ -252,7 +253,7 @@
 
                 &:hover,
                 &:active {
-                    color: @consonantLightBlue100;
+                    color: @consonantBlue600;
                 }
             }
 

@@ -1,7 +1,7 @@
 .consonant {
     &-LeftFilter {
         position: relative;
-        border-bottom: 1px solid @consonantLightGrey200;
+        border-bottom: 1px solid @consonantGray300;
         outline: 0;
         cursor: pointer;
 
@@ -14,7 +14,7 @@
             margin: auto;
             width: 8px;
             height: 8px;
-            border: 2px solid @consonantLightGrey400;
+            border: 2px solid @consonantGray400;
             transform: rotate(-135deg);
             border-top: 0;
             border-right: 0;
@@ -34,7 +34,7 @@
             .full-width;
 
             max-height: 90vh;
-            background-color: @consonantWhite;
+            background-color: @consonantBaseColor;
             border-radius: 5px;
         }
 
@@ -62,7 +62,7 @@
             padding-bottom: 17px;
             padding-right: 36px;
 
-            .font(1rem, 1.1875rem, 700, @consonantDarkGrey400);
+            .font(1rem, 1.1875rem, 700, @consonantGray800);
 
             text-transform: capitalize;
             text-decoration: none;
@@ -77,7 +77,7 @@
             margin-top: 4px;
             padding-right: 18px;
 
-            .font(@color: @consonantLightGrey800);
+            .font(@color: @consonantGray600);
 
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -88,7 +88,7 @@
                 right: 12px;
                 content: attr(data-qty);
                 font-weight: 700;
-                background-color: @consonantWhite;
+                background-color: @consonantBaseColor;
             }
 
             &:empty {
@@ -106,12 +106,12 @@
             top: 12px;
             right: 30px;
 
-            .font(0.875rem, 0.875rem, 700, @consonantWhite, center);
+            .font(0.875rem, 0.875rem, 700, @consonantBaseColor, center);
 
             white-space: nowrap;
             text-overflow: ellipsis;
             border-radius: 15px;
-            background-color: @consonantLightBlue100;
+            background-color: @consonantBlue600;
             z-index: 1;
             opacity: 1;
 
@@ -137,7 +137,7 @@
                 .position-absolute-0;
 
                 margin: auto;
-                background-color: @consonantWhite;
+                background-color: @consonantBaseColor;
                 z-index: 1;
                 opacity: 0;
                 transition: opacity @consonantTransitionTime @consonantTransitionFunc;
@@ -163,7 +163,7 @@
             margin: auto 0 0;
             padding: 0;
             list-style-type: none;
-            border-top: 1px solid @consonantLightGrey200;
+            border-top: 1px solid @consonantGray300;
             overflow-y: auto;
         }
 
@@ -173,7 +173,7 @@
             transition: background-color @consonantTransitionTime @consonantTransitionFunc;
 
             &:hover {
-                background-color: @consonantLightGrey100;
+                background-color: @consonantGray200;
             }
 
             &:nth-of-type(n+10):last-of-type {
@@ -205,8 +205,8 @@
         }
 
         input[type = checkbox]:checked + &-itemsItemCheckmark {
-            background-color: @consonantLightBlue200;
-            border-color: @consonantLightBlue200;
+            background-color: @consonantBlue500;
+            border-color: @consonantBlue500;
 
             &:after {
                 display: block;
@@ -220,7 +220,7 @@
             width: @consonant-LeftFilter-itemsItemCheckmark-size;
             height: @consonant-LeftFilter-itemsItemCheckmark-size;
             margin-right: 10px;
-            border: 2px solid @consonantLightGrey800;
+            border: 2px solid @consonantGray600;
             border-radius: 3px;
             transition:
                 border-color @consonantTransitionTime @consonantTransitionFunc,
@@ -237,7 +237,7 @@
                 margin: auto;
                 width: @consonant-LeftFilter-itemCheckmark-width;
                 height: @consonant-LeftFilter-itemCheckmark-height;
-                border: 2px solid @consonantWhite;
+                border: 2px solid @consonantBaseColor;
                 border-top: 0;
                 border-right: 0;
                 border-radius: 2px;
@@ -250,7 +250,7 @@
 
             .font(
                 @line-height: 1.1875rem,
-                @color: @consonantDarkGrey400
+                @color: @consonantGray800
             );
 
             text-transform: capitalize;
@@ -267,7 +267,7 @@
             margin-top: auto;
             align-items: center;
             padding: 16px;
-            border-top: 1px solid @consonantLightGrey200;
+            border-top: 1px solid @consonantGray300;
         }
 
         &-footerResQty {
@@ -276,7 +276,7 @@
 
             .font(
                 @weight: 700,
-                @color: @consonantDarkGrey400
+                @color: @consonantGray800
             );
 
             text-transform: capitalize;
@@ -289,7 +289,7 @@
 
             .font(
                 @weight: 700,
-                @color: @consonantLightBlue100
+                @color: @consonantBlue600
             );
 
             background-color: transparent;
@@ -308,12 +308,12 @@
 
             .font(
                 @weight: 700,
-                @color: @consonantWhite,
+                @color: @consonantBaseColor,
                 @align: center
             );
 
             text-transform: capitalize;
-            background-color: @consonantLightBlue100;
+            background-color: @consonantBlue600;
             border-radius: 20px;
 
             .no-border-no-outline;
@@ -336,7 +336,7 @@
 
             margin: auto;
             z-index: 4;
-            background-color: fade(@consonantDarkGrey400, 80%);
+            background-color: fade(@consonantGray800, 80%);
 
             &:after {
                 .hide-all;
@@ -345,8 +345,8 @@
 
         &.is-opened &-inner {
             position: relative;
-            box-shadow: 0 3px 15px fade(@consonantDarkGrey400, 80%);
-            border: 1px solid @consonantLightGrey200;
+            box-shadow: 0 3px 15px fade(@consonantGray800, 80%);
+            border: 1px solid @consonantGray300;
             border-radius: 4px;
 
             &:after {
@@ -360,7 +360,13 @@
                 bottom: @consonant-LeftFilter-innerPseudoEl-isOpened-posBottom;
                 left: 0;
                 right: 0;
-                background: transparent linear-gradient(180deg, fade(@consonantWhite, 80%) 0%, @consonantWhite 100%) no-repeat 0% 0%;
+                background:
+                    transparent
+                    linear-gradient(
+                        180deg,
+                        fade(@consonantBaseColor, 80%) 0%,
+                        @consonantBaseColor 100%
+                    ) no-repeat 0% 0%;
                 z-index: 1;
                 pointer-events: none;
             }
@@ -394,7 +400,7 @@
             &:after {
                 display: block;
                 right: 13px;
-                border-color: @consonantLightGrey600;
+                border-color: @consonantGray500;
                 transform: rotate(-45deg);
             }
 
@@ -419,7 +425,7 @@
             }
 
             input[type = checkbox]:focus + &-itemsItemCheckmark {
-                outline: 2px solid @consonantFocusedColor;
+                outline: 2px solid @consonantBlue600;
             }
 
             &-itemsItem:nth-of-type(n+10):last-of-type {
@@ -447,11 +453,11 @@
                 border: 2px solid transparent;
 
                 &:hover {
-                    color: @consonantDarkGrey300;
+                    color: @consonantGray800;
                 }
 
                 &:focus {
-                    border-color: @consonantFocusedColor;
+                    border-color: @consonantBlue600;
                 }
             }
 
@@ -473,7 +479,7 @@
                     display: block;
                     top: 24px;
                     bottom: auto;
-                    border-color: @consonantLightGrey800;
+                    border-color: @consonantGray600;
                     transform: rotate(135deg);
                 }
             }
@@ -505,7 +511,7 @@
 
             &.is-opened &-link {
                 padding-right: 36px;
-                color: @consonantDarkGrey300;
+                color: @consonantGray800;
             }
 
             &.is-opened &-items {

@@ -273,7 +273,7 @@
 
 #create-app .create-search .create-search__create-card-img {
     min-width: 40%;
-    background-position: 50% 50%;
+    : 50% 50%;
     background-size: cover;
 }
 
