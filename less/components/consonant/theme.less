@@ -783,6 +783,53 @@
                 }
             }
         }
+
+        /* .consonant-Bookmarks */
+
+        .consonant-Bookmarks {
+            @url: extract(@consonant-Bookmarks-ico-data, @index + 1);
+            @urlFilled: extract(@consonant-Bookmarks-isSelected-ico-data, @index + 1);
+
+            border-color: @consonantGray300;
+
+            &-itemBadge {
+                color: @consonantBaseColor;
+                background-color: @consonantBlue600;
+            }
+
+            &-icoWrapper .consonant-Bookmarks-ico {
+                background-image: url(@url);
+            }
+
+            &-title {
+                color: @consonantGray800;
+            }
+
+            &.is-selected .consonant-Bookmarks-ico {
+                background-image: url(@urlFilled);
+            }
+
+            @media @consonant-desktop-up {
+                border: 2px solid transparent;
+
+                &:focus {
+                    border-color: @consonantBlue600;
+                }
+
+                &:after {
+                    background-color: @consonantGray300;
+                }
+
+                &-itemBadge&:hover,
+                &-itemBadge&:active {
+                    color: @consonantBaseColor;
+                }
+
+                &-title:hover {
+                    color: @consonantGray800;
+                }
+            }
+        }
     }
 
     .buildThemes(@index + 1);

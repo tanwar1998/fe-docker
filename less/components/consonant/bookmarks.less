@@ -1,3 +1,5 @@
+@consonant-bookmarks-ico: extract(@consonant-Bookmarks-ico-data, 1);
+@consonant-bookmarks-ico-filled: extract(@consonant-Bookmarks-isSelected-ico-data, 1);
 
 .consonant {
     &-Bookmarks {
@@ -8,7 +10,7 @@
 
         .no-border-no-outline;
 
-        border-top: 1px solid @consonantLightGrey200;
+        border-top: 1px solid @consonantGray300;
 
         + div:last-child {
             margin-top: 0;
@@ -26,12 +28,12 @@
             bottom: 0;
             right: 16px;
 
-            .font(0.875rem, 0.875rem, 700, @consonantWhite, center);
+            .font(0.875rem, 0.875rem, 700, @consonantBaseColor, center);
 
             white-space: nowrap;
             text-overflow: ellipsis;
             border-radius: 15px;
-            background-color: @consonantLightBlue100;
+            background-color: @consonantBlue600;
             z-index: 1;
             opacity: 1;
 
@@ -57,7 +59,7 @@
             min-width: @consonant-Bookmarks-ico-maxSize;
             height: @consonant-Bookmarks-ico-maxSize;
             margin-right: 6px;
-            background: transparent url(@consonant-Bookmarks-ico-data) no-repeat 50% 50%;
+            background: transparent url(@consonant-bookmarks-ico) no-repeat 50% 50%;
             background-size: contain;
         }
 
@@ -66,13 +68,13 @@
             padding-right: 55px;
             padding-bottom: 1px;
 
-            .font(@line-height: 1rem, @weight: 700, @color: @consonantDarkGrey400);
+            .font(@line-height: 1rem, @weight: 700, @color: @consonantGray800);
 
             transition: color @consonantTransitionTime @consonantTransitionFunc;
         }
 
         &.is-selected &-ico {
-            background-image: url(@consonant-Bookmarks-isSelected-ico-data);
+            background-image: url(@consonant-bookmarks-ico-filled);
         }
 
         @media @consonant-desktop-up {
@@ -84,7 +86,7 @@
             order: 0;
 
             &:focus {
-                border-color: @consonantFocusedColor;
+                border-color: @consonantBlue600;
             }
 
             &:after {
@@ -95,7 +97,7 @@
                 width: 100%;
                 left: 0;
                 top: 0;
-                background-color: @consonantLightGrey200;
+                background-color: @consonantGray300;
                 z-index: 1;
             }
 
@@ -106,12 +108,12 @@
 
                 &:hover,
                 &:active {
-                    .font(@line-height: 0.875rem, @weight: 700, @color: @consonantWhite, @align: center);
+                    .font(@line-height: 0.875rem, @weight: 700, @color: @consonantBaseColor, @align: center);
                 }
             }
 
             &-title:hover {
-                color: @consonantDarkGrey300;
+                color: @consonantGray800;
             }
         }
     }
