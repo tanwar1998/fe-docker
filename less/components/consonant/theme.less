@@ -397,11 +397,7 @@
                 background-image: url(@url);
             }
 
-            @media @consonant-desktop-up {
-                &:focus {
-                    outline-color: @consonantBlue600;
-                }
-            }
+            .focused;
         }
 
         /* consonant-Tooltip */
@@ -443,9 +439,7 @@
                 color: @consonantBaseColor;
             }
 
-            &:focus {
-                outline-color: @consonantBlue600;
-            }
+            .focused;
 
             &--cta {
                 border-color: @consonantBlue500;
@@ -492,9 +486,7 @@
         /* consonant-LinkWithIcoInfobit */
 
         .consonant-LinkWithIcoInfobit {
-            &:focus {
-                outline-color: @consonantBlue600;
-            }
+            .focused;
 
             span {
                 color: @consonantBlue500;
@@ -522,9 +514,7 @@
                 color: @consonantBlue700;
             }
 
-            &:focus {
-                outline-color: @consonantBlue600;
-            }
+            .focused;
         }
 
         /* consonant-PriceInfobit */
@@ -606,6 +596,8 @@
 
             &-clearLink {
                 color: @consonantGray500;
+
+                .focused;
             }
 
             &-mobileFooter {
@@ -653,6 +645,8 @@
             &:after {
                 background-color: @consonantGray600;
             }
+
+            .focused;
         }
 
         /* Item */
@@ -688,6 +682,8 @@
                 &:after {
                     background-color: @consonantBaseColor;
                 }
+
+                .focused;
             }
 
             &-items {
@@ -766,7 +762,7 @@
                     }
 
                     &:focus {
-                        color: @consonantBlue600;
+                        border-color: @consonantBlue600;
                     }
                 }
 
