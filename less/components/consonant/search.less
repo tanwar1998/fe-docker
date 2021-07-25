@@ -1,3 +1,5 @@
+@consonant-search-ico: extract(@consonant-Search-inputWrapper-src, 1);
+
 .consonant {
     &-Search {
         position: relative;
@@ -16,7 +18,7 @@
 
             margin: 0 0 5px;
 
-            .font(0.75rem, 0.875rem, 400, @consonantDarkGrey200);
+            .font(0.75rem, 0.875rem, 400, @consonantGray700);
 
             cursor: pointer;
         }
@@ -35,7 +37,7 @@
                 bottom: 0;
                 left: 10px;
                 margin: auto;
-                background: transparent url(@consonant-Search-inputWrapper-src) no-repeat 0 0;
+                background: transparent url(@consonant-search-ico) no-repeat 0 0;
                 background-size: cover;
                 z-index: 1;
             }
@@ -49,11 +51,11 @@
 
             padding: 0 8px 0 32px;
 
-            .font(@line-height: 1.875rem, @color: @consonantDarkGrey400);
+            .font(@line-height: 1.875rem, @color: @consonantGray800);
 
-            border: 1px solid @consonantLightGrey200;
+            border: 1px solid @consonantGray300;
             border-radius: 5px;
-            background-color: @consonantWhite;
+            background-color: @consonantBaseColor;
             transition:
                 border-color @consonantTransitionTime @consonantTransitionFunc
                 background-color @consonantTransitionTime @consonantTransitionFunc;
@@ -77,14 +79,14 @@
 
             &::placeholder {
                 font-style: italic;
-                color: @consonantLightGrey800;
+                color: @consonantGray600;
                 transition: opacity @consonantTransitionTime @consonantTransitionFunc;
             }
 
             &:focus {
                 padding-right: 32px;
-                border-color: @consonantLightBlue200;
-                background-color: @consonantWhite;
+                border-color: @consonantBlue500;
+                background-color: @consonantBaseColor;
 
                 &::placeholder {
                     opacity: 0;
@@ -112,7 +114,7 @@
             line-height: 0;
             border: 0;
             border-radius: 50%;
-            background-color: @consonantLightGrey100;
+            background-color: @consonantGray200;
             outline: 0;
             pointer-events: none;
             transition: background-color @consonantTransitionTime @consonantTransitionFunc;
@@ -127,7 +129,7 @@
                 .position-absolute-0;
 
                 margin: auto;
-                background-color: @consonantDarkGrey200;
+                background-color: @consonantGray700;
                 transform: rotate(45deg);
             }
 
@@ -155,12 +157,12 @@
                 }
 
                 &:hover {
-                    background-color: @consonantLightBlue100;
+                    background-color: @consonantBlue600;
                 }
 
                 &:hover:before,
                 &:hover:after {
-                    background-color: @consonantWhite;
+                    background-color: @consonantBaseColor;
                 }
             }
         }
