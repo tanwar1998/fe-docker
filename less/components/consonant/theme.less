@@ -881,6 +881,44 @@
                 }
             }
         }
+
+        /* .consonant-FiltersInfo */
+
+        .consonant-FiltersInfo {
+            @url: extract(@consonant-FiltersInfo-btnIco-src, @index + 1);
+
+            &-btn {
+                border-color: @consonantGray800;
+                color: @consonantGray800;
+
+                &Selected {
+                    border-color: @consonantGray800;
+                }
+
+                &--withFilters {
+                    background-color: @consonantGray200;
+                    color: @consonantGray900;
+                }
+            }
+
+            &-btnIco {
+                background-image: url(@url);
+            }
+
+            &-title {
+                color: @consonantGray900;
+            }
+
+            &-results {
+                color: @consonantGray800;
+            }
+
+            @media @consonant-desktop-up {
+                &-wrapper:after {
+                    background-color: @consonantGray300;
+                }
+            }
+        }
     }
 
     .buildThemes(@index + 1);

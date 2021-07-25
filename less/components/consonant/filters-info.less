@@ -2,6 +2,8 @@
 - .consonant-FiltersInfo-wrapper--noLine;
 */
 
+@consonant-filters-ico: extract(@consonant-FiltersInfo-btnIco-src, 1);
+
 .consonant {
     &-FiltersInfo {
         display: flex;
@@ -37,11 +39,11 @@
             max-width: 100%;
             margin-bottom: 10px;
             padding: 0 0 0 11px;
-            border: 1px solid @consonantDarkGrey400;
+            border: 1px solid @consonantGray800;
             border-radius: 5px;
             overflow: hidden;
 
-            .font(0.875rem, 1.875rem, 700, @consonantDarkGrey400);
+            .font(0.875rem, 1.875rem, 700, @consonantGray800);
 
             text-transform: capitalize;
             background-color: transparent;
@@ -53,15 +55,15 @@
                 max-width: 40%;
                 padding-left: 8px;
                 padding-right: 7px;
-                border-left: 1px solid @consonantDarkGrey400;
+                border-left: 1px solid @consonantGray800;
                 white-space: nowrap;
                 text-overflow: ellipsis;
                 overflow: hidden;
             }
 
             &--withFilters {
-                background-color: @consonantLightGrey100;
-                color: @consonantDarkGrey600;
+                background-color: @consonantGray200;
+                color: @consonantGray900;
             }
         }
 
@@ -71,7 +73,7 @@
             width: @consonant-FiltersInfo-btnIco-size;
             height: @consonant-FiltersInfo-btnIco-size;
             margin-right: 8px;
-            background: transparent url(@consonant-FiltersInfo-btnIco-src) no-repeat 0 0;
+            background: transparent url(@consonant-filters-ico) no-repeat 0 0;
         }
 
         &-btnText {
@@ -97,7 +99,7 @@
             max-width: @consonant-FiltersInfo-title-width;
             margin: 0;
 
-            .font(1.125rem, 1.375rem, 700, @consonantDarkGrey800);
+            .font(1.125rem, 1.375rem, 700, @consonantGray900);
         }
 
         &-results {
@@ -105,7 +107,7 @@
             margin-left: auto;
             padding-left: 12px;
 
-            .font(0.875rem, 1.3125rem, 400, @consonantDarkGrey400, right);
+            .font(0.875rem, 1.3125rem, 400, @consonantGray800, right);
 
             strong {
                 font-weight: 700;
@@ -130,7 +132,7 @@
                     position: absolute;
                     width: 1px;
                     height: 32px;
-                    background-color: @consonantLightGrey300;
+                    background-color: @consonantGray300;
                     top: 0;
                     right: 16px;
                     margin: auto;
