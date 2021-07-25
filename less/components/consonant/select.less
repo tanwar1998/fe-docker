@@ -18,7 +18,7 @@
             bottom: 0;
             right: 12px;
             margin: auto;
-            border: 1px solid @consonantDarkGrey600;
+            border: 1px solid @consonantGray900;
             z-index: 1;
             transform: rotate(-45deg) translate3d(-1px, -2px, 0);
             border-top: 0;
@@ -33,12 +33,12 @@
             max-width: @consonant-Select-width;
             padding: 0 34px 0 12px;
 
-            .font(0.875rem, 1.875rem, 400, @consonantDarkGrey400, left);
+            .font(0.875rem, 1.875rem, 400, @consonantGray800, left);
 
             text-transform: capitalize;
             white-space: nowrap;
             cursor: pointer;
-            border: 1px solid @consonantLightGrey200;
+            border: 1px solid @consonantGray300;
             border-radius: 5px;
             background-color: transparent;
             overflow: hidden;
@@ -59,9 +59,9 @@
             top: calc(~ '100% + 6px');
             right: 0;
             word-break: break-word;
-            border: 1px solid @consonantLightGrey200;
-            background-color: @consonantWhite;
-            box-shadow: 0 3px 15px fade(@consonantDarkGrey400, 10%);
+            border: 1px solid @consonantGray300;
+            background-color: @consonantBaseColor;
+            box-shadow: 0 3px 15px fade(@consonantGray800, 10%);
             transition: opacity @consonantTransitionTime @consonantTransitionFunc;
             z-index: 2;
             border-radius: 5px;
@@ -83,23 +83,23 @@
             max-width: 100%;
             padding: 9px 30px 9px 20px;
 
-            .font(@color: @consonantDarkGrey400);
+            .font(@color: @consonantGray800);
 
             white-space: nowrap;
             text-overflow: ellipsis;
-            background-color: @consonantWhite;
+            background-color: @consonantBaseColor;
             transition: background-color @consonantTransitionTime @consonantTransitionFunc;
             outline: 0;
             overflow: hidden;
 
             &:hover {
-                background-color: @consonantLightGrey100;
+                background-color: @consonantGray200;
             }
 
             &.is-selected {
                 position: relative;
 
-                .font(@weight: 700; @color: @consonantLightBlue200);
+                .font(@weight: 700; @color: @consonantBlue500);
 
                 &:after {
                     content: '';
@@ -110,7 +110,7 @@
                     bottom: 0;
                     right: 16px;
                     margin: auto;
-                    border: 2px solid @consonantLightBlue100;
+                    border: 2px solid @consonantBlue600;
                     border-top: 0;
                     border-right: 0;
                     transform: rotate(-45deg) translate3d(1px, -2px, 0);
@@ -127,7 +127,7 @@
             &:after {
                 width: 4px;
                 height: 4px;
-                border-color: @consonantDarkGrey400;
+                border-color: @consonantGray800;
             }
         }
 
@@ -168,7 +168,7 @@
                 border: 2px solid transparent;
 
                 &:focus {
-                    border-color: @consonantFocusedColor;
+                    border-color: @consonantBlue600;
                 }
             }
 

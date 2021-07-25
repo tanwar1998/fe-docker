@@ -919,6 +919,58 @@
                 }
             }
         }
+
+        /* .consonant-Select */
+
+        .consonant-Select {
+            &:after {
+                border-color: @consonantGray900;
+            }
+
+            &-btn {
+                color: @consonantGray800;
+                border-color: @consonantGray300;
+
+                .focused;
+            }
+
+            &-options {
+                border-color: @consonantGray300;
+                background-color: @consonantBaseColor;
+                box-shadow: 0 3px 15px fade(@consonantGray800, 10%);
+            }
+
+            &-option {
+                color: @consonantGray800;
+                background-color: @consonantBaseColor;
+
+                &:hover {
+                    background-color: @consonantGray200;
+                }
+
+                &.is-selected {
+                    color: @consonantBlue500;
+
+                    &:after {
+                        border-color: @consonantBlue600;
+                    }
+                }
+            }
+
+            &--autoWidth:after {
+                border-color: @consonantGray800;
+            }
+
+            @media @consonant-desktop-up {
+                &-option:focus {
+                    border-color: @consonantBlue600;
+                }
+
+                &-btn {
+                    border-color: transparent;
+                }
+            }
+        }
     }
 
     .buildThemes(@index + 1);
