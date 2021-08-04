@@ -28,6 +28,11 @@
             background-color: @consonantBaseColor;
             outline: 0;
 
+            &:hover,
+            &:active {
+                text-decoration: none;
+            }
+
             & > :last-child {
                 margin-bottom: 0;
             }
@@ -163,6 +168,10 @@
             max-height: 1rem * 5;
 
             .line-clamp(5);
+        }
+
+        &-title:first-child + &-text {
+            .line-clamp(1);
         }
 
         &-label + &-title + &-text {
