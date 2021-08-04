@@ -1,14 +1,18 @@
 import React from 'react';
+import classNames from 'classnames';
 import {
     string,
     shape,
+    bool,
 } from 'prop-types';
 
 import { useLazyLoading } from '../Helpers/hooks';
 import {
     stylesType,
     contentAreaType,
+    overlaysType,
 } from '../types/card';
+import VideoButton from '../Modal/videoButton';
 
 const doubleWideCardType = {
     ctaLink: string,
@@ -16,6 +20,8 @@ const doubleWideCardType = {
     lh: string,
     styles: shape(stylesType),
     contentArea: shape(contentAreaType),
+    overlays: shape(overlaysType),g
+    renderBorder: bool,
 };
 
 const defaultProps = {
@@ -23,6 +29,8 @@ const defaultProps = {
     lh: '',
     ctaLink: '',
     contentArea: {},
+    overlays: {},
+    renderBorder: true,
 };
 
 /**
@@ -35,6 +43,8 @@ const defaultProps = {
     ctaLink: String,
     styles: Object,
     contentArea: Object,
+    overlays: Object,
+    renderBorder: Boolean,
  * }
  * return (
  *   <DoubleWideCard {...props}/>
@@ -53,7 +63,25 @@ const DoubleWideCard = (props) => {
             description,
             detailText: label,
         },
+        overlays: {
+            videoButton: {
+                url: videoURL,
+            },
+        },
+        renderBorder,
     } = props;
+
+    /**
+     * Class name for the card:
+     * whether card text content should be rendered or no;
+     * whether card border should be rendered or no;     
+     * @type {String}
+     */
+    const cardClassName = classNames({
+        'consonant-DoubleWideCard': true,
+        'consonant-DoubleWideCard--noTextInfo': !title && !description && !label,
+        'consonant-u-noBorders': !renderBorder,      
+    });
 
     /**
      * Creates a card image DOM reference
@@ -74,13 +102,15 @@ const DoubleWideCard = (props) => {
 
     return (
         <div
-            className="consonant-DoubleWideCard"
+            className={cardClassName}
             daa-lh={lh}
             id={id}>
             <div
                 className="consonant-DoubleWideCard-img"
                 ref={imageRef}
-                style={{ backgroundImage: `url("${lazyLoadedImage}")` }} />
+                style={{ backgroundImage: `url("${lazyLoadedImage}")` }}>
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-DoubleWideCard-videoIco" />}
+            </div>
             <a
                 href={ctaLink}
                 target="_blank"
