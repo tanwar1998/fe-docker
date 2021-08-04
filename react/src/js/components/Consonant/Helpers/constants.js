@@ -162,6 +162,10 @@ export const DEFAULT_CONFIG = {
     pagination: {
         enabled: true,
         type: 'loadMore',
+        loadMoreButton: {
+            style: 'primary',
+            useThemeThree: false,
+        },
         paginatorQuantityText: 'Showing {}-{} of {} Results',
         paginatorPrevLabel: 'Previous',
         paginatorNextLabel: 'Next',
@@ -244,6 +248,7 @@ export const GUTTER_SIZE = {
 export const LAYOUT_CONTAINER = {
     SIZE_83_VW: '83Percent',
     SIZE_1200_PX: '1200MaxWidth',
+    SIZE_1600_PX: '1600MaxWidth',
     SIZE_100_VW_32_MARGIN: '32Margin',
 };
 
