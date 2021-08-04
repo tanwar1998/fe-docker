@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import {
     string,
     shape,
+    bool,
 } from 'prop-types';
 
 import { useLazyLoading } from '../Helpers/hooks';
@@ -19,7 +20,8 @@ const doubleWideCardType = {
     lh: string,
     styles: shape(stylesType),
     contentArea: shape(contentAreaType),
-    overlays: shape(overlaysType),
+    overlays: shape(overlaysType),g
+    renderBorder: bool,
 };
 
 const defaultProps = {
@@ -28,6 +30,7 @@ const defaultProps = {
     ctaLink: '',
     contentArea: {},
     overlays: {},
+    renderBorder: true,
 };
 
 /**
@@ -41,6 +44,7 @@ const defaultProps = {
     styles: Object,
     contentArea: Object,
     overlays: Object,
+    renderBorder: Boolean,
  * }
  * return (
  *   <DoubleWideCard {...props}/>
@@ -64,16 +68,19 @@ const DoubleWideCard = (props) => {
                 url: videoURL,
             },
         },
+        renderBorder,
     } = props;
 
     /**
      * Class name for the card:
      * whether card text content should be rendered or no;
+     * whether card border should be rendered or no;     
      * @type {String}
      */
     const cardClassName = classNames({
         'consonant-DoubleWideCard': true,
         'consonant-DoubleWideCard--noTextInfo': !title && !description && !label,
+        'consonant-u-noBorders': !renderBorder,      
     });
 
     /**

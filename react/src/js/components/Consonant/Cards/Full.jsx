@@ -1,7 +1,9 @@
 import React from 'react';
+import classNames from 'classnames';
 import {
     string,
     shape,
+    bool,
 } from 'prop-types';
 
 import { useLazyLoading } from '../Helpers/hooks';
@@ -19,6 +21,7 @@ const fullCardType = {
     styles: shape(stylesType),
     overlays: shape(overlaysType),
     contentArea: shape(contentAreaType),
+    renderBorder: bool,
 };
 
 const defaultProps = {
@@ -27,6 +30,7 @@ const defaultProps = {
     ctaLink: '',
     overlays: {},
     contentArea: {},
+    renderBorder: true,
 };
 
 /**
@@ -40,6 +44,7 @@ const defaultProps = {
     styles: Object,
     contentArea: Object,
     overlays: Object,
+    renderBorder: Boolean,
  * }
  * return (
  *   <FullCard {...props}/>
@@ -78,7 +83,18 @@ const FullCard = (props) => {
                 description: badgeText,
             },
         },
+        renderBorder,
     } = props;
+
+    /**
+     * Class name for the card:
+     * whether card border should be rendered or no;
+     * @type {String}
+     */
+    const cardClassName = classNames({
+        'consonant-FullCard': true,
+        'consonant-u-noBorders': !renderBorder,
+    });
 
     /**
      * Creates a card image DOM reference
@@ -100,7 +116,7 @@ const FullCard = (props) => {
     return (
         <div
             daa-lh={lh}
-            className="consonant-FullCard"
+            className={cardClassName}
             data-testid="consonant-FullCard"
             id={id}>
             <div
