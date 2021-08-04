@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import classNames from 'classnames';
 import {
     string,
     shape,
+    bool,
 } from 'prop-types';
 
 import { useLazyLoading } from '../Helpers/hooks';
@@ -10,6 +12,7 @@ import {
     contentAreaType,
     overlaysType,
 } from '../types/card';
+import VideoButton from '../Modal/videoButton';
 
 const halfHeightCardType = {
     ctaLink: string,
@@ -18,6 +21,7 @@ const halfHeightCardType = {
     styles: shape(stylesType),
     overlays: shape(overlaysType),
     contentArea: shape(contentAreaType),
+    renderBorder: bool,
 };
 
 const defaultProps = {
@@ -26,6 +30,7 @@ const defaultProps = {
     ctaLink: '',
     overlays: {},
     contentArea: {},
+    renderBorder: true,
 };
 
 /**
@@ -39,6 +44,7 @@ const defaultProps = {
     styles: Object,
     contentArea: Object,
     overlays: Object,
+    renderBorder: Boolean,
  * }
  * return (
  *   <HalfHeightCard {...props}/>
@@ -64,8 +70,22 @@ const HalfHeightCard = (props) => {
                 backgroundColor: bannerBackgroundColor,
                 icon: bannerIcon,
             },
+            videoButton: {
+                url: videoURL,
+            },
         },
+        renderBorder,
     } = props;
+
+    /**
+     * Class name for the card:
+     * whether card border should be rendered or no;
+     * @type {String}
+     */
+    const cardClassName = classNames({
+        'consonant-HalfHeightCard': true,
+        'consonant-u-noBorders': !renderBorder,
+    });
 
     /**
      * Creates a card image DOM reference
@@ -84,16 +104,11 @@ const HalfHeightCard = (props) => {
      */
     const [lazyLoadedImage] = useLazyLoading(imageRef, image);
 
-    return (
-        <a
-            href={ctaLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="consonant-HalfHeightCard"
-            title=""
-            daa-lh={lh}
-            tabIndex="0"
-            id={id}>
+    /**
+     * Inner HTML of the card, which will be included into either div or a tag;
+     */
+    const renderCardContent = () => (
+        <Fragment>
             {bannerDescription && bannerFontColor && bannerBackgroundColor &&
                 <span
                     className="consonant-HalfHeightCard-banner"
@@ -124,8 +139,28 @@ const HalfHeightCard = (props) => {
                 {title &&
                     <h2 className="consonant-HalfHeightCard-title">{title}</h2>
                 }
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" />}
             </div>
-        </a>
+        </Fragment>
+    );
+
+    return (
+        videoURL ?
+            <div
+                className="consonant-HalfHeightCard"
+                daa-lh={lh}
+                id={id}>{renderCardContent()}
+            </div> :
+            <a
+                href={ctaLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="consonant-HalfHeightCard"
+                title=""
+                daa-lh={lh}
+                tabIndex="0"
+                id={id}>{renderCardContent()}
+            </a>
     );
 };
 

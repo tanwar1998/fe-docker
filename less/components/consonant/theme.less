@@ -1,5 +1,12 @@
 /* Themes generation file */
 
+/* Available modificators:
+- .consonant-u-themeLight;
+- .consonant-u-themeLightest;
+- .consonant-u-themeDark;
+- .consonant-u-themeDarkest;
+*/
+
 /* Configuration */
 
 @consonantThemes: Light, Dark, Darkest;
@@ -575,6 +582,14 @@
 
         .consonant-TextInfobit {
             color: @consonantGray700;
+        }
+
+        /* consonant-LoadMore */
+
+        .consonant-LoadMore {
+            &--overBg &-btn {
+                color: @consonantGray800;
+            }
         }
     }
 

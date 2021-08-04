@@ -51,16 +51,19 @@
     <script type="text/javascript">
         var config = {
             collection: {
-                mode: "darkest", // Can be empty, "light", "dark", "darkest";
+                mode: "light", // Can be empty, "light", "dark", "darkest";
                 layout: {
-                    type: '3up', // Can be "2up", "3up", "4up", "5up";
+                    type: '4up', // Can be "2up", "3up", "4up", "5up";
                     gutter: '4x', // Can be "2x", "3x", "4x";
                     container: '1200MaxWidth', // Can be "83Percent", "1200MaxWidth", "32Margin";
+                },
+                button: {
+                  style: "call-to-action", // Can be "primary", "call-to-action";
                 },
                 resultsPerPage: '20',
                 endpoint: "./tests/card-collection/json-response-tests/smoke-tests/smoke.json",
                 totalCardsToShow: '100',
-                cardStyle: "1:2", // available options: "1:2", "3:4", "full-card", "half-height", "custom-card", "double-wide";
+                cardStyle: "3:4", // available options: "1:2", "3:4", "full-card", "half-height", "custom-card", "double-wide";
                 showTotalResults: 'true',
                 i18n: {
                     prettyDateIntervalFormat: '{LLL} {dd} | {timeRange} {timeZone}',
@@ -68,7 +71,8 @@
                     title: 'Speakers',
                     onErrorTitle: 'Sorry there was a system error.',
                     onErrorDescription: 'Please try reloading the page or try coming back to the page another time.',
-                }
+                },
+                setCardBorders: "true", // Can be true or false;
             },
             featuredCards: [
             {
@@ -150,8 +154,8 @@
                 }
             ],
             filterPanel: {
-                enabled: 'false',
-                type: 'left',
+                enabled: 'true',
+                type: 'top',
                 filters: [
                     {
                         "group": "Topic",
@@ -293,6 +297,10 @@
             pagination: {
                 enabled: 'true',
                 type: 'loadMore',
+                loadMoreButton: {
+                  style: "primary", // Can be "primary", "over-background";
+                  useThemeThree: "false", // Can be "true" or "false";
+                },
                 i18n: {
                     loadMore: {
                         btnText: 'Load More',
