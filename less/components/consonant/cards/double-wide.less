@@ -39,10 +39,14 @@
             background-color: @consonantBaseColor;
             outline: 0;
 
-            &:empty {
-                display: none;
+            &:hover,
+            &:active {
+                text-decoration: none;
             }
-        }
+          
+            &:empty {
+              display: none;
+            }
 
         &-title {
             margin: 0 0 5px;
