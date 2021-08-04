@@ -48,37 +48,7 @@
         }
 
         &-videoIco {
-            position: absolute;
-            width: @consonantCardVideoIcoSize;
-            height: @consonantCardVideoIcoSize;
-            right: 24px;
-            bottom: 16px;
-
-            .no-font;
-
-            background: transparent url(@consonantCardPlayIcoData) no-repeat 0 0;
-            background-size: cover;
-            z-index: 1;
-            cursor: pointer;
-            transform-origin: 50% 50%;
-            opacity: 0;
-            transition: opacity @consonantTransitionTime @consonantTransitionFunc;
-            transition-delay: @consonantTransitionTime * 2;
-
-            &:hover,
-            &:active,
-            &:focus {
-                opacity: 1;
-                transform: scale(1.1);
-                transition: transform @consonantTransitionTime @consonantTransitionFunc;
-                transition-delay: 0;
-            }
-
-            .focused;
-        }
-
-        &:hover &-videoIco {
-            opacity: 1;
+            .video-button-styles;
         }
 
         &-logo {
