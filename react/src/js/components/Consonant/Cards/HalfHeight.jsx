@@ -147,7 +147,7 @@ const HalfHeightCard = (props) => {
     return (
         videoURL ?
             <div
-                className="consonant-HalfHeightCard"
+                className={cardClassName}
                 daa-lh={lh}
                 id={id}>{renderCardContent()}
             </div> :
@@ -155,7 +155,7 @@ const HalfHeightCard = (props) => {
                 href={ctaLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="consonant-HalfHeightCard"
+                className={cardClassName}
                 title=""
                 daa-lh={lh}
                 tabIndex="0"

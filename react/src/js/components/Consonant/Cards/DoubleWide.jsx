@@ -20,7 +20,7 @@ const doubleWideCardType = {
     lh: string,
     styles: shape(stylesType),
     contentArea: shape(contentAreaType),
-    overlays: shape(overlaysType),g
+    overlays: shape(overlaysType),
     renderBorder: bool,
 };
 
@@ -74,13 +74,13 @@ const DoubleWideCard = (props) => {
     /**
      * Class name for the card:
      * whether card text content should be rendered or no;
-     * whether card border should be rendered or no;     
+     * whether card border should be rendered or no;
      * @type {String}
      */
     const cardClassName = classNames({
         'consonant-DoubleWideCard': true,
         'consonant-DoubleWideCard--noTextInfo': !title && !description && !label,
-        'consonant-u-noBorders': !renderBorder,      
+        'consonant-u-noBorders': !renderBorder,
     });
 
     /**
