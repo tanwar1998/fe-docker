@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import {
     number,
     func,
@@ -34,6 +35,18 @@ const LoadMore = ({
     const getConfig = useConfig();
 
     /**
+     * Authored Button Style
+     * @type {String}
+     */
+    const loadMoreButtonStyle = getConfig('pagination', 'loadMoreButton.style');
+
+    /**
+     * Whether we should apply theme "Three" for the load more button;
+     * @type {String}
+     */
+    const useThemeThree = getConfig('pagination', 'loadMoreButton.useThemeThree');
+
+    /**
      * Authored Button Text
      * @type {String}
      */
@@ -44,6 +57,17 @@ const LoadMore = ({
      * @type {String}
      */
     const loadMoreQuantityText = getConfig('pagination', 'i18n.loadMore.resultsQuantityText');
+
+    /**
+     * Class name for the load more component:
+     * whether it should be primary or over background;
+     * @type {String}
+     */
+    const loadMoreClass = classNames({
+        'consonant-LoadMore': true,
+        'consonant-LoadMore--overBg': loadMoreButtonStyle === 'over-background' && !useThemeThree,
+        'consonant-LoadMore--themeThree': useThemeThree,
+    });
 
     /**
      * Summary Of Load More Results To Show To Users
@@ -59,7 +83,7 @@ const LoadMore = ({
     return (shouldDisplayLoadMore) ? (
         <div
             data-testid="consonant-LoadMore"
-            className="consonant-LoadMore">
+            className={loadMoreClass}>
             <div className="consonant-LoadMore-inner">
                 <p
                     data-testid="consonant-LoadMore-text"
