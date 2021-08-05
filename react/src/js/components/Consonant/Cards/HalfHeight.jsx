@@ -7,14 +7,15 @@ import {
     bool,
 } from 'prop-types';
 
-import { useLazyLoading } from '../Helpers/hooks';
+import { useConfig, useLazyLoading } from '../Helpers/hooks';
 import {
     stylesType,
     contentAreaType,
     overlaysType,
 } from '../types/card';
 import VideoButton from '../Modal/videoButton';
-import { getEventBanner } from '../Helpers/general';
+import { getEventBanner, isDateBeforeInterval } from '../Helpers/general';
+import prettyFormatDate from '../Helpers/prettyFormat';
 
 const halfHeightCardType = {
     ctaLink: string,
@@ -87,6 +88,14 @@ const HalfHeightCard = (props) => {
         bannerMap,
     } = props;
 
+    const getConfig = useConfig();
+
+    /**
+     **** Authored Configs ****
+     */
+    const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
+    const locale = getConfig('language', '');
+
     /**
      * Class name for the card:
      * whether card border should be rendered or no;
@@ -120,6 +129,10 @@ const HalfHeightCard = (props) => {
         bannerDescription = eventBanner.description;
         bannerFontColor = eventBanner.fontColor;
         bannerIcon = eventBanner.icon;
+        let now = new Date();
+        if (isDateBeforeInterval(now, startDate)) {
+            label = prettyFormatDate(startDate, endDate, locale, i18nFormat);
+        }
     }
 
     /**
@@ -151,11 +164,11 @@ const HalfHeightCard = (props) => {
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }} />
             <div className="consonant-HalfHeightCard-inner">
-                {label &&
-                    <span className="consonant-HalfHeightCard-label">{label}</span>
-                }
                 {title &&
                     <h2 className="consonant-HalfHeightCard-title">{title}</h2>
+                }
+                {label &&
+                    <span className="consonant-HalfHeightCard-label">{label}</span>
                 }
                 {videoURL && <VideoButton videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" />}
             </div>
