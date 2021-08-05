@@ -107,7 +107,7 @@ const Grid = (props) => {
         },
         onDemand: {
             description: getConfig('banner', 'onDemand.description'),
-            backgroundColor: '#1372e5',
+            backgroundColor: '#2D9D78',
             fontColor: '#ffffff',
             icon: '',
         },
