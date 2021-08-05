@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import React from 'react';
 import classNames from 'classnames';
 import cuid from 'cuid';
@@ -12,6 +13,7 @@ import {
 import CardFooter from './CardFooter/CardFooter';
 import prettyFormatDate from '../Helpers/prettyFormat';
 import { INFOBIT_TYPE } from '../Helpers/constants';
+import { getEventBanner } from '../Helpers/general';
 import {
     useConfig,
     useLazyLoading,
@@ -36,6 +38,9 @@ const oneHalfCardType = {
     footer: arrayOf(shape(footerType)),
     contentArea: shape(contentAreaType),
     renderBorder: bool,
+    startDate: string,
+    endDate: string,
+    bannerMap: shape(Object).isRequired,
 };
 
 const defaultProps = {
@@ -48,6 +53,8 @@ const defaultProps = {
     isBookmarked: false,
     disableBookmarkIco: false,
     renderBorder: true,
+    startDate: '',
+    endDate: '',
 };
 
 /**
@@ -68,7 +75,7 @@ const defaultProps = {
  * )
  */
 const OneHalfCard = (props) => {
-    const {
+    let {
         id,
         footer,
         lh,
@@ -110,6 +117,9 @@ const OneHalfCard = (props) => {
             },
         },
         renderBorder,
+        startDate,
+        endDate,
+        bannerMap,
     } = props;
 
     const getConfig = useConfig();
@@ -185,6 +195,14 @@ const OneHalfCard = (props) => {
             }
             return infobit;
         });
+    }
+
+    if (startDate && endDate) {
+        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
+        bannerBackgroundColor = eventBanner.backgroundColor;
+        bannerDescription = eventBanner.description;
+        bannerFontColor = eventBanner.fontColor;
+        bannerIcon = eventBanner.icon;
     }
 
     return (

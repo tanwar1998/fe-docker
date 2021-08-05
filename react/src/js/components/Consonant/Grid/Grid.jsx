@@ -92,6 +92,27 @@ const Grid = (props) => {
         'consonant-CardsGrid--doubleWideCards': collectionStyleOverride === CARD_STYLES.DOUBLE_WIDE,
     });
 
+    const bannerMap = {
+        live: {
+            description: getConfig('banner', 'live.description'),
+            backgroundColor: '#ffffff',
+            fontColor: '#d7373f',
+            icon: 'https://upload.wikimedia.org/wikipedia/commons/9/92/Location_dot_red.svg',
+        },
+        upcoming: {
+            description: getConfig('banner', 'upcoming.description'),
+            backgroundColor: '#cb6f10',
+            fontColor: '#ffffff',
+            icon: '',
+        },
+        onDemand: {
+            description: getConfig('banner', 'onDemand.description'),
+            backgroundColor: '#1372e5',
+            fontColor: '#ffffff',
+            icon: '',
+        },
+    };
+
     /**
      * Whether the paginator component is being used
      * @type {Boolean}
@@ -143,6 +164,7 @@ const Grid = (props) => {
                             lh={`Card ${index} | ${card.contentArea.title}`}
                             key={card.id}
                             {...card}
+                            bannerMap={bannerMap}
                             renderBorder={renderCardsBorders} />
                     );
                 } else if (cardStyle === CARD_STYLES.SQUARE) {
@@ -151,6 +173,7 @@ const Grid = (props) => {
                             lh={`Card ${index} | ${card.contentArea.title}`}
                             key={card.id}
                             {...card}
+                            bannerMap={bannerMap}
                             renderBorder={renderCardsBorders} />
                     );
                 } else if (cardStyle === CARD_STYLES.HALF_HEIGHT) {
@@ -159,6 +182,7 @@ const Grid = (props) => {
                             lh={`Card ${index} | ${card.contentArea.title}`}
                             key={card.id}
                             {...card}
+                            bannerMap={bannerMap}
                             renderBorder={renderCardsBorders} />
                     );
                 } else if (cardStyle === CARD_STYLES.DOUBLE_WIDE) {
@@ -180,6 +204,7 @@ const Grid = (props) => {
                         onClick={onCardBookmark}
                         dateFormat={dateFormat}
                         locale={locale}
+                        bannerMap={bannerMap}
                         renderBorder={renderCardsBorders} />
                 );
             })}

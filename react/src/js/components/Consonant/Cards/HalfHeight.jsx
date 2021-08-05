@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import {
@@ -13,6 +14,7 @@ import {
     overlaysType,
 } from '../types/card';
 import VideoButton from '../Modal/videoButton';
+import { getEventBanner } from '../Helpers/general';
 
 const halfHeightCardType = {
     ctaLink: string,
@@ -22,6 +24,9 @@ const halfHeightCardType = {
     overlays: shape(overlaysType),
     contentArea: shape(contentAreaType),
     renderBorder: bool,
+    startDate: string,
+    endDate: string,
+    bannerMap: shape(Object).isRequired,
 };
 
 const defaultProps = {
@@ -31,6 +36,8 @@ const defaultProps = {
     overlays: {},
     contentArea: {},
     renderBorder: true,
+    startDate: '',
+    endDate: '',
 };
 
 /**
@@ -51,7 +58,7 @@ const defaultProps = {
  * )
  */
 const HalfHeightCard = (props) => {
-    const {
+    let {
         id,
         lh,
         ctaLink,
@@ -75,6 +82,9 @@ const HalfHeightCard = (props) => {
             },
         },
         renderBorder,
+        startDate,
+        endDate,
+        bannerMap,
     } = props;
 
     /**
@@ -103,6 +113,14 @@ const HalfHeightCard = (props) => {
      * @type {[Image]} lazyLoadedImage
      */
     const [lazyLoadedImage] = useLazyLoading(imageRef, image);
+
+    if (startDate && endDate) {
+        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
+        bannerBackgroundColor = eventBanner.backgroundColor;
+        bannerDescription = eventBanner.description;
+        bannerFontColor = eventBanner.fontColor;
+        bannerIcon = eventBanner.icon;
+    }
 
     /**
      * Inner HTML of the card, which will be included into either div or a tag;

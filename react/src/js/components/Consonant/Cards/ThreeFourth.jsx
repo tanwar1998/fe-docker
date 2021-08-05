@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import React from 'react';
 import classNames from 'classnames';
 import {
@@ -17,6 +18,7 @@ import {
     overlaysType,
 } from '../types/card';
 import VideoButton from '../Modal/videoButton';
+import { getEventBanner } from '../Helpers/general';
 
 const threeFourthCardType = {
     ctaLink: string,
@@ -26,6 +28,9 @@ const threeFourthCardType = {
     overlays: shape(overlaysType),
     contentArea: shape(contentAreaType),
     renderBorder: bool,
+    startDate: string,
+    endDate: string,
+    bannerMap: shape(Object).isRequired,
 };
 
 const defaultProps = {
@@ -35,6 +40,8 @@ const defaultProps = {
     contentArea: {},
     lh: '',
     renderBorder: true,
+    startDate: '',
+    endDate: '',
 };
 
 /**
@@ -55,7 +62,7 @@ const defaultProps = {
  * )
  */
 const ThreeFourthCard = (props) => {
-    const {
+    let {
         id,
         ctaLink,
         lh,
@@ -92,6 +99,9 @@ const ThreeFourthCard = (props) => {
             },
         },
         renderBorder,
+        startDate,
+        endDate,
+        bannerMap,
     } = props;
 
     const getConfig = useConfig();
@@ -140,6 +150,14 @@ const ThreeFourthCard = (props) => {
      * @type {String}
      */
     const detailText = prettyDate || label;
+
+    if (startDate && endDate) {
+        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
+        bannerBackgroundColor = eventBanner.backgroundColor;
+        bannerDescription = eventBanner.description;
+        bannerFontColor = eventBanner.fontColor;
+        bannerIcon = eventBanner.icon;
+    }
 
     return (
         <div

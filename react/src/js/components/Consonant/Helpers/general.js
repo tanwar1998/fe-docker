@@ -434,3 +434,29 @@ export const qs = {
         return searchParams.toString();
     },
 };
+
+export const isDateWithinInterval = (currentDate, startDate, endDate) => {
+    const curr = Date.parse(currentDate);
+    const start = Date.parse(startDate);
+    const end = Date.parse(endDate);
+
+    return (start <= curr && end >= curr);
+};
+
+export const isDateBeforeInterval = (currentDate, startDate) => {
+    const curr = Date.parse(currentDate);
+    const start = Date.parse(startDate);
+
+    return curr < start;
+};
+
+
+export const getEventBanner = function foo(startDate, endDate, bannerMap) {
+    const currDate = new Date();
+    if (isDateWithinInterval(currDate, startDate, endDate)) {
+        return bannerMap.live;
+    } else if (isDateBeforeInterval(currDate, startDate)) {
+        return bannerMap.upcoming;
+    }
+    return bannerMap.onDemand;
+};
