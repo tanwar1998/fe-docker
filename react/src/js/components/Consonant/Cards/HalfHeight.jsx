@@ -133,11 +133,11 @@ const HalfHeightCard = (props) => {
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }} />
             <div className="consonant-HalfHeightCard-inner">
-                {label &&
-                    <span className="consonant-HalfHeightCard-label">{label}</span>
-                }
                 {title &&
                     <h2 className="consonant-HalfHeightCard-title">{title}</h2>
+                }
+                {label &&
+                    <span className="consonant-HalfHeightCard-label">{label}</span>
                 }
                 {videoURL && <VideoButton videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" />}
             </div>
