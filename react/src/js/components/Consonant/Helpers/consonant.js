@@ -43,10 +43,10 @@ export const makeConfigGetter = config => (object, key) => {
  */
 export function getDefaultSortOption(config, query) {
     const sortOptions = makeConfigGetter(config)('sort', 'options');
-    const getSortConstant = SORT_TYPES[query.toUpperCase()];
+    const sortConstant = SORT_TYPES[query.toUpperCase()];
 
     return sortOptions.find(option => option.sort === query) || {
-        label: getSortConstant || 'Featured',
-        sort: getSortConstant || 'featured',
+        label: sortConstant || 'Featured',
+        sort: sortConstant || 'featured',
     };
 }

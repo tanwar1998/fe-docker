@@ -39,7 +39,7 @@ const getDefaultSortOption = [
     },
     {
         config: { sort: { options: [{ sort: 'date' }] } },
-        query: 'random',
+        query: 'some-random-string-12897sada',
         expectedValue: { label: 'Featured', sort: 'featured' },
     },
 ];
