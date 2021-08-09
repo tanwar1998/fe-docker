@@ -300,3 +300,5 @@ export const getUpdatedCardBookmarkData = (cards, bookmarkedCardIds) => cards.ma
     ...card,
     isBookmarked: bookmarkedCardIds.some(i => i === card.id),
 }));
+
+export const getRandomSort = cards => cards.sort(() => Math.random() - 0.5);
