@@ -7,6 +7,7 @@ import {
     getFeaturedSort,
     getTitleAscSort,
     getTitleDescSort,
+    getRandomSort,
 } from './Helpers';
 import { SORT_TYPES } from './constants';
 import { filterCardsByDateRange } from './cards';
@@ -105,6 +106,9 @@ export default class CardFilterer {
                 break;
             case SORT_TYPES.TITLEDESC:
                 this.filteredCards = getTitleDescSort(this.filteredCards);
+                break;
+            case SORT_TYPES.RANDOM:
+                this.filteredCards = getRandomSort(this.filteredCards);
                 break;
             default:
                 return this;
