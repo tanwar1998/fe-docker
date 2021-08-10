@@ -203,22 +203,22 @@ const FiltersPanelTop = (props) => {
 
     /**
      * Class name for the top filters:
-     * whether we should hide all filters after quantity defined in MAX_TRUNCATED_FILTERS constant
-     * @type {String}
-     */
-    const showLimitedFiltersQtyClass = classNames({
-        'consonant-TopFilters': true,
-        'consonant-TopFilters--truncated': showLimitedFiltersQty,
-    });
-
-    /**
-     * Class name for the top filters:
      * whether we should apply dark or light theme
      * @type {String}
      */
     const topFiltersClass = classNames({
+        'consonant-TopFilters': true,
+        'consonant-TopFilters--withLightTheme': useLightTheme,
+    });
+
+    /**
+     * Class name for filters of the top filters:
+     * whether we should hide all filters after quantity defined in MAX_TRUNCATED_FILTERS constant
+     * @type {String}
+     */
+    const showLimitedFiltersQtyClass = classNames({
         'consonant-TopFilters-filters': true,
-        'consonant-TopFilters-filters--withLightTheme': useLightTheme,
+        'consonant-TopFilters-filters--truncated': showLimitedFiltersQty,
     });
 
     /**
