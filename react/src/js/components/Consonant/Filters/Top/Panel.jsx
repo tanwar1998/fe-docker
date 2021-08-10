@@ -207,8 +207,18 @@ const FiltersPanelTop = (props) => {
      * @type {String}
      */
     const showLimitedFiltersQtyClass = classNames({
+        'consonant-TopFilters': true,
+        'consonant-TopFilters--truncated': showLimitedFiltersQty,
+    });
+
+    /**
+     * Class name for the top filters:
+     * whether we should apply dark or light theme
+     * @type {String}
+     */
+    const topFiltersClass = classNames({
         'consonant-TopFilters-filters': true,
-        'consonant-TopFilters-filters--truncated': showLimitedFiltersQty,
+        'consonant-TopFilters-filters--withLightTheme': useLightTheme,
     });
 
     /**
@@ -221,22 +231,6 @@ const FiltersPanelTop = (props) => {
         'consonant-TopFilters-clearBtnWrapper--withBlur': blurMobileFilters && filters.length > 1,
     });
 
-
-    const titleClass = classNames({
-        'consonant-TopFilters-title': true,
-        'consonant-TopFilters-title--withLightTheme': useLightTheme,
-    });
-
-    const collectionTitleClass = classNames({
-        'consonant-TopFilters-collectionTitle': true,
-        'consonant-TopFilters-collectionTitle--withLightTheme': useLightTheme,
-    });
-
-    const resultsClass = classNames({
-        'consonant-TopFilters-results': true,
-        'consonant-TopFilters-results--withLightTheme': useLightTheme,
-    });
-
     /**
      * Whether the search bar should be visible
      * @type {Boolean}
@@ -246,7 +240,7 @@ const FiltersPanelTop = (props) => {
     return (
         <div
             data-testid="consonant-TopFilters"
-            className="consonant-TopFilters">
+            className={topFiltersClass}>
             {shouldDisplaySearchBar &&
                 <div
                     data-testid="consonant-TopFilters-searchWrapper"
@@ -261,7 +255,7 @@ const FiltersPanelTop = (props) => {
                         className="consonant-TopFilters-filtersWrapper">
                         {TABLET_OR_DESKTOP_SCREEN_SIZE &&
                             <strong
-                                className={titleClass}>
+                                className="consonant-TopFilters-title">
                                 {filterGroupLabel}
                             </strong>
                         }
@@ -334,14 +328,14 @@ const FiltersPanelTop = (props) => {
                         {title &&
                             <h2
                                 data-testid="consonant-TopFilters-collectionTitle"
-                                className={collectionTitleClass}>
+                                className="consonant-TopFilters-collectionTitle">
                                 {title}
                             </h2>
                         }
                         {showTotalResults &&
                             <div
                                 data-testid="consonant-TopFilters-results"
-                                className={resultsClass}>
+                                className="consonant-TopFilters-results">
                                 {totalResultsHtml}
                             </div>
                         }

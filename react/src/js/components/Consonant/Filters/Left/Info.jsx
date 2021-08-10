@@ -121,6 +121,16 @@ const Info = (props) => {
     const shouldRenderMobileInfo = NOT_DESKTOP_SCREEN_SIZE && filtersQty > 0 && enabled;
 
     /**
+     * Class name for the left filters info:
+     * whether the left filters info should be light or dark
+     * @type {String}
+     */
+    const filtersInfoClassName = classNames({
+        'consonant-FiltersInfo': true,
+        'consonant-FiltersInfo--withLightTheme': useLightTheme,
+    });
+
+    /**
      * Class name for the left filters info inner wrapper:
      * whether the left filters info inner wrapper should display a vertical separator
      * after the block with the quantity of the filtered cards
@@ -129,23 +139,12 @@ const Info = (props) => {
     const wrapperClassName = classNames({
         'consonant-FiltersInfo-wrapper': true,
         'consonant-FiltersInfo-wrapper--noLine': !sortEnabled || !sortOptions.length,
-        'consonant-FiltersInfo-wrapper--withLightTheme': useLightTheme,
-    });
-
-    const titleClassName = classNames({
-        'consonant-FiltersInfo-title': true,
-        'consonant-FiltersInfo-title--withLightTheme': useLightTheme,
-    });
-
-    const totalResultsClassName = classNames({
-        'consonant-FiltersInfo-results': true,
-        'consonant-FiltersInfo-results--withLightTheme': useLightTheme,
     });
 
     return (
         <aside
             data-testid="consonant-FiltersInfo"
-            className="consonant-FiltersInfo">
+            className={filtersInfoClassName}>
             <div
                 className="consonant-FiltersInfo-search">
                 {shouldRenderSearch && searchComponent}
@@ -162,14 +161,14 @@ const Info = (props) => {
                 {title &&
                     <h2
                         data-testid="consonant-FiltersInfo-title"
-                        className={titleClassName}>
+                        className="consonant-FiltersInfo-title">
                         {title}
                     </h2>
                 }
                 {showTotalResults &&
                     <div
                         data-testid="consonant-FiltersInfo-results"
-                        className={totalResultsClassName}>
+                        className="consonant-FiltersInfo-results">
                         {totalResultsHtml}
                     </div>
                 }

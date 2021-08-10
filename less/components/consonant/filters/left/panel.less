@@ -3,13 +3,11 @@
         position: static;
         display: flex;
         flex-direction: column;
-        border-radius: 4px;
-        padding: 16px;
 
         .full-width;
         .position-absolute-0;
 
-        background-color: transparent;
+        background-color: @consonantWhite;
         overflow: visible;
         user-select: none;
 
@@ -162,7 +160,6 @@
             position: fixed;
             z-index: 10;
             display: flex;
-            background-color: @consonantWhite;
 
             & > button {
                 display: flex;
@@ -211,7 +208,8 @@
             max-width: @consonant-filters-1200-break-width;
             margin-right: 32px;
             margin-top: 123px;
-            background-color: @consonantWhite;
+            padding: 16px;
+            border-radius: 4px;
             overflow: visible;
 
             &-list {

@@ -8,7 +8,7 @@ import {
     string,
 } from 'prop-types';
 
-import { useConfig, useExpandable } from '../Helpers/hooks';
+import { useExpandable } from '../Helpers/hooks';
 import { sortOptionType } from '../types/config';
 
 const popupType = {
@@ -53,8 +53,6 @@ const Popup = ({
     optionsAlignment,
     id,
 }) => {
-    const getConfig = useConfig();
-    const useLightTheme = getConfig('collection', 'headerTheme') === 'light';
     /**
      * @typedef {String} OpenDropdownState - Id of a selected dropdown
      * @description — Passed in Context Provider So All Nested Components can be in sync
@@ -85,13 +83,11 @@ const Popup = ({
 
     const shouldAutoWidthSortClass = classNames({
         'consonant-Select': true,
-        'consonant-Select--withLightTheme': useLightTheme,
         'consonant-Select--autoWidth': autoWidth,
     });
 
     const openButtonClass = classNames({
         'consonant-Select-btn': true,
-        'consonant-Select-btn--withLightTheme': useLightTheme,
         'is-active': opened,
     });
 

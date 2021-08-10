@@ -1,6 +1,7 @@
 /* Available modifiers:
   - consonant-TopFilters-filters--truncated;
   - consonant-TopFilters-clearBtnWrapper--withBlur;
+  - consonant-TopFilters--withLightTheme;
 */
 
 .consonant {
@@ -102,10 +103,6 @@
             user-select: none;
 
             .font(1rem, 2rem, 600, @consonantDarkGrey800);
-
-            &--withLightTheme {
-                color: @consonantWhite;
-            }
         }
 
         &-clearBtnWrapper {
@@ -189,10 +186,6 @@
             margin: 0;
 
             .font(1.125rem, 1.375rem, 700, @consonantDarkGrey800);
-
-            &--withLightTheme {
-                color: @consonantWhite;
-            }
         }
 
         &-results {
@@ -201,14 +194,22 @@
             padding-left: 12px;
 
             .font(0.875rem, 1.3125rem, 400, @consonantDarkGrey400, right);
-
-            &--withLightTheme {
-                color: @consonantWhite;
-            }
         }
 
         &-results strong {
             font-weight: 700;
+        }
+
+        &--withLightTheme &-title {
+            color: @consonantWhite;
+        }
+
+        &--withLightTheme &-collectionTitle {
+            color: @consonantWhite;
+        }
+
+        &--withLightTheme &-results {
+            color: @consonantWhite;
         }
 
         @media @consonant-tablet-up {

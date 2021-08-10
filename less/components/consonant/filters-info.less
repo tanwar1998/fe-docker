@@ -1,5 +1,7 @@
 /* Available modifiers:
 - .consonant-FiltersInfo-wrapper--noLine;
+- .consonant-FiltersInfo-btn--withFilters;
+- .consonant-FiltersInfo--withLightTheme;
 */
 
 .consonant {
@@ -44,7 +46,7 @@
             .font(0.875rem, 1.875rem, 700, @consonantDarkGrey400);
 
             text-transform: capitalize;
-            background-color: #fff;
+            background-color: @consonantBaseColor;
             outline: 0;
             user-select: none;
 
@@ -98,10 +100,6 @@
             margin: 0;
 
             .font(1.125rem, 1.375rem, 700, @consonantDarkGrey800);
-
-            &--withLightTheme {
-                color: @consonantLightGrey200;
-            }
         }
 
         &-results {
@@ -114,10 +112,14 @@
             strong {
                 font-weight: 700;
             }
+        }
 
-            &--withLightTheme {
-                color: @consonantLightGrey200;
-            }
+        &--withLightTheme &-title {
+            color: @consonantLightGrey200;
+        }
+
+        &--withLightTheme &-results {
+            color: @consonantLightGrey200;
         }
 
         @media @consonant-desktop-up {

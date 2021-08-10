@@ -42,27 +42,27 @@ const View = (props) => {
     const displayMsg = RenderDisplayMsg(description, replaceValue);
     const useLightTheme = getConfig('collection', 'headerTheme') === 'light';
 
-    const titleClassName = classNames({
-        'consonant-NoResultsView-title': true,
-        'consonant-NoResultsView-title--withLightTheme': useLightTheme,
-    });
-
-    const descriptionClassName = classNames({
-        'consonant-NoResultsView-description': true,
-        'consonant-NoResultsView-description--withLightTheme': useLightTheme,
+    /**
+     * Class name for the NoResultsView:
+     * whether we should apply dark or light theme
+     * @type {String}
+    */
+    const noResultsViewClass = classNames({
+        'consonant-NoResultsView': true,
+        'consonant-NoResultsView--withLightTheme': useLightTheme,
     });
 
     return (
         <div
             data-testid="consonant-NoResultsView"
-            className="consonant-NoResultsView">
+            className={noResultsViewClass}>
             <strong
-                className={titleClassName}>
+                className="consonant-NoResultsView-title">
                 {title}
             </strong>
             {description &&
                 <div
-                    className={descriptionClassName}>
+                    className="consonant-NoResultsView-description">
                     {displayMsg}
                 </div>
             }
