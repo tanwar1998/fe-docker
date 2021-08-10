@@ -53,7 +53,7 @@
             collection: {
                 mode: "light", // Can be empty, "light", "dark", "darkest";
                 layout: {
-                    type: '4up', // Can be "2up", "3up", "4up", "5up";
+                    type: '3up', // Can be "2up", "3up", "4up", "5up";
                     gutter: '4x', // Can be "2x", "3x", "4x";
                     container: '1200MaxWidth', // Can be "83Percent", "1200MaxWidth", "32Margin";
                 },
@@ -72,7 +72,8 @@
                     onErrorTitle: 'Sorry there was a system error.',
                     onErrorDescription: 'Please try reloading the page or try coming back to the page another time.',
                 },
-                setCardBorders: "true", // Can be true or false;
+                headerTheme: "light", // can be light or dark
+                setCardBorders: "false", // Can be true or false;
             },
             featuredCards: [
             {
@@ -155,7 +156,7 @@
             ],
             filterPanel: {
                 enabled: 'true',
-                type: 'top',
+                type: 'left',
                 filters: [
                     {
                         "group": "Topic",
@@ -298,8 +299,8 @@
                 enabled: 'true',
                 type: 'loadMore',
                 loadMoreButton: {
-                  style: "primary", // Can be "primary", "over-background";
-                  useThemeThree: "false", // Can be "true" or "false";
+                  style: "over-background", // Can be "primary", "over-background";
+                  useThemeThree: "true", // Can be "true" or "false";
                 },
                 i18n: {
                     loadMore: {
@@ -367,5 +368,11 @@
 
 <script type="text/javascript" src="./dependencies/head.js"></script>
 <script type="text/javascript" src="./dependencies/publish.js"></script>
+
+<style>
+    body {
+        background-image: url("https://caas-chimera.s3.us-west-1.amazonaws.com/ugly-background.jpg");
+    }
+</style>
 
 </html>

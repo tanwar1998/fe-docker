@@ -77,6 +77,7 @@ const Info = (props) => {
     const searchEnabled = getConfig('search', 'enabled');
     const sortEnabled = getConfig('sort', 'enabled');
     const mobileFilterBtnLabel = getConfig('filterPanel', 'i18n.leftPanel.mobile.filtersBtnLabel');
+    const useLightTheme = getConfig('collection', 'headerTheme') === 'light';
 
     /**
      **** Constants ****
@@ -128,6 +129,17 @@ const Info = (props) => {
     const wrapperClassName = classNames({
         'consonant-FiltersInfo-wrapper': true,
         'consonant-FiltersInfo-wrapper--noLine': !sortEnabled || !sortOptions.length,
+        'consonant-FiltersInfo-wrapper--withLightTheme': useLightTheme,
+    });
+
+    const titleClassName = classNames({
+        'consonant-FiltersInfo-title': true,
+        'consonant-FiltersInfo-title--withLightTheme': useLightTheme,
+    });
+
+    const totalResultsClassName = classNames({
+        'consonant-FiltersInfo-results': true,
+        'consonant-FiltersInfo-results--withLightTheme': useLightTheme,
     });
 
     return (
@@ -150,14 +162,14 @@ const Info = (props) => {
                 {title &&
                     <h2
                         data-testid="consonant-FiltersInfo-title"
-                        className="consonant-FiltersInfo-title">
+                        className={titleClassName}>
                         {title}
                     </h2>
                 }
                 {showTotalResults &&
                     <div
                         data-testid="consonant-FiltersInfo-results"
-                        className="consonant-FiltersInfo-results">
+                        className={totalResultsClassName}>
                         {totalResultsHtml}
                     </div>
                 }
