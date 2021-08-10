@@ -26,10 +26,6 @@
             pointer-events: none;
         }
 
-        &--withLightTheme:after {
-            border-color: @consonantLightGrey200;
-        }
-
         &-btn {
             box-sizing: border-box;
             display: block;
@@ -44,16 +40,12 @@
             cursor: pointer;
             border: 1px solid @consonantLightGrey200;
             border-radius: 5px;
-            background-color: transparent;
+            background-color: @consonantWhite;
             overflow: hidden;
             outline: 0;
             text-overflow: ellipsis;
 
             .focused;
-
-            &--withLightTheme {
-                color: @consonantLightGrey200;
-            }
         }
 
         &-btn.is-active + &-options {
@@ -163,7 +155,7 @@
             margin-bottom: 0;
 
             &:after {
-                right: 0;
+                right: 4px;
             }
 
             &-options {
@@ -182,7 +174,7 @@
 
             &-btn {
                 max-width: 112px;
-                padding-left: 0;
+                padding-left: 4px;
                 padding-right: 10px;
                 border-color: transparent;
             }

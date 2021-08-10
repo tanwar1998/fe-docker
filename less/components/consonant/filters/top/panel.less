@@ -83,7 +83,7 @@
             .font(0.875rem, 1.1875rem, 700, @consonantDarkGrey400, center);
 
             text-transform: capitalize;
-            background-color: transparent;
+            background-color: @consonantWhite;
             border: 1px solid @consonantLightGrey200;
             border-radius: 16px;
             outline: 0;
@@ -102,6 +102,10 @@
             user-select: none;
 
             .font(1rem, 2rem, 600, @consonantDarkGrey800);
+
+            &--withLightTheme {
+                color: @consonantWhite;
+            }
         }
 
         &-clearBtnWrapper {
@@ -185,6 +189,10 @@
             margin: 0;
 
             .font(1.125rem, 1.375rem, 700, @consonantDarkGrey800);
+
+            &--withLightTheme {
+                color: @consonantWhite;
+            }
         }
 
         &-results {
@@ -193,6 +201,10 @@
             padding-left: 12px;
 
             .font(0.875rem, 1.3125rem, 400, @consonantDarkGrey400, right);
+
+            &--withLightTheme {
+                color: @consonantWhite;
+            }
         }
 
         &-results strong {
