@@ -1,7 +1,9 @@
 import React from 'react';
 import { string } from 'prop-types';
+import classNames from 'classnames';
 
 import { RenderDisplayMsg } from '../Helpers/rendering';
+import { useConfig } from '../Helpers/hooks';
 
 const viewType = {
     description: string,
@@ -35,19 +37,32 @@ const View = (props) => {
         replaceValue,
     } = props;
 
+    const getConfig = useConfig();
+
     const displayMsg = RenderDisplayMsg(description, replaceValue);
+    const useLightTheme = getConfig('collection', 'headerTheme') === 'light';
+
+    const titleClassName = classNames({
+        'consonant-NoResultsView-title': true,
+        'consonant-NoResultsView-title--withLightTheme': useLightTheme,
+    });
+
+    const descriptionClassName = classNames({
+        'consonant-NoResultsView-description': true,
+        'consonant-NoResultsView-description--withLightTheme': useLightTheme,
+    });
 
     return (
         <div
             data-testid="consonant-NoResultsView"
             className="consonant-NoResultsView">
             <strong
-                className="consonant-NoResultsView-title">
+                className={titleClassName}>
                 {title}
             </strong>
             {description &&
                 <div
-                    className="consonant-NoResultsView-description">
+                    className={descriptionClassName}>
                     {displayMsg}
                 </div>
             }

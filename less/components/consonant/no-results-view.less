@@ -12,6 +12,10 @@
             margin-bottom: 20px;
 
             .font(1.125rem, 1.6875rem, 400, @consonantDarkGrey400, center);
+
+            &--withLightTheme {
+                color: @consonantWhite;
+            }
         }
 
         &-description {
@@ -23,6 +27,10 @@
 
             strong {
                 font-weight: 700;
+            }
+
+            &--withLightTheme * {
+                color: @consonantWhite;
             }
         }
     }
