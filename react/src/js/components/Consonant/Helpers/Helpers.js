@@ -1,4 +1,3 @@
-
 import produce, { enableES5 } from 'immer';
 
 import { HighlightSearchField } from './rendering';
@@ -301,4 +300,13 @@ export const getUpdatedCardBookmarkData = (cards, bookmarkedCardIds) => cards.ma
     isBookmarked: bookmarkedCardIds.some(i => i === card.id),
 }));
 
-export const getRandomSort = cards => cards.sort(() => Math.random() - 0.5);
+let randomSort = [];
+export const getRandomSort = (cards) => {
+    function randomSortCards() {
+        return [...cards.sort(() => Math.random() - 0.5)];
+    }
+    if (randomSort.length === 0) {
+        randomSort = randomSortCards();
+    }
+    return randomSort;
+};

@@ -2,7 +2,6 @@ import React, {
     Fragment,
     useEffect,
     useState,
-    useMemo,
 } from 'react';
 import classNames from 'classnames';
 import 'whatwg-fetch';
@@ -633,7 +632,7 @@ const Container = (props) => {
      *
      * @type {Object}
      */
-    const cardFilterer = useMemo(() => new CardFilterer(cards), [cards]);
+    const cardFilterer = new CardFilterer(cards);
 
     /**
      * Filtered cards based off current state of page
