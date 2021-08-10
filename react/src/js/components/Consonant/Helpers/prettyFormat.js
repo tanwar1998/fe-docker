@@ -4,8 +4,8 @@
 * @returns {Date} - Locale Time Zone in abbreviated named offset
 * @example - EST
 */
-const getLocalTimeZone = someTimeUTC => new Date(someTimeUTC)
-    .toLocaleTimeString('en-us', { timeZoneName: 'short' }).split(' ')[2];
+const getLocalTimeZone = (someTimeUTC, someLocale) => new Date(someTimeUTC)
+    .toLocaleTimeString(someLocale, { timeZoneName: 'short' }).split(' ').slice(-1)[0];
 
 /**
 * Gets the Local Time Interval
@@ -55,6 +55,6 @@ const getPrettyDateInterval = (startDateUTC, endDateUTC, locale, i18nFormat) => 
     .replace('{LLL}', getMonth(startDateUTC, locale))
     .replace('{dd}', getDay(startDateUTC, locale))
     .replace('{timeRange}', getTimeInterval(startDateUTC, endDateUTC, locale))
-    .replace('{timeZone}', getLocalTimeZone(startDateUTC));
+    .replace('{timeZone}', getLocalTimeZone(startDateUTC, locale));
 
 export default getPrettyDateInterval;
