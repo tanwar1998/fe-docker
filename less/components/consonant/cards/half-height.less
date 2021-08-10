@@ -59,6 +59,24 @@
             top: -44px;
             left: 24px;
             right: auto;
+
+            &:hover,
+            &:active {
+                transform: scale(1);
+            }
+
+            /* Overlay to make video icon clickable across the whole card */
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: @consonant-OneHalfCard-height * -1;
+                bottom: @consonant-OneHalfCard-height * -1;
+                left: @consonantCardMaxWidth * -1;
+                right: @consonantCardMaxWidth * -2;
+                background-color: transparent;
+                z-index: 0;
+            }
         }
 
         &-inner {
