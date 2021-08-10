@@ -28,6 +28,7 @@ export default class CardFilterer {
      */
     constructor(cardsToFilter) {
         this.filteredCards = cardsToFilter;
+        this.randomSort = null;
     }
 
     /**
@@ -108,7 +109,10 @@ export default class CardFilterer {
                 this.filteredCards = getTitleDescSort(this.filteredCards);
                 break;
             case SORT_TYPES.RANDOM:
-                this.filteredCards = getRandomSort(this.filteredCards);
+                if (this.randomSort === null) {
+                    this.randomSort = getRandomSort(this.filteredCards);
+                }
+                this.filteredCards = this.randomSort;
                 break;
             default:
                 return this;

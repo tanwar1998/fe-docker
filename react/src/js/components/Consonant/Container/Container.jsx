@@ -2,6 +2,7 @@ import React, {
     Fragment,
     useEffect,
     useState,
+    useMemo,
 } from 'react';
 import classNames from 'classnames';
 import 'whatwg-fetch';
@@ -632,16 +633,16 @@ const Container = (props) => {
      *
      * @type {Object}
      */
-    const cardFilterer = new CardFilterer(cards);
+    const cardFilterer = useMemo(() => new CardFilterer(cards), [cards]);
 
     /**
      * Filtered cards based off current state of page
      * @type {Array}
      */
     const { filteredCards } = cardFilterer
+        .sortCards(sortOption)
         .keepBookmarkedCardsOnly(onlyShowBookmarks, bookmarkedCardIds, showBookmarks)
         .filterCards(activeFilterIds, filterLogic, FILTER_TYPES)
-        .sortCards(sortOption)
         .keepCardsWithinDateRange()
         .truncateList(totalCardLimit)
         .searchCards(searchQuery, searchFields);
