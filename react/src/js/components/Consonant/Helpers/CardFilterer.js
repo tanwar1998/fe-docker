@@ -26,9 +26,8 @@ export default class CardFilterer {
      * @param {*} cardsToFilter
      * @memberof CardFilterer
      */
-    constructor(cardsToFilter, filtersItems) {
+    constructor(cardsToFilter) {
         this.filteredCards = cardsToFilter;
-        this.filterItems = filtersItems;
     }
 
     /**
@@ -157,24 +156,6 @@ export default class CardFilterer {
      */
     truncateList(totalCardLimit) {
         this.filteredCards = truncateList(totalCardLimit, this.filteredCards);
-        return this;
-    }
-
-    /**
-     * This will remove all the filters that return no cards if showEmptyFilters is set to false
-     *
-     * @param {*} showEmptyFilters
-     * @return {*} Chainable
-     * @memberof CardFilterer
-     */
-    removeEmptyFilters(showEmptyFilters) {
-        const tags = [].concat(...this.filteredCards.map(card => card.tags.map(tag => tag.id)));
-
-        this.filterItems = this.filterItems.map(filter => ({
-            ...filter,
-            items: filter.items.filter(item => tags.includes(item.id) || showEmptyFilters),
-        })).filter(filter => filter.items.length > 0);
-
         return this;
     }
 }

@@ -118,7 +118,6 @@ const Container = (props) => {
     const collectionIdentifier = getConfig('analytics', 'collectionIdentifier');
     const authoredMode = getConfig('collection', 'mode');
     const authoredLayoutContainer = getConfig('collection', 'layout.container');
-    const showEmptyFilters = getConfig('filterPanel', 'showEmptyFilters');
 
     /**
      **** Constants ****
@@ -633,15 +632,14 @@ const Container = (props) => {
      *
      * @type {Object}
      */
-    const cardFilterer = new CardFilterer(cards, filters);
+    const cardFilterer = new CardFilterer(cards);
 
     /**
      * Filtered cards based off current state of page
      * @type {Array}
      */
-    const { filteredCards, filterItems } = cardFilterer
+    const { filteredCards } = cardFilterer
         .keepBookmarkedCardsOnly(onlyShowBookmarks, bookmarkedCardIds, showBookmarks)
-        .removeEmptyFilters(showEmptyFilters)
         .filterCards(activeFilterIds, filterLogic, FILTER_TYPES)
         .sortCards(sortOption)
         .keepCardsWithinDateRange()
@@ -774,7 +772,7 @@ const Container = (props) => {
                         {displayLeftFilterPanel && (
                             <div className="consonant-Wrapper-leftFilterWrapper">
                                 <LeftFilterPanel
-                                    filters={filterItems}
+                                    filters={filters}
                                     selectedFiltersQty={selectedFiltersItemsQty}
                                     windowWidth={windowWidth}
                                     onFilterClick={handleFilterGroupClick}
@@ -806,7 +804,7 @@ const Container = (props) => {
                                 isTopFilterPanel &&
                                 <FiltersPanelTop
                                     filterPanelEnabled={filterPanelEnabled}
-                                    filters={filterItems}
+                                    filters={filters}
                                     windowWidth={windowWidth}
                                     resQty={gridCards.length}
                                     onCheckboxClick={handleCheckBoxChange}
@@ -839,7 +837,7 @@ const Container = (props) => {
                                 <LeftInfo
                                     enabled={filterPanelEnabled}
                                     filtersQty={filters.length}
-                                    filters={filterItems}
+                                    filters={filters}
                                     cardsQty={gridCards.length}
                                     selectedFiltersQty={selectedFiltersItemsQty}
                                     windowWidth={windowWidth}
