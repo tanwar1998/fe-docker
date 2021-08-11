@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
     string,
     shape,
 } from 'prop-types';
+import { createPortal } from 'react-dom';
 
 import { useLazyLoading } from '../Helpers/hooks';
 import {
@@ -10,6 +11,8 @@ import {
     contentAreaType,
     overlaysType,
 } from '../types/card';
+import ModalWindow from '../Modal/videoModal';
+import Modal from '../../../../../../publish/src/js/components/modal/modal';
 
 const halfHeightCardType = {
     ctaLink: string,
@@ -45,6 +48,7 @@ const defaultProps = {
  * )
  */
 const HalfHeightCard = (props) => {
+    const modalContainer = document.querySelector('.modalContainer');
     const {
         id,
         lh,
@@ -64,6 +68,9 @@ const HalfHeightCard = (props) => {
                 backgroundColor: bannerBackgroundColor,
                 icon: bannerIcon,
             },
+            videoButton: {
+                url,
+            },
         },
     } = props;
 
@@ -72,6 +79,17 @@ const HalfHeightCard = (props) => {
      * @returns {Object} - card image DOM reference
      */
     const imageRef = React.useRef();
+    const modalElement = React.useRef(null);
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    const handleModal = () => {
+        if (url) {
+            setIsOpen(!isOpen);
+        } else {
+            window.open(ctaLink);
+        }
+    };
 
     /**
      * @typedef {Image} LazyLoadedImageState
@@ -84,10 +102,22 @@ const HalfHeightCard = (props) => {
      */
     const [lazyLoadedImage] = useLazyLoading(imageRef, image);
 
+    React.useEffect(() => {
+        if (isOpen && modalElement && modalElement.current) {
+            const videoModal = new Modal(
+                modalElement.current,
+                { buttonClose: handleModal },
+            );
+
+            videoModal.open();
+        }
+    }, [isOpen, modalElement]);
+
     return (
-        <a
-            href={ctaLink}
-            target="_blank"
+        <div
+            onKeyPress={handleModal}
+            onClick={handleModal}
+            role="button"
             rel="noopener noreferrer"
             className="consonant-HalfHeightCard"
             title=""
@@ -117,6 +147,8 @@ const HalfHeightCard = (props) => {
                 className="consonant-HalfHeightCard-img"
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }} />
+            {url && <div
+                className="consonant-HalfHeightCard-videoIco" />}
             <div className="consonant-HalfHeightCard-inner">
                 {label &&
                     <span className="consonant-HalfHeightCard-label">{label}</span>
@@ -124,8 +156,16 @@ const HalfHeightCard = (props) => {
                 {title &&
                     <h2 className="consonant-HalfHeightCard-title">{title}</h2>
                 }
+                {url && isOpen && createPortal(
+                    <ModalWindow
+                        name="video-modal"
+                        videoURL={url}
+                        innerRef={modalElement}
+                        videoPolicy="autoplay; fullscreen" />,
+                    modalContainer,
+                )}
             </div>
-        </a>
+        </div>
     );
 };
 

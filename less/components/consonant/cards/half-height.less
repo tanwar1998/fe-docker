@@ -18,6 +18,7 @@
         border-radius: 4px;
         overflow: hidden;
         outline: 0;
+        cursor: pointer;
 
         .card-hover;
 
@@ -45,6 +46,36 @@
                     ) 0 0% no-repeat;
                 z-index: 1;
             }
+        }
+
+        &-videoIco {
+            position: absolute;
+            width: @consonantCardVideoIcoSize;
+            height: @consonantCardVideoIcoSize;
+            left: 28px;
+            bottom: 28px;
+
+            .no-font;
+
+            background: transparent url(@consonantCardPlayIcoData) no-repeat 0 0;
+            background-size: cover;
+            z-index: 3;
+            cursor: pointer;
+            transform-origin: 50% 50%;
+            opacity: 0;
+            transition: opacity @consonantTransitionTime @consonantTransitionFunc;
+            transition-delay: @consonantTransitionTime * 2;
+
+            .focused;
+        }
+
+        &:hover > &-videoIco,
+        &:active > &-videoIco,
+        &:focus > &-videoIco {
+            opacity: 1;
+            transform: scale(1.1);
+            transition: transform @consonantTransitionTime @consonantTransitionFunc;
+            transition-delay: 0;
         }
 
         &-inner {
