@@ -8,6 +8,7 @@ import {
 
 import Tooltip from './Tooltip';
 import { trackCardSave } from '../../../Analytics/Analytics';
+import { useConfig } from '../../../Helpers/hooks';
 
 const bookmarkType = {
     isBookmarked: bool,
@@ -64,6 +65,9 @@ const Bookmark = ({
         'is-disabled': disableBookmarkIco,
     });
 
+    const getConfig = useConfig();
+    const showOnCards = getConfig('bookmarks', 'showOnCards');
+
     const bookmarkIcon = () => {
         const cardIcon = isBookmarked ? saveCardIcon : unsaveCardIcon;
         return (
@@ -83,18 +87,22 @@ const Bookmark = ({
     const tooltipText = isBookmarked ? cardUnsaveText : cardSaveText;
 
     return (
-        <button
-            data-testid="consonant-BookmarkInfobit"
-            data-tooltip-wrapper
-            type="button"
-            className={bookmarkInfobitClass}
-            onClick={handleClick}
-            tabIndex="0">
-            {bookmarkIcon()}
-            <Tooltip
-                data-testid="consonant-Tooltip"
-                text={tooltipText} />
-        </button>
+        <React.Fragment>
+            { showOnCards &&
+                <button
+                    data-testid="consonant-BookmarkInfobit"
+                    data-tooltip-wrapper
+                    type="button"
+                    className={bookmarkInfobitClass}
+                    onClick={handleClick}
+                    tabIndex="0">
+                    {bookmarkIcon()}
+                    <Tooltip
+                        data-testid="consonant-Tooltip"
+                        text={tooltipText} />
+                </button>
+            }
+        </React.Fragment>
     );
 };
 
