@@ -77,7 +77,7 @@ const Info = (props) => {
     const searchEnabled = getConfig('search', 'enabled');
     const sortEnabled = getConfig('sort', 'enabled');
     const mobileFilterBtnLabel = getConfig('filterPanel', 'i18n.leftPanel.mobile.filtersBtnLabel');
-    const useLightTheme = getConfig('collection', 'headerTheme') === 'light';
+    const useLightText = getConfig('collection', 'useLightText');
 
     /**
      **** Constants ****
@@ -127,7 +127,7 @@ const Info = (props) => {
      */
     const filtersInfoClassName = classNames({
         'consonant-FiltersInfo': true,
-        'consonant-FiltersInfo--withLightTheme': useLightTheme,
+        'consonant-FiltersInfo--withLightText': useLightText,
     });
 
     /**

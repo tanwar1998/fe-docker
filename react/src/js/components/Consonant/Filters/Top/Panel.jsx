@@ -104,7 +104,7 @@ const FiltersPanelTop = (props) => {
     const filterGroupLabel = getConfig('filterPanel', 'i18n.topPanel.groupLabel');
     const moreFiltersBtnText = getConfig('filterPanel', 'i18n.topPanel.moreFiltersBtnText');
     const title = getConfig('collection', 'i18n.title');
-    const useLightTheme = getConfig('collection', 'headerTheme') === 'light';
+    const useLightText = getConfig('collection', 'useLightText');
 
     /**
      * Top search bar identifier
@@ -208,7 +208,7 @@ const FiltersPanelTop = (props) => {
      */
     const topFiltersClass = classNames({
         'consonant-TopFilters': true,
-        'consonant-TopFilters--withLightTheme': useLightTheme,
+        'consonant-TopFilters--withLightText': useLightText,
     });
 
     /**

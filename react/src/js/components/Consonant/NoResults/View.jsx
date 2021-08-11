@@ -40,7 +40,7 @@ const View = (props) => {
     const getConfig = useConfig();
 
     const displayMsg = RenderDisplayMsg(description, replaceValue);
-    const useLightTheme = getConfig('collection', 'headerTheme') === 'light';
+    const useLightText = getConfig('collection', 'useLightText');
 
     /**
      * Class name for the NoResultsView:
@@ -49,7 +49,7 @@ const View = (props) => {
     */
     const noResultsViewClass = classNames({
         'consonant-NoResultsView': true,
-        'consonant-NoResultsView--withLightTheme': useLightTheme,
+        'consonant-NoResultsView--withLightText': useLightText,
     });
 
     return (
