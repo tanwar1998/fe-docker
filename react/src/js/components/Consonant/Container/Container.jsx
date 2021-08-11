@@ -55,6 +55,7 @@ import {
     getTotalPages,
     getActiveFilterIds,
     getUpdatedCardBookmarkData,
+    removeEmptyFilters,
 } from '../Helpers/Helpers';
 import {
     trackClearAllClicked,
@@ -118,6 +119,7 @@ const Container = (props) => {
     const collectionIdentifier = getConfig('analytics', 'collectionIdentifier');
     const authoredMode = getConfig('collection', 'mode');
     const authoredLayoutContainer = getConfig('collection', 'layout.container');
+    const showEmptyFilters = getConfig('filterPanel', 'showEmptyFilters');
 
     /**
      **** Constants ****
@@ -526,6 +528,15 @@ const Container = (props) => {
         setOpenDropdown(null);
     };
 
+    const reformatFilter = authoredFilters.map(filterGroup => ({
+        ...filterGroup,
+        opened: DESKTOP_SCREEN_SIZE ? filterGroup.openedOnLoad : false,
+        items: filterGroup.items.map(filterItem => ({
+            ...filterItem,
+            selected: false,
+        })),
+    }));
+
     /**
          **** Effects ****
      */
@@ -536,14 +547,9 @@ const Container = (props) => {
     */
 
     useEffect(() => {
-        setFilters(authoredFilters.map(filterGroup => ({
-            ...filterGroup,
-            opened: DESKTOP_SCREEN_SIZE ? filterGroup.openedOnLoad : false,
-            items: filterGroup.items.map(filterItem => ({
-                ...filterItem,
-                selected: false,
-            })),
-        })));
+        if (showEmptyFilters) {
+            setFilters(reformatFilter);
+        }
     }, []);
 
     /**
@@ -589,6 +595,9 @@ const Container = (props) => {
 
                 setCards(processedCards);
                 trackAllCardsLoaded(processedCards);
+                if (!showEmptyFilters) {
+                    setFilters(removeEmptyFilters(reformatFilter, processedCards));
+                }
             }).catch(() => {
                 setLoading(false);
                 setApiFailure(true);

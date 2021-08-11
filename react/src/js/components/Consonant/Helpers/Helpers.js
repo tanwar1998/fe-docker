@@ -302,3 +302,19 @@ export const getUpdatedCardBookmarkData = (cards, bookmarkedCardIds) => cards.ma
 }));
 
 export const getRandomSort = cards => cards.sort(() => Math.random() - 0.5);
+
+/**
+ * This will remove all the filters that return no cards if showEmptyFilters is set to false
+ *
+ * @param {*} showEmptyFilters
+ * @return {*} Chainable
+ * @memberof CardFilterer
+ */
+export const removeEmptyFilters = (allFilters, cardsFromJson) => {
+    const tags = [].concat(...cardsFromJson.map(card => card.tags.map(tag => tag.id)));
+
+    return allFilters.map(filter => ({
+        ...filter,
+        items: filter.items.filter(item => tags.includes(item.id)),
+    })).filter(filter => filter.items.length > 0);
+};
