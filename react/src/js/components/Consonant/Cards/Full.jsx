@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import React from 'react';
 import classNames from 'classnames';
 import {
@@ -58,7 +57,7 @@ const defaultProps = {
  * )
  */
 const FullCard = (props) => {
-    let {
+    const {
         id,
         lh,
         ctaLink,
@@ -111,6 +110,12 @@ const FullCard = (props) => {
      * @returns {Object} - card image DOM reference
      */
     const imageRef = React.useRef();
+    const [badge, setBadge] = React.useState({
+        bannerDescription,
+        bannerFontColor,
+        bannerBackgroundColor,
+        bannerIcon,
+    });
 
     /**
      * @typedef {Image} LazyLoadedImageState
@@ -122,14 +127,20 @@ const FullCard = (props) => {
      * @type {[Image]} lazyLoadedImage
      */
     const [lazyLoadedImage] = useLazyLoading(imageRef, image);
+    React.useEffect(() => {
+        if (startDate && endDate) {
+            if (startDate && endDate) {
+                const eventBanner = getEventBanner(startDate, endDate, bannerMap);
 
-    if (startDate && endDate) {
-        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
-        bannerBackgroundColor = eventBanner.backgroundColor;
-        bannerDescription = eventBanner.description;
-        bannerFontColor = eventBanner.fontColor;
-        bannerIcon = eventBanner.icon;
-    }
+                setBadge({
+                    bannerDescription: eventBanner.description,
+                    bannerBackgroundColor: eventBanner.backgroundColor,
+                    bannerFontColor: eventBanner.fontColor,
+                    bannerIcon: eventBanner.icon,
+                });
+            }
+        }
+    }, []);
 
     return (
         <div
@@ -142,25 +153,25 @@ const FullCard = (props) => {
                 className="consonant-FullCard-img"
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }}>
-                {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+                {badge.bannerDescription && badge.bannerFontColor && badge.bannerBackgroundColor &&
                     <span
                         data-testid="consonant-FullCard-banner"
                         className="consonant-FullCard-banner"
                         style={({
-                            backgroundColor: bannerBackgroundColor,
-                            color: bannerFontColor,
+                            backgroundColor: badge.bannerBackgroundColor,
+                            color: badge.bannerFontColor,
                         })}>
-                        {bannerIcon &&
+                        {badge.bannerIcon &&
                             <div
                                 className="consonant-FullCard-bannerIconWrapper">
                                 <img
                                     alt=""
                                     loading="lazy"
                                     data-testid="consonant-Card-bannerImg"
-                                    src={bannerIcon} />
+                                    src={badge.bannerIcon} />
                             </div>
                         }
-                        <span>{bannerDescription}</span>
+                        <span>{badge.bannerDescription}</span>
                     </span>
                 }
                 {badgeText &&
@@ -170,7 +181,7 @@ const FullCard = (props) => {
                     </span>
                 }
 
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-FullCard-videoIco" /> }
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-FullCard-videoIco" />}
                 {logoSrc &&
                     <div
                         style={({

@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import React from 'react';
 import classNames from 'classnames';
 import cuid from 'cuid';
@@ -75,7 +74,7 @@ const defaultProps = {
  * )
  */
 const OneHalfCard = (props) => {
-    let {
+    const {
         id,
         footer,
         lh,
@@ -145,6 +144,13 @@ const OneHalfCard = (props) => {
      * @returns {Object} - card image DOM reference
      */
     const imageRef = React.useRef();
+    const [badge, setBadge] = React.useState({
+        bannerDescription,
+        bannerFontColor,
+        bannerBackgroundColor,
+        bannerIcon,
+        label,
+    });
 
     /**
      * @typedef {Image} LazyLoadedImageState
@@ -197,13 +203,18 @@ const OneHalfCard = (props) => {
         });
     }
 
-    if (startDate && endDate) {
-        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
-        bannerBackgroundColor = eventBanner.backgroundColor;
-        bannerDescription = eventBanner.description;
-        bannerFontColor = eventBanner.fontColor;
-        bannerIcon = eventBanner.icon;
-    }
+    React.useEffect(() => {
+        if (startDate && endDate) {
+            const eventBanner = getEventBanner(startDate, endDate, bannerMap);
+
+            setBadge({
+                bannerDescription: eventBanner.description,
+                bannerBackgroundColor: eventBanner.backgroundColor,
+                bannerFontColor: eventBanner.fontColor,
+                bannerIcon: eventBanner.icon,
+            });
+        }
+    }, []);
 
     return (
         <div
@@ -216,25 +227,25 @@ const OneHalfCard = (props) => {
                 className="consonant-OneHalfCard-img"
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }}>
-                {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+                {badge.bannerDescription && badge.bannerFontColor && badge.bannerBackgroundColor &&
                     <span
                         data-testid="consonant-OneHalfCard-banner"
                         className="consonant-OneHalfCard-banner"
                         style={({
-                            backgroundColor: bannerBackgroundColor,
-                            color: bannerFontColor,
+                            backgroundColor: badge.bannerBackgroundColor,
+                            color: badge.bannerFontColor,
                         })}>
-                        {bannerIcon &&
+                        {badge.bannerIcon &&
                             <div
                                 className="consonant-OneHalfCard-bannerIconWrapper">
                                 <img
                                     alt=""
                                     loading="lazy"
-                                    src={bannerIcon}
+                                    src={badge.bannerIcon}
                                     data-testid="consonant-Card-bannerImg" />
                             </div>
                         }
-                        <span>{bannerDescription}</span>
+                        <span>{badge.bannerDescription}</span>
                     </span>
                 }
                 {badgeText &&
@@ -243,7 +254,7 @@ const OneHalfCard = (props) => {
                         {badgeText}
                     </span>
                 }
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-OneHalfCard-videoIco" /> }
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-OneHalfCard-videoIco" />}
                 {logoSrc &&
                     <div
                         style={({

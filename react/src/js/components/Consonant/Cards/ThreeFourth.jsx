@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import React from 'react';
 import classNames from 'classnames';
 import {
@@ -62,7 +61,7 @@ const defaultProps = {
  * )
  */
 const ThreeFourthCard = (props) => {
-    let {
+    const {
         id,
         ctaLink,
         lh,
@@ -127,6 +126,13 @@ const ThreeFourthCard = (props) => {
      * @returns {Object} - card image DOM reference
      */
     const imageRef = React.useRef();
+    const [badge, setBadge] = React.useState({
+        bannerDescription,
+        bannerFontColor,
+        bannerBackgroundColor,
+        bannerIcon,
+        label,
+    });
 
     /**
      * @typedef {Image} LazyLoadedImageState
@@ -151,13 +157,18 @@ const ThreeFourthCard = (props) => {
      */
     const detailText = prettyDate || label;
 
-    if (startDate && endDate) {
-        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
-        bannerBackgroundColor = eventBanner.backgroundColor;
-        bannerDescription = eventBanner.description;
-        bannerFontColor = eventBanner.fontColor;
-        bannerIcon = eventBanner.icon;
-    }
+    React.useEffect(() => {
+        if (startDate && endDate) {
+            const eventBanner = getEventBanner(startDate, endDate, bannerMap);
+
+            setBadge({
+                bannerDescription: eventBanner.description,
+                bannerBackgroundColor: eventBanner.backgroundColor,
+                bannerFontColor: eventBanner.fontColor,
+                bannerIcon: eventBanner.icon,
+            });
+        }
+    }, []);
 
     return (
         <div
@@ -170,25 +181,25 @@ const ThreeFourthCard = (props) => {
                 className="consonant-ThreeFourthCard-img"
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }}>
-                {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+                {badge.bannerDescription && badge.bannerFontColor && badge.bannerBackgroundColor &&
                     <span
                         data-testid="consonant-ThreeFourthCard-banner"
                         className="consonant-ThreeFourthCard-banner"
                         style={({
-                            backgroundColor: bannerBackgroundColor,
-                            color: bannerFontColor,
+                            backgroundColor: badge.bannerBackgroundColor,
+                            color: badge.bannerFontColor,
                         })}>
-                        {bannerIcon &&
+                        {badge.bannerIcon &&
                             <div
                                 className="consonant-ThreeFourthCard-bannerIconWrapper">
                                 <img
                                     alt=""
                                     loading="lazy"
-                                    src={bannerIcon}
+                                    src={badge.bannerIcon}
                                     data-testid="consonant-Card-bannerImg" />
                             </div>
                         }
-                        <span>{bannerDescription}</span>
+                        <span>{badge.bannerDescription}</span>
                     </span>
                 }
                 {badgeText &&
@@ -197,7 +208,7 @@ const ThreeFourthCard = (props) => {
                         {badgeText}
                     </span>
                 }
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-ThreeFourthCard-videoIco" /> }
+                {videoURL && <VideoButton videoURL={videoURL} className="consonant-ThreeFourthCard-videoIco" />}
                 {logoSrc &&
                     <div
                         style={({

@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import React, { Fragment } from 'react';
 import classNames from 'classnames';
 import {
@@ -59,7 +58,7 @@ const defaultProps = {
  * )
  */
 const HalfHeightCard = (props) => {
-    let {
+    const {
         id,
         lh,
         ctaLink,
@@ -111,6 +110,14 @@ const HalfHeightCard = (props) => {
      * @returns {Object} - card image DOM reference
      */
     const imageRef = React.useRef();
+    const [badge, setBadge] = React.useState({
+        bannerDescription,
+        bannerFontColor,
+        bannerBackgroundColor,
+        bannerIcon,
+        label,
+    });
+    const [content, setContent] = React.useState({ label });
 
     /**
      * @typedef {Image} LazyLoadedImageState
@@ -123,40 +130,50 @@ const HalfHeightCard = (props) => {
      */
     const [lazyLoadedImage] = useLazyLoading(imageRef, image);
 
-    if (startDate && endDate) {
-        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
-        bannerBackgroundColor = eventBanner.backgroundColor;
-        bannerDescription = eventBanner.description;
-        bannerFontColor = eventBanner.fontColor;
-        bannerIcon = eventBanner.icon;
-        let now = new Date();
-        if (isDateBeforeInterval(now, startDate)) {
-            label = prettyFormatDate(startDate, endDate, locale, i18nFormat);
+    React.useEffect(() => {
+        if (startDate && endDate) {
+            if (startDate && endDate) {
+                const eventBanner = getEventBanner(startDate, endDate, bannerMap);
+
+                setBadge({
+                    bannerDescription: eventBanner.description,
+                    bannerBackgroundColor: eventBanner.backgroundColor,
+                    bannerFontColor: eventBanner.fontColor,
+                    bannerIcon: eventBanner.icon,
+                });
+            }
+
+            const now = new Date();
+            if (isDateBeforeInterval(now, startDate)) {
+                setContent({
+                    label: prettyFormatDate(startDate, endDate, locale, i18nFormat),
+                });
+            }
         }
-    }
+    }, []);
 
     /**
      * Inner HTML of the card, which will be included into either div or a tag;
      */
     const renderCardContent = () => (
         <Fragment>
-            {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+            {badge.bannerDescription && badge.bannerFontColor && badge.bannerBackgroundColor &&
                 <span
                     className="consonant-HalfHeightCard-banner"
                     style={({
-                        backgroundColor: bannerBackgroundColor,
-                        color: bannerFontColor,
+                        backgroundColor: badge.bannerBackgroundColor,
+                        color: badge.bannerFontColor,
                     })}>
-                    {bannerIcon &&
+                    {badge.bannerIcon &&
                         <div
                             className="consonant-HalfHeightCard-bannerIconWrapper">
                             <img
                                 alt=""
                                 loading="lazy"
-                                src={bannerIcon} />
+                                src={badge.bannerIcon} />
                         </div>
                     }
-                    <span>{bannerDescription}</span>
+                    <span>{badge.bannerDescription}</span>
                 </span>
             }
             <div
@@ -167,8 +184,8 @@ const HalfHeightCard = (props) => {
                 {title &&
                     <h2 className="consonant-HalfHeightCard-title">{title}</h2>
                 }
-                {label &&
-                    <span className="consonant-HalfHeightCard-label">{label}</span>
+                {content.label &&
+                    <span className="consonant-HalfHeightCard-label">{content.label}</span>
                 }
                 {videoURL && <VideoButton videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" />}
             </div>
