@@ -92,6 +92,9 @@ const HalfHeightCard = (props) => {
      * @returns {Object} - card image DOM reference
      */
     const imageRef = React.useRef();
+    const [isOpen, setIsOpen] = React.useState(false);
+
+    const handleModal = () => setIsOpen(!isOpen);
 
     /**
      * @typedef {Image} LazyLoadedImageState
@@ -139,7 +142,7 @@ const HalfHeightCard = (props) => {
                 {title &&
                     <h2 className="consonant-HalfHeightCard-title">{title}</h2>
                 }
-                {videoURL && <VideoButton videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" />}
+                {videoURL && <VideoButton isOpenParent={isOpen} videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" />}
             </div>
         </Fragment>
     );
@@ -149,6 +152,11 @@ const HalfHeightCard = (props) => {
             <div
                 className={cardClassName}
                 daa-lh={lh}
+                onClick={handleModal}
+                onKeyPress={handleModal}
+                role="button"
+                style={{ cursor: 'pointer' }}
+                tabIndex={0}
                 id={id}>{renderCardContent()}
             </div> :
             <a

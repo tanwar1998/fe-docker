@@ -1,5 +1,5 @@
 import React, { memo, Fragment, useState, useEffect, useRef, useCallback } from 'react';
-import { string } from 'prop-types';
+import { string, bool } from 'prop-types';
 import { createPortal } from 'react-dom';
 import ModalWindow from './videoModal';
 import Modal from '../../../../../../publish/src/js/components/modal/modal';
@@ -9,11 +9,12 @@ const VideoButton = ({
     videoURL,
     className,
     videoPolicy,
+    isOpenParent,
 }) => {
     const modalContainer = document.querySelector('.modalContainer');
 
     const modalElement = useRef(null);
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(isOpenParent);
 
     const handleShowModal = useCallback(() => {
         setIsOpen(true);
@@ -24,7 +25,7 @@ const VideoButton = ({
     };
 
     useEffect(() => {
-        if (isOpen && modalElement && modalElement.current) {
+        if ((isOpen || isOpenParent) && modalElement && modalElement.current) {
             const videoModal = new Modal(
                 modalElement.current,
                 { buttonClose: handleCloseModal },
@@ -39,7 +40,7 @@ const VideoButton = ({
             <button
                 className={className}
                 onClick={handleShowModal} />
-            {isOpen && createPortal(
+            {(isOpen || isOpenParent) && createPortal(
                 <ModalWindow
                     name={name}
                     videoURL={videoURL}
@@ -56,11 +57,13 @@ VideoButton.propTypes = {
     videoPolicy: string,
     videoURL: string.isRequired,
     className: string.isRequired,
+    isOpenParent: bool,
 };
 
 VideoButton.defaultProps = {
     name: 'video-modal',
     videoPolicy: 'autoplay; fullscreen',
+    isOpenParent: false,
 };
 
 export default memo(VideoButton);
