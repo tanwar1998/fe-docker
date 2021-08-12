@@ -1726,8 +1726,11 @@
       },
       "logo": {},
       "label": {},
-      "videoButton": {}
+      "videoButton": {
+        "url": "https://www.youtube.com/embed/X6fQlBjx5zU"
+      }
     },
+    "ctaLink": "https://www.google.com",
     "contentArea": {
       "detailText": "",
       "title": "Ba tah soc. Hosoyu..",
