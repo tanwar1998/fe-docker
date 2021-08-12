@@ -3,7 +3,7 @@ import { string, oneOfType, shape, instanceOf } from 'prop-types';
 
 const VideoModal = ({
     name,
-    // videoURL,
+    videoURL,
     innerRef,
     videoPolicy,
 }) => (
@@ -26,8 +26,8 @@ const VideoModal = ({
                             webkitallowfullscreen="true"
                             mozallowfullscreen="true"
                             allowFullScreen=""
-                            // src={videoURL}
-                            src="https://www.youtube.com/embed/hY7m5jjJ9mM?autoplay=1&amp;rel=0" />
+                            // src="https://www.youtube.com/embed/hY7m5jjJ9mM?autoplay=1&amp;rel=0"
+                            src={videoURL} />
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ const VideoModal = ({
 
 VideoModal.propTypes = {
     name: string.isRequired,
-    // videoURL: string.isRequired,
+    videoURL: string.isRequired,
     videoPolicy: string.isRequired,
     innerRef: oneOfType([
         shape({ current: instanceOf(Element) }),

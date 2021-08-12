@@ -26,7 +26,9 @@
       },
       "logo": {},
       "label": {},
-      "videoButton": {}
+      "videoButton": {
+        "url": "https://www.youtube.com/embed/hY7m5jjJ9mM?autoplay=1&amp;rel=0"
+      }
     },
     "contentArea": {
       "detailText": "",
@@ -1727,7 +1729,7 @@
       "logo": {},
       "label": {},
       "videoButton": {
-        "url": "https://www.youtube.com/embed/X6fQlBjx5zU"
+        "url": "https://www.youtube.com/embed/X6fQlBjx5zU?autoplay=1&amp;rel=0"
       }
     },
     "ctaLink": "https://www.google.com",
