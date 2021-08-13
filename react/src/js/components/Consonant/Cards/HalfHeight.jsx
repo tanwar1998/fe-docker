@@ -142,7 +142,7 @@ const HalfHeightCard = (props) => {
                 {title &&
                     <h2 className="consonant-HalfHeightCard-title">{title}</h2>
                 }
-                {videoURL && <VideoButton isOpenParent={isOpen} handleModalParent={handleModal} videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" />}
+                {videoURL && <VideoButton isOpenParent={isOpen} videoURL={videoURL} className="consonant-HalfHeightCard-videoIco" />}
             </div>
         </Fragment>
     );

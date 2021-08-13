@@ -1,5 +1,5 @@
 import React, { memo, Fragment, useState, useEffect, useRef, useCallback } from 'react';
-import { string, bool, func } from 'prop-types';
+import { string, bool } from 'prop-types';
 import { createPortal } from 'react-dom';
 import ModalWindow from './videoModal';
 import Modal from '../../../../../../publish/src/js/components/modal/modal';
@@ -10,7 +10,6 @@ const VideoButton = ({
     className,
     videoPolicy,
     isOpenParent,
-    handleModalParent,
 }) => {
     const modalContainer = document.querySelector('.modalContainer');
 
@@ -18,12 +17,12 @@ const VideoButton = ({
     const [isOpen, setIsOpen] = useState(isOpenParent);
 
     const handleShowModal = useCallback(() => {
+        this.stopPropagation();
         setIsOpen(true);
     }, []);
 
     const handleCloseModal = () => {
         setIsOpen(false);
-        handleModalParent();
     };
 
     useEffect(() => {
@@ -60,14 +59,12 @@ VideoButton.propTypes = {
     videoURL: string.isRequired,
     className: string.isRequired,
     isOpenParent: bool,
-    handleModalParent: func,
 };
 
 VideoButton.defaultProps = {
     name: 'video-modal',
     videoPolicy: 'autoplay; fullscreen',
     isOpenParent: false,
-    handleModalParent: () => { },
 };
 
 export default memo(VideoButton);
