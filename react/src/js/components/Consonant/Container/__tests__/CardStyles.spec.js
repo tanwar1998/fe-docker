@@ -28,7 +28,7 @@ describe('Consonant/Container/Card Styles', () => {
         expect(fullCards).not.toBeNull();
     });
 
-    test('can render the 1:1 card style', async () => {
+    test('can render the 3:4 card style', async () => {
         const configToUse = config;
         configToUse.collection.cardStyle = 'three-fourth';
         await act(async () => render(<Container config={configToUse} />));

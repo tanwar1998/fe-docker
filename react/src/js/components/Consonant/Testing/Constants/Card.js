@@ -36,7 +36,7 @@ export const DEFAULT_PROPS_ONE_HALF = {
     onClick: jest.fn(),
 };
 
-export const DEFAULT_PROPS_1_1 = {
+export const DEFAULT_PROPS_THREE_FOURTH = {
     ...CARD_PROPS,
 
     ctaLink: 'some_link',

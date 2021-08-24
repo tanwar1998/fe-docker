@@ -7,7 +7,7 @@
 				"until": "2025-10-31T21:45:00Z"
 			},
 			"styles": {
-				"typeOverride": "1:1",
+				"typeOverride": "3:4",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"overlays": {

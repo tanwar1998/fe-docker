@@ -145,7 +145,7 @@ const Grid = (props) => {
                             {...card}
                             renderBorder={renderCardsBorders} />
                     );
-                } else if (cardStyle === CARD_STYLES.SQUARE) {
+                } else if (cardStyle === CARD_STYLES.THREE_FOURTH) {
                     return (
                         <ThreeFourthCard
                             lh={`Card ${index} | ${card.contentArea.title}`}

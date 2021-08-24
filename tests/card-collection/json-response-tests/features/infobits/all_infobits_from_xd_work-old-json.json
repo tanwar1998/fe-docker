@@ -257,7 +257,7 @@
 		{
 			"id": "14",
 			"styles": {
-				"typeOverride": "1:1",
+				"typeOverride": "3:4",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer": {
@@ -298,7 +298,7 @@
 		{
 			"id": "11",
 			"styles": {
-				"typeOverride": "1:1",
+				"typeOverride": "3:4",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer": {
@@ -339,7 +339,7 @@
 		{
 			"id": "7",
 			"styles": {
-				"typeOverride": "1:1",
+				"typeOverride": "3:4",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer": {

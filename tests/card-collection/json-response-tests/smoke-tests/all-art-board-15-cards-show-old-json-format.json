@@ -407,7 +407,7 @@
 		{
 			"id": "7",
 			"styles": {
-				"typeOverride": "1:1",
+				"typeOverride": "3:4",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer": {},
@@ -456,13 +456,13 @@
 				}
 			],
 			"label": "",
-			"cardStyle": "1:1",
+			"cardStyle": "3:4",
 			"image": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 		},
 		{
 			"id": "8",
 			"styles": {
-				"typeOverride": "1:1",
+				"typeOverride": "3:4",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer": {},
@@ -502,13 +502,13 @@
 			"bannerDescription": "Featured",
 			"bannerBackgroundColor": "#EBC526",
 			"bannerFontColor": "#002148",
-			"cardStyle": "1:1",
+			"cardStyle": "3:4",
 			"image": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 		},
 		{
 			"id": "9",
 			"styles": {
-				"typeOverride": "1:1",
+				"typeOverride": "3:4",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer": [],
@@ -557,14 +557,14 @@
 				}
 			],
 			"label": "Details",
-			"cardStyle": "1:1",
+			"cardStyle": "3:4",
 			"image": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png",
 			"videoURL": "https://www.youtube.com/watch?v=hcr7cszxINk&ab_channel=knytrix"
 		},
 		{
 			"id": "10",
 			"styles": {
-				"typeOverride": "1:1",
+				"typeOverride": "3:4",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer": {},
@@ -601,7 +601,7 @@
 				}
 			],
 			"label": "Details",
-			"cardStyle": "1:1",
+			"cardStyle": "3:4",
 			"image": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png",
 			"videoURL": "https://www.youtube.com/watch?v=hcr7cszxINk&ab_channel=knytrix"
 		},

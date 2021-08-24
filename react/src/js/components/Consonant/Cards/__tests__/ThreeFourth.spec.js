@@ -3,13 +3,13 @@ import '@testing-library/jest-dom/extend-expect';
 
 import Card from '../ThreeFourth';
 
-import { DEFAULT_PROPS_1_1 } from '../../Testing/Constants/Card';
+import { DEFAULT_PROPS_THREE_FOURTH } from '../../Testing/Constants/Card';
 
 import setup from '../../Testing/Utils/Settings';
 
-const renderCard = setup(Card, DEFAULT_PROPS_1_1);
+const renderCard = setup(Card, DEFAULT_PROPS_THREE_FOURTH);
 
-describe('Consonant/Card/1:1', () => {
+describe('Consonant/Card/ThreeFourth', () => {
     test('should renders banner correctly', () => {
         const {
             props: {
