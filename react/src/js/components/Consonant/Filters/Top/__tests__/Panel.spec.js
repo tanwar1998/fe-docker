@@ -55,13 +55,13 @@ describe('Consonant/Filters/Top/Panel', () => {
             searchComponent: CHILD_COMPONENTS.search,
         });
 
-        const footerTotalResElement = screen.queryByTestId('consonant-TopFilters-searchWrapper');
+        const footerTotalResElement = screen.queryByTestId('consonant-TopFilters-search');
         expect(footerTotalResElement).not.toBeNull();
     });
     test('Should be able to render correctly without search', () => {
         renderTopFilterPanel({ searchComponent: CHILD_COMPONENTS.search });
 
-        const footerTotalResElement = screen.queryByTestId('consonant-TopFilters-searchWrapper');
+        const footerTotalResElement = screen.queryByTestId('consonant-TopFilters-search');
         expect(footerTotalResElement).toBeNull();
     });
     test('Should be able to show the Sort Popup', () => {

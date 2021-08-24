@@ -232,8 +232,8 @@ const FiltersPanelTop = (props) => {
             className="consonant-TopFilters">
             {shouldDisplaySearchBar &&
                 <div
-                    data-testid="consonant-TopFilters-searchWrapper"
-                    className="consonant-TopFilters-searchWrapper">
+                    data-testid="consonant-TopFilters-search"
+                    className="consonant-TopFilters-search">
                     {searchComponent}
                 </div>
             }
