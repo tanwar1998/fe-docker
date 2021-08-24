@@ -16,7 +16,7 @@ const defaultProps = {
 };
 
 /**
- * Progress Bar infobit (shown in 3:2 Card Footer)
+ * Progress Bar infobit (shown in OneHalf Card Footer)
  *
  * @component
  * @example

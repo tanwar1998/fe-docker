@@ -3,7 +3,7 @@
 		{
 			"id": "1",
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer": {
@@ -64,13 +64,13 @@
 				}
 			],
 			"label": "Some Label",
-			"cardStyle": "3:2",
+			"cardStyle": "1:2",
 			"image": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 		},
 		{
 			"id": "2",
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"label": "Details",
@@ -129,13 +129,13 @@
 			"bannerDescription": "Featured",
 			"bannerBackgroundColor": "#EBC526",
 			"bannerFontColor": "#002148",
-			"cardStyle": "3:2",
+			"cardStyle": "1:2",
 			"image": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 		},
 		{
 			"id": "3",
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer":
@@ -203,13 +203,13 @@
 				}
 			],
 			"label": "Details",
-			"cardStyle": "3:2",
+			"cardStyle": "1:2",
 			"image": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 		},
 		{
 			"id": "4",
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer":
@@ -274,13 +274,13 @@
 				}
 			],
 			"label": "Details",
-			"cardStyle": "3:2",
+			"cardStyle": "1:2",
 			"image": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 		},
 		{
 			"id": "5",
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer": {
@@ -343,13 +343,13 @@
 				}
 			],
 			"label": "Details",
-			"cardStyle": "3:2",
+			"cardStyle": "1:2",
 			"image": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 		},
 		{
 			"id": "6",
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"footer":
@@ -401,7 +401,7 @@
 				}
 			],
 			"label": "Details",
-			"cardStyle": "3:2",
+			"cardStyle": "1:2",
 			"image": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 		},
 		{

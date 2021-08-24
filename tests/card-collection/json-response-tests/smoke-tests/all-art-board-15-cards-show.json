@@ -7,7 +7,7 @@
 				"until": "2025-10-31T21:45:00Z"
 			},
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"overlays": {
@@ -89,7 +89,7 @@
 				"until": "2025-10-31T21:45:00Z"
 			},
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"overlays": {
@@ -166,7 +166,7 @@
 				"until": "2025-10-31T21:45:00Z"
 			},
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"overlays": {
@@ -253,7 +253,7 @@
 				"until": "2025-10-31T21:45:00Z"
 			},
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"overlays": {
@@ -338,7 +338,7 @@
 				"until": "2025-10-31T21:45:00Z"
 			},
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"overlays": {
@@ -435,7 +435,7 @@
 				"until": "2025-10-31T21:45:00Z"
 			},
 			"styles": {
-				"typeOverride": "3:2",
+				"typeOverride": "1:2",
 				"backgroundImage": "https://caas-chimera.s3-us-west-1.amazonaws.com/img/cat.png"
 			},
 			"overlays": {

@@ -5,7 +5,7 @@ const tooltipType = { text: string };
 const defaultProps = { text: '' };
 
 /**
- * Tooltip (shown in 3:2 Card Footer -- primarily used with bookmark infobit)
+ * Tooltip (shown in OneHalf Card Footer -- primarily used with bookmark infobit)
  * Used on hover to indicate to users that they do or not do an actino
  *
  * @component

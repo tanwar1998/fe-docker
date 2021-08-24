@@ -13,7 +13,7 @@ const defaultProps = {
 };
 
 /**
- * The footer that is displayed for 3:2 cards
+ * The footer that is displayed for OneHalf cards
  *
  * @component
  * @example

@@ -18,7 +18,7 @@ const defaultProps = {
 };
 
 /**
- * Link Infobit (shown in 3:2 Card Footer)
+ * Link Infobit (shown in OneHalf Card Footer)
  *
  * @component
  * @example

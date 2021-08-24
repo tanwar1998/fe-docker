@@ -6,7 +6,7 @@ const textType = {
 };
 
 /**
- * Text infobit (shown in 3:2 Card Footer)
+ * Text infobit (shown in OneHalf Card Footer)
  *
  * @component
  * @example

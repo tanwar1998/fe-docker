@@ -11,7 +11,7 @@ const dateIntervalType = {
 };
 
 /**
- * Date Interval Infobit (shown in 3:2 Card Footer)
+ * Date Interval Infobit (shown in OneHalf Card Footer)
  *
  * @component
  * @example

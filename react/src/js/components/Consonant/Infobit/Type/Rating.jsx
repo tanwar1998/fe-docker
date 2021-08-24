@@ -47,7 +47,7 @@ const getRating = (starsFilled, totalStars) => {
 };
 
 /**
- * Rating Infobit (shown in 3:2 Card Footer)
+ * Rating Infobit (shown in OneHalf Card Footer)
  *
  * Displays how many stars should be shown for a giving rating
  *

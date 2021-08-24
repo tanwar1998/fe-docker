@@ -38,7 +38,7 @@ const defaultProps = {
 };
 
 /**
- * Group of Infobits (shown in 3:2 Card Footer)
+ * Group of Infobits (shown in OneHalf Card Footer)
  *
  * @component
  * @example

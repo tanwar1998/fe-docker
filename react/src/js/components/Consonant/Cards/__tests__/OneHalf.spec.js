@@ -3,13 +3,13 @@ import '@testing-library/jest-dom/extend-expect';
 
 import Card from '../OneHalf';
 
-import { DEFAULT_PROPS_3_2 } from '../../Testing/Constants/Card';
+import { DEFAULT_PROPS_ONE_HALF } from '../../Testing/Constants/Card';
 
 import setup from '../../Testing/Utils/Settings';
 
-const renderCard = setup(Card, DEFAULT_PROPS_3_2);
+const renderCard = setup(Card, DEFAULT_PROPS_ONE_HALF);
 
-describe('Consonant/Card/3:2', () => {
+describe('Consonant/Card/OneHalf', () => {
     test('should be able to render a banner overlay', () => {
         const {
             props: {

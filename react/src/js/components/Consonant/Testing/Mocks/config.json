@@ -19,7 +19,7 @@
                 "until": "2025-10-31T21:45:00Z"
             },
             "styles": {
-                "typeOverride": "3:2",
+                "typeOverride": "1:2",
                 "backgroundImage": "https://www.somedomain.com/some-image.jpg"
             },
             "overlays": {
@@ -86,7 +86,7 @@
                 "until": "2025-10-31T21:45:00Z"
             },
             "styles": {
-                "typeOverride": "3:2",
+                "typeOverride": "1:2",
                 "backgroundImage": "https://www.somedomain.com/some-card-background-image.jpeg"
             },
             "overlays": {

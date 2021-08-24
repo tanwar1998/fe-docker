@@ -28,7 +28,7 @@ const defaultProps = {
 };
 
 /**
- * Button Infobit (shown in 3:2 Card Footer)
+ * Button Infobit (shown in OneHalf Card Footer)
  *
  * @component
  * @example

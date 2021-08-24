@@ -29,7 +29,7 @@ const defaultProps = {
 };
 
 /**
- * Bookmark Infobit (shown in 3:2 Card Footer)
+ * Bookmark Infobit (shown in OneHalf Card Footer)
  * Used to save/unsave a card to local storage
  *
  * @component

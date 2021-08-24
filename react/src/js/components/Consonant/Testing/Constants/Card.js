@@ -25,7 +25,7 @@ const CARD_PROPS = {
     contentArea,
 };
 
-export const DEFAULT_PROPS_3_2 = {
+export const DEFAULT_PROPS_ONE_HALF = {
     ...CARD_PROPS,
 
     footer,

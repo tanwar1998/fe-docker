@@ -11,7 +11,7 @@ const defaultProps = {
 };
 
 /**
- * Icon With Text Infobit (shown in 3:2 Card Footer)
+ * Icon With Text Infobit (shown in OneHalf Card Footer)
  *
  * @component
  * @example
