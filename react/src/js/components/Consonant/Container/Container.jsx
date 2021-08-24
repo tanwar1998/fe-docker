@@ -744,17 +744,18 @@ const Container = (props) => {
     });
 
     /**
-     * Class name for the consonant wrapper:
-     * whether consonant wrapper contains left filter;
+     * Class name for the consonant container:
+     * whether consonant container contains left filter;
+     * max width of the consonant container;
      * @type {String}
      */
-    const wrapperClass = classNames({
-        'consonant-Wrapper': true,
-        'consonant-Wrapper--32MarginContainer': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_100_VW_32_MARGIN,
-        'consonant-Wrapper--83PercentContainier': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_83_VW,
-        'consonant-Wrapper--1200MaxWidth': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_1200_PX,
-        'consonant-Wrapper--1600MaxWidth': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_1600_PX,
-        'consonant-Wrapper--withLeftFilter': filterPanelEnabled && isLeftFilterPanel,
+    const containerClass = classNames({
+        'consonant-Container': true,
+        'consonant-Container--32Margin': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_100_VW_32_MARGIN,
+        'consonant-Container--83Percent': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_83_VW,
+        'consonant-Container--1200Max': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_1200_PX,
+        'consonant-Container--1600Max': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_1600_PX,
+        'consonant-Container--withLeftFilter': filterPanelEnabled && isLeftFilterPanel,
     });
 
     return (
@@ -767,10 +768,10 @@ const Container = (props) => {
                     daa-lh={collectionIdentifier}
                     daa-im={String(trackImpressions)}
                     onClick={handleWindowClick}
-                    className={`${wrapperClass} ${themeClass}`}>
-                    <div className="consonant-Wrapper-inner">
+                    className={`${containerClass} ${themeClass}`}>
+                    <div className="consonant-Container-inner">
                         {displayLeftFilterPanel && (
-                            <div className="consonant-Wrapper-leftFilterWrapper">
+                            <div className="consonant-Container-leftFilterWrapper">
                                 <LeftFilterPanel
                                     filters={filters}
                                     selectedFiltersQty={selectedFiltersItemsQty}
@@ -799,7 +800,7 @@ const Container = (props) => {
                                     )} />
                             </div>
                         )}
-                        <div className="consonant-Wrapper-collection">
+                        <div className="consonant-Container-collection">
                             {
                                 isTopFilterPanel &&
                                 <FiltersPanelTop
