@@ -65,10 +65,10 @@ describe('Consonant/Container/Left Filter', () => {
         configToUse.filterPanel.filterLogic = 'xor';
 
         await act(async () => render(<Container config={configToUse} />));
-        await waitFor(() => screen.getAllByTestId('consonant-LeftFilter-itemsItemCheckbox'));
+        await waitFor(() => screen.getAllByTestId('consonant-LeftFilter-itemCheckbox'));
 
         const filtersLeftElement = screen.getByTestId('consonant-LeftFilters');
-        const [firstCheckbox] = queryAllByTestId(filtersLeftElement, 'consonant-LeftFilter-itemsItemCheckbox');
+        const [firstCheckbox] = queryAllByTestId(filtersLeftElement, 'consonant-LeftFilter-itemCheckbox');
 
         expect(firstCheckbox.checked).toBeFalsy();
 
@@ -116,7 +116,7 @@ describe('Consonant/Container/Left Filter', () => {
 
         const [firstFilter] = screen.queryAllByTestId('consonant-LeftFilter');
 
-        const [firstFilterCheckbox] = queryAllByTestId(firstFilter, 'consonant-LeftFilter-itemsItemCheckbox');
+        const [firstFilterCheckbox] = queryAllByTestId(firstFilter, 'consonant-LeftFilter-itemCheckbox');
 
         fireEvent.click(firstFilterCheckbox);
 
@@ -154,12 +154,12 @@ describe('Consonant/Left Filter/Selected Filter Pills', () => {
 
         await act(async () => render(<Container config={configToUse} />));
         // Need to wait for all checkboxes to render
-        await waitFor(() => screen.getAllByTestId('consonant-LeftFilter-itemsItemCheckbox'));
+        await waitFor(() => screen.getAllByTestId('consonant-LeftFilter-itemCheckbox'));
 
         const filterElements = screen.getAllByTestId('consonant-LeftFilter');
         const firstFilterElement = filterElements[0];
 
-        const [firstCheckbox] = queryAllByTestId(firstFilterElement, 'consonant-LeftFilter-itemsItemCheckbox');
+        const [firstCheckbox] = queryAllByTestId(firstFilterElement, 'consonant-LeftFilter-itemCheckbox');
 
         fireEvent.click(firstCheckbox);
 

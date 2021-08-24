@@ -167,7 +167,7 @@
             overflow-y: auto;
         }
 
-        &-itemsItem {
+        &-item {
             display: flex;
             align-items: baseline;
             transition: background-color @consonantTransitionTime @consonantTransitionFunc;
@@ -181,7 +181,7 @@
             }
         }
 
-        &-itemsItemLabel {
+        &-itemLabel {
             position: relative;
             display: flex;
             align-items: center;
@@ -204,7 +204,7 @@
             .no-border-no-outline;
         }
 
-        input[type = checkbox]:checked + &-itemsItemCheckmark {
+        input[type = checkbox]:checked + &-itemCheckmark {
             background-color: @consonantLightBlue200;
             border-color: @consonantLightBlue200;
 
@@ -213,12 +213,12 @@
             }
         }
 
-        &-itemsItemCheckmark {
+        &-itemCheckmark {
             position: relative;
             display: block;
-            min-width: @consonant-LeftFilter-itemsItemCheckmark-size;
-            width: @consonant-LeftFilter-itemsItemCheckmark-size;
-            height: @consonant-LeftFilter-itemsItemCheckmark-size;
+            min-width: @consonant-LeftFilter-itemCheckmark-size;
+            width: @consonant-LeftFilter-itemCheckmark-size;
+            height: @consonant-LeftFilter-itemCheckmark-size;
             margin-right: 10px;
             border: 2px solid @consonantLightGrey800;
             border-radius: 3px;
@@ -245,7 +245,7 @@
             }
         }
 
-        &-itemsItemName {
+        &-itemName {
             padding-bottom: 1px;
 
             .font(
@@ -414,19 +414,19 @@
                 overflow-y: auto;
             }
 
-            &-itemsItemLabel {
+            &-itemLabel {
                 padding: 6px 8px;
             }
 
-            input[type = checkbox]:focus + &-itemsItemCheckmark {
+            input[type = checkbox]:focus + &-itemCheckmark {
                 outline: 2px solid @consonantFocusedColor;
             }
 
-            &-itemsItem:nth-of-type(n+10):last-of-type {
+            &-item:nth-of-type(n+10):last-of-type {
                 margin-bottom: 0;
             }
 
-            &-itemsItemName {
+            &-itemName {
                 font-size: 0.875rem;
                 line-height: 1rem;
             }

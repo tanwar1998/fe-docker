@@ -34,7 +34,7 @@ describe('Consonant/Filters/Left/Item', () => {
     test('should be able to render all list items', () => {
         const { props: { items } } = renderItemComponent();
 
-        const filterItemElement = screen.queryAllByTestId('consonant-LeftFilter-itemsItem');
+        const filterItemElement = screen.queryAllByTestId('consonant-LeftFilter-item');
 
         expect(filterItemElement).toHaveLength(items.length);
     });
@@ -42,7 +42,7 @@ describe('Consonant/Filters/Left/Item', () => {
     test('Checking a checkbox for a filter item should work', () => {
         const { props: { onCheck } } = renderItemComponent();
 
-        const [checkboxElement] = screen.queryAllByTestId('consonant-LeftFilter-itemsItemCheckbox');
+        const [checkboxElement] = screen.queryAllByTestId('consonant-LeftFilter-itemCheckbox');
 
         expect(checkboxElement).toBeDefined();
 
