@@ -241,7 +241,7 @@ const FiltersPanelTop = (props) => {
                 className="consonant-TopFilters-inner">
                 {shouldDisplayFilters &&
                     <div
-                        className="consonant-TopFilters-filtersWrapper">
+                        className="consonant-TopFilters-row">
                         {TABLET_OR_DESKTOP_SCREEN_SIZE &&
                             <strong
                                 className="consonant-TopFilters-title">
