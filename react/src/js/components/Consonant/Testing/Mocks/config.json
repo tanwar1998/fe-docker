@@ -154,6 +154,7 @@
         "enabled": true,
         "type": "left",
         "filterLogic": "and",
+        "showEmptyFilters": true,
         "filters": [
             {
                 "group": "First Tag Group Label",

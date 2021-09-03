@@ -118,6 +118,7 @@ const Container = (props) => {
     const collectionIdentifier = getConfig('analytics', 'collectionIdentifier');
     const authoredMode = getConfig('collection', 'mode');
     const authoredLayoutContainer = getConfig('collection', 'layout.container');
+    const showEmptyFilters = getConfig('filterPanel', 'showEmptyFilters');
 
     /**
      **** Constants ****
@@ -569,6 +570,15 @@ const Container = (props) => {
         }));
     }, []);
 
+    const removeEmptyFilters = (allFilters, cardsFromJson) => {
+        const tags = [].concat(...cardsFromJson.map(card => card.tags.map(tag => tag.id)));
+
+        return allFilters.map(filter => ({
+            ...filter,
+            items: filter.items.filter(item => tags.includes(item.id)),
+        })).filter(filter => filter.items.length > 0);
+    };
+
     /**
     * Fetches cards from authored API endpoint
     * @returns {Void} - an updated state
@@ -589,6 +599,9 @@ const Container = (props) => {
 
                 setCards(processedCards);
                 trackAllCardsLoaded(processedCards);
+                if (!showEmptyFilters) {
+                    setFilters(prevFilters => removeEmptyFilters(prevFilters, processedCards));
+                }
             }).catch(() => {
                 setLoading(false);
                 setApiFailure(true);
