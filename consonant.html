@@ -33,6 +33,7 @@
                                             <div id="someDivId"></div>
                                             <div id="someDivIdTwo"></div>
                                             <!-- <consonant-page-hook></consonant-page-hook> -->
+                                            <h1 style="text-align: center;"> some heading</h1>
                                         </div>
                                     </div>
                                 </section>
@@ -53,26 +54,26 @@
             collection: {
                 mode: "light", // Can be empty, "light", "dark", "darkest";
                 layout: {
-                    type: '4up', // Can be "2up", "3up", "4up", "5up";
+                    type: '3up', // Can be "2up", "3up", "4up", "5up";
                     gutter: '4x', // Can be "2x", "3x", "4x";
                     container: '1200MaxWidth', // Can be "83Percent", "1200MaxWidth", "32Margin";
                 },
                 button: {
                   style: "call-to-action", // Can be "primary", "call-to-action";
                 },
-                resultsPerPage: '20',
+                resultsPerPage: '3',
                 endpoint: "./tests/card-collection/json-response-tests/smoke-tests/smoke.json",
-                totalCardsToShow: '100',
-                cardStyle: "3:4", // available options: "1:2", "3:4", "full-card", "half-height", "custom-card", "double-wide";
-                showTotalResults: 'true',
+                totalCardsToShow: '3',
+                cardStyle: "half-height", // available options: "1:2", "3:4", "full-card", "half-height", "custom-card", "double-wide";
+                showTotalResults: 'false',
                 i18n: {
                     prettyDateIntervalFormat: '{LLL} {dd} | {timeRange} {timeZone}',
                     totalResultsText: '{total} Results',
-                    title: 'Speakers',
+                    title: '',
                     onErrorTitle: 'Sorry there was a system error.',
                     onErrorDescription: 'Please try reloading the page or try coming back to the page another time.',
                 },
-                setCardBorders: "true", // Can be true or false;
+                setCardBorders: "false", // Can be true or false;
             },
             featuredCards: [
             {
@@ -154,7 +155,7 @@
                 }
             ],
             filterPanel: {
-                enabled: 'true',
+                enabled: 'false',
                 type: 'left',
                 showEmptyFilters: false,
                 filters: [
@@ -291,12 +292,12 @@
                 }
             },
             sort: {
-                enabled: 'true',
+                enabled: 'false',
                 defaultSort: 'featured',
                 options: '[{"label":"Random", "sort":"random"},{"label":"Featured","sort":"featured"},{"label":"Title: (A-Z)","sort":"titleAsc"},{"label":"Title: (Z-A)","sort":"titleDesc"},{"label":"Date: (Oldest to newest)","sort":"dateAsc"},{"label":"Date: (Newest to oldest)","sort":"dateDesc"}]',
             },
             pagination: {
-                enabled: 'true',
+                enabled: 'false',
                 type: 'loadMore',
                 loadMoreButton: {
                   style: "primary", // Can be "primary", "over-background";
@@ -365,6 +366,12 @@
 
 <div class="modalContainer parsys">
 </div>
+
+<style>
+    body {
+        background-color: #0d66d0;
+    }
+</style>
 
 <script type="text/javascript" src="./dependencies/head.js"></script>
 <script type="text/javascript" src="./dependencies/publish.js"></script>
