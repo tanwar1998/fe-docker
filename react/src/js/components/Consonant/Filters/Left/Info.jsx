@@ -120,6 +120,12 @@ const Info = (props) => {
     const shouldRenderMobileInfo = NOT_DESKTOP_SCREEN_SIZE && filtersQty > 0 && enabled;
 
     /**
+     * Whether filters info inner wrapper should be rendered;
+     * @type {Boolean}
+    */
+    const shouldRenderInnerWrapper = title || showTotalResults;
+
+    /**
      * Class name for the left filters info inner wrapper:
      * whether the left filters info inner wrapper should display a vertical separator
      * after the block with the quantity of the filtered cards
@@ -134,10 +140,11 @@ const Info = (props) => {
         <aside
             data-testid="consonant-FiltersInfo"
             className="consonant-FiltersInfo">
-            <div
-                className="consonant-FiltersInfo-search">
-                {shouldRenderSearch && searchComponent}
-            </div>
+            {shouldRenderSearch &&
+                <div className="consonant-FiltersInfo-search">
+                    {searchComponent}
+                </div>
+            }
             {shouldRenderMobileInfo &&
                 <MobileInfo
                     selectedFiltersQty={selectedFiltersQty}
@@ -145,23 +152,20 @@ const Info = (props) => {
                     onMobileFiltersToggleClick={onMobileFiltersToggleClick} />
             }
             {shouldRenderSortPopup && sortComponent}
-            <div
-                className={wrapperClassName}>
-                {title &&
-                    <h2
-                        data-testid="consonant-FiltersInfo-title"
-                        className="consonant-FiltersInfo-title">
-                        {title}
-                    </h2>
-                }
-                {showTotalResults &&
-                    <div
-                        data-testid="consonant-FiltersInfo-results"
-                        className="consonant-FiltersInfo-results">
-                        {totalResultsHtml}
-                    </div>
-                }
-            </div>
+            {shouldRenderInnerWrapper &&
+                <div className={wrapperClassName}>
+                    {title &&
+                        <h2 data-testid="consonant-FiltersInfo-title" className="consonant-FiltersInfo-title">
+                            {title}
+                        </h2>
+                    }
+                    {showTotalResults &&
+                        <div data-testid="consonant-FiltersInfo-results" className="consonant-FiltersInfo-results">
+                            {totalResultsHtml}
+                        </div>
+                    }
+                </div>
+            }
         </aside>
     );
 };

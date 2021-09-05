@@ -226,6 +226,13 @@ const FiltersPanelTop = (props) => {
      */
     const shouldShowSearchBar = openExpandable === searchId;
 
+    /**
+     * Whether should render top filters inner wrapper
+     * @type {Boolean}
+    */
+    const shouldRenderInnerWrapper = shouldDisplayFilters
+        || searchEnabled || shouldDisplaySortComponent || shouldDisplayCollectionInfo;
+
     return (
         <div
             data-testid="consonant-TopFilters"
@@ -237,100 +244,102 @@ const FiltersPanelTop = (props) => {
                     {searchComponent}
                 </div>
             }
-            <div
-                className="consonant-TopFilters-inner">
-                {shouldDisplayFilters &&
-                    <div
-                        className="consonant-TopFilters-filtersWrapper">
-                        {TABLET_OR_DESKTOP_SCREEN_SIZE &&
-                            <strong
-                                className="consonant-TopFilters-title">
-                                {filterGroupLabel}
-                            </strong>
-                        }
+            {shouldRenderInnerWrapper &&
+                <div
+                    className="consonant-TopFilters-inner">
+                    {shouldDisplayFilters &&
                         <div
-                            data-testid="consonant-TopFilters-filters"
-                            className={showLimitedFiltersQtyClass}>
-                            {filters.map(filter =>
-                                (<TopFilterItem
-                                    key={filter.id}
-                                    name={filter.group}
-                                    items={filter.items}
-                                    numItemsSelected={getSelectedItemsCount(filter.items)}
-                                    results={resQty}
-                                    id={filter.id}
-                                    isOpened={filter.opened}
-                                    onCheck={onCheckboxClick}
-                                    onClick={onFilterClick}
-                                    onClearAll={onClearFilterItems}
-                                    clearFilterText={clearFilterText}
-                                    isTopFilter />))
+                            className="consonant-TopFilters-filtersWrapper">
+                            {TABLET_OR_DESKTOP_SCREEN_SIZE &&
+                                <strong
+                                    className="consonant-TopFilters-title">
+                                    {filterGroupLabel}
+                                </strong>
                             }
-                            {shouldDisplayMoreFiltersBtn &&
-                                <button
-                                    type="button"
-                                    data-testid="consonant-TopFilters-moreBtn"
-                                    className="consonant-TopFilters-moreBtn"
-                                    onClick={onShowAllClick}>
-                                    {moreFiltersBtnText}
-                                </button>
-                            }
-                        </div>
-                        {shouldShowClearButtonWrapper &&
                             <div
-                                data-testid="consonant-TopFilters-clearBtnWrapper"
-                                className={clearBtnWrapperClass}>
-                                {atleastOneFilterSelected &&
+                                data-testid="consonant-TopFilters-filters"
+                                className={showLimitedFiltersQtyClass}>
+                                {filters.map(filter =>
+                                    (<TopFilterItem
+                                        key={filter.id}
+                                        name={filter.group}
+                                        items={filter.items}
+                                        numItemsSelected={getSelectedItemsCount(filter.items)}
+                                        results={resQty}
+                                        id={filter.id}
+                                        isOpened={filter.opened}
+                                        onCheck={onCheckboxClick}
+                                        onClick={onFilterClick}
+                                        onClearAll={onClearFilterItems}
+                                        clearFilterText={clearFilterText}
+                                        isTopFilter />))
+                                }
+                                {shouldDisplayMoreFiltersBtn &&
                                     <button
                                         type="button"
-                                        data-testid="consonant-TopFilters-clearBtn"
-                                        className="consonant-TopFilters-clearBtn"
-                                        onClick={onClearAllFilters}
-                                        tabIndex="0">
-                                        {clearAllFiltersText}
+                                        data-testid="consonant-TopFilters-moreBtn"
+                                        className="consonant-TopFilters-moreBtn"
+                                        onClick={onShowAllClick}>
+                                        {moreFiltersBtnText}
                                     </button>
                                 }
                             </div>
-                        }
-                    </div>
-                }
-                {searchEnabled && TABLET_OR_DESKTOP_SCREEN_SIZE &&
-                    <div
-                        data-testid="consonant-TopFilters-searchIcoWrapper"
-                        className="consonant-TopFilters-searchIcoWrapper">
-                        {shouldShowSearchBar && searchComponent}
-                        {TABLET_OR_DESKTOP_SCREEN_SIZE &&
-                            <SearchIcon
-                                onClick={handleExpandableToggle} />
-                        }
-                    </div>
-                }
-                {shouldDisplaySortComponent &&
-                    <div
-                        data-testid="consonant-TopFilters-selectWrapper"
-                        className="consonant-TopFilters-selectWrapper">
-                        {sortComponent}
-                    </div>
-                }
-                {shouldDisplayCollectionInfo &&
-                    <div className="consonant-TopFilters-infoWrapper">
-                        {title &&
-                            <h2
-                                data-testid="consonant-TopFilters-collectionTitle"
-                                className="consonant-TopFilters-collectionTitle">
-                                {title}
-                            </h2>
-                        }
-                        {showTotalResults &&
-                            <div
-                                data-testid="consonant-TopFilters-results"
-                                className="consonant-TopFilters-results">
-                                {totalResultsHtml}
-                            </div>
-                        }
-                    </div>
-                }
-            </div>
+                            {shouldShowClearButtonWrapper &&
+                                <div
+                                    data-testid="consonant-TopFilters-clearBtnWrapper"
+                                    className={clearBtnWrapperClass}>
+                                    {atleastOneFilterSelected &&
+                                        <button
+                                            type="button"
+                                            data-testid="consonant-TopFilters-clearBtn"
+                                            className="consonant-TopFilters-clearBtn"
+                                            onClick={onClearAllFilters}
+                                            tabIndex="0">
+                                            {clearAllFiltersText}
+                                        </button>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+                    {searchEnabled && TABLET_OR_DESKTOP_SCREEN_SIZE &&
+                        <div
+                            data-testid="consonant-TopFilters-searchIcoWrapper"
+                            className="consonant-TopFilters-searchIcoWrapper">
+                            {shouldShowSearchBar && searchComponent}
+                            {TABLET_OR_DESKTOP_SCREEN_SIZE &&
+                                <SearchIcon
+                                    onClick={handleExpandableToggle} />
+                            }
+                        </div>
+                    }
+                    {shouldDisplaySortComponent &&
+                        <div
+                            data-testid="consonant-TopFilters-selectWrapper"
+                            className="consonant-TopFilters-selectWrapper">
+                            {sortComponent}
+                        </div>
+                    }
+                    {shouldDisplayCollectionInfo &&
+                        <div className="consonant-TopFilters-infoWrapper">
+                            {title &&
+                                <h2
+                                    data-testid="consonant-TopFilters-collectionTitle"
+                                    className="consonant-TopFilters-collectionTitle">
+                                    {title}
+                                </h2>
+                            }
+                            {showTotalResults &&
+                                <div
+                                    data-testid="consonant-TopFilters-results"
+                                    className="consonant-TopFilters-results">
+                                    {totalResultsHtml}
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
         </div>
     );
 };
