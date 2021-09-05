@@ -18,10 +18,6 @@
         left: 0;
         background-color: transparent;
 
-        > *:last-child {
-            margin-left: auto;
-        }
-
         &-search {
             .full-width;
         }
@@ -112,8 +108,8 @@
             }
         }
 
-        &:empty {
-            display: none;
+        > .consonant-Select {
+            margin-left: auto;
         }
 
         @media @consonant-desktop-up {
@@ -171,4 +167,8 @@
             }
         }
     }
+}
+
+.consonant-Wrapper-collection:first-child .consonant-FiltersInfo:empty {
+    display: none;
 }
