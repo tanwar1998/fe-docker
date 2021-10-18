@@ -42,7 +42,8 @@ export const makeConfigGetter = config => (object, key) => {
  * @returns {Object} - Sort Option or default if none is found
  */
 export function getDefaultSortOption(config, query) {
-    const sortOptions = makeConfigGetter(config)('sort', 'options');
+    const getConfig = makeConfigGetter(config);
+    const sortOptions = getConfig('sort', 'options');
     const sortConstant = SORT_TYPES[query.toUpperCase()];
 
     return sortOptions.find(option => option.sort === query) || {

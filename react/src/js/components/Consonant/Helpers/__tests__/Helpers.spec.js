@@ -21,6 +21,7 @@ import {
     shouldDisplayPaginator,
     getCardsMatchingSearch,
     getUpdatedCardBookmarkData,
+    hasTag,
 } from '../Helpers';
 
 describe('utils/Helpers', () => {
@@ -272,6 +273,25 @@ describe('utils/Helpers', () => {
 
                 expect(updatedCards).toEqual(expectedValue);
             });
+        });
+    });
+    describe('hasTag', () => {
+        test('has Live Expired tag', () => {
+            const hasLiveExpired = hasTag(PROPS.hasTag.compareRegExp1, PROPS.hasTag.passedTags1);
+
+            expect(hasLiveExpired).toBe(true);
+        });
+
+        test('has On Demand Schedules tag', () => {
+            const hasLiveExpired = hasTag(PROPS.hasTag.compareRegExp2, PROPS.hasTag.passedTags2);
+
+            expect(hasLiveExpired).toBe(true);
+        });
+
+        test('does not have DrSuess tag', () => {
+            const hasLiveExpired = hasTag(PROPS.hasTag.compareRegExp3, PROPS.hasTag.passedTags3);
+
+            expect(hasLiveExpired).toBe(false);
         });
     });
 });

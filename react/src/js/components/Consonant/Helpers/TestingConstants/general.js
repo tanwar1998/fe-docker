@@ -540,6 +540,19 @@ const mergeDeep = [
     },
 ];
 
+const getLinkTarget = [
+    {
+        domain: 'example.com',
+        link: 'http://example.com',
+        expectedValue: '_self'
+    },
+    {
+        domain: 'example.com',
+        link: 'http://some-url.com',
+        expectedValue: '_blank'
+    }
+];
+
 export default {
     isObject,
     template,
@@ -563,4 +576,5 @@ export default {
     getSelectedItemsCount,
     isAtleastOneFilterSelected,
     readBookmarksFromLocalStorage,
+    getLinkTarget,
 };

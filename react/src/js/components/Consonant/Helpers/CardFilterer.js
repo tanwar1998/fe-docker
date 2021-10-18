@@ -4,6 +4,7 @@ import {
     highlightCard,
     getDateAscSort,
     getDateDescSort,
+    getEventSort,
     getFeaturedSort,
     getTitleAscSort,
     getTitleDescSort,
@@ -89,34 +90,47 @@ export default class CardFilterer {
      * @memberof CardFilterer
      */
     sortCards(sortOption) {
+        if (!this.filteredCards.length) return this;
+
         const sortType = sortOption ? sortOption.sort.toLowerCase() : null;
 
         switch (sortType) {
             case SORT_TYPES.DATEASC:
                 this.filteredCards = getDateAscSort(this.filteredCards);
-                break;
+                return this;
             case SORT_TYPES.DATEDESC:
                 this.filteredCards = getDateDescSort(this.filteredCards);
-                break;
+                return this;
+            case SORT_TYPES.EVENTSORT: {
+                const {
+                    nextTransitionMs,
+                    visibleSessions = [],
+                } = getEventSort(this.filteredCards);
+
+                this.filteredCards = visibleSessions;
+
+                if (nextTransitionMs > 0) {
+                    this.nextTransitionMs = nextTransitionMs;
+                }
+
+                return this;
+            }
             case SORT_TYPES.FEATURED:
                 this.filteredCards = getFeaturedSort(this.filteredCards);
-                break;
+                return this;
             case SORT_TYPES.TITLEASC:
                 this.filteredCards = getTitleAscSort(this.filteredCards);
-                break;
+                return this;
             case SORT_TYPES.TITLEDESC:
                 this.filteredCards = getTitleDescSort(this.filteredCards);
-                break;
+                return this;
             case SORT_TYPES.RANDOM:
                 this.filteredCards = getRandomSort(this.filteredCards);
-                break;
+                return this;
             default:
                 return this;
         }
-
-        return this;
     }
-
     /**
      * If cards were authored to be shown or hidden based off a given date range, this method
      * constrains the result set to only cards that should be shown within that date interval.
@@ -125,7 +139,10 @@ export default class CardFilterer {
      * @memberof CardFilterer
      */
     keepCardsWithinDateRange() {
+        if (!this.filteredCards.length) return this;
+
         this.filteredCards = filterCardsByDateRange(this.filteredCards);
+
         return this;
     }
     /**
@@ -155,7 +172,10 @@ export default class CardFilterer {
      * @memberof CardFilterer
      */
     truncateList(totalCardLimit) {
+        if (!this.filteredCards.length) return this;
+
         this.filteredCards = truncateList(totalCardLimit, this.filteredCards);
+
         return this;
     }
 }

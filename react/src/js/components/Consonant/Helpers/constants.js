@@ -67,6 +67,7 @@ export const FILTER_PANEL = {
 export const SORT_TYPES = {
     DATEASC: 'dateasc',
     DATEDESC: 'datedesc',
+    EVENTSORT: 'eventsort',
     FEATURED: 'featured',
     TITLEASC: 'titleasc',
     TITLEDESC: 'titledesc',
@@ -254,6 +255,7 @@ export const LAYOUT_CONTAINER = {
     SIZE_1200_PX: '1200MaxWidth',
     SIZE_1600_PX: '1600MaxWidth',
     SIZE_100_VW_32_MARGIN: '32Margin',
+    CAROUSEL: 'carousel',
 };
 
 /**
@@ -271,3 +273,4 @@ export const LOADER_SIZE = {
  * @type {String}
  */
 export const ROOT_MARGIN_DEFAULT = '500px';
+export const ONE_SECOND_DELAY = 1000;

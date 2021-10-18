@@ -201,6 +201,17 @@ export const getCardsMatchingQuery = (cards, searchFields, query) => {
     });
     return getUniqueCardSet(cardsMatchingQuery);
 };
+/**
+ * @func hasTag
+ * @desc Does current entity have a specific tag?
+ * @param {RegExp} compare a regEx pattern to test for
+ * @param {Array} tags an array of tags
+ */
+export const hasTag = (compare, tags = []) => {
+    if (!tags.length || compare.constructor.name !== 'RegExp') return false;
+
+    return tags.some(({ id = '' } = {}) => id && compare.test(id));
+};
 
 /**
 * Returns all cards title sorted (A-Z)

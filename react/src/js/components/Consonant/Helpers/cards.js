@@ -13,7 +13,7 @@ export const getCardDate = date => new Date(date).getTime();
  * @param {Array} cards - cards array
  * @returns {Array} - All cards that are inside the show card date window
  */
-export const filterCardsByDateRange = (cards) => {
+export const filterCardsByDateRange = (cards = []) => {
     const currentDate = new Date().getTime();
 
     return cards.filter((card) => {

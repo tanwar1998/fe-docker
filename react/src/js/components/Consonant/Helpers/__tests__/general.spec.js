@@ -13,6 +13,7 @@ import {
     truncateList,
     truncateString,
     generateRange,
+    getLinkTarget,
     getPageStartEnd,
     getStartNumber,
     getEndNumber,
@@ -327,6 +328,16 @@ describe('utils/general', () => {
             jest.runAllTimers();
 
             expect(func).toHaveBeenCalledTimes(1);
+        });
+    });
+    describe('getLinkTarget', () => {
+        PROPS.getLinkTarget.forEach(({
+            domain, link, expectedValue,
+        }) => {
+            test('should return correct value', () => {
+                const target = getLinkTarget(link, domain);
+                expect(target).toEqual(expectedValue);
+            });
         });
     });
 });

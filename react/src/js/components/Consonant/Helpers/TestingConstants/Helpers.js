@@ -543,6 +543,21 @@ const getUpdatedCardBookmarkData = [
     },
 ];
 
+/* eslint-disable */
+const hasTag = {
+    compareRegExp1: /[a-zA-Z0-9-]+:[a-zA-Z0-9-\/]+live-expired/,
+    passedTags1: [
+        {id: 'caas:events/live-expired'},
+        {id: 'caas:events/purple-people-eater'}
+    ],
+    compareRegExp2: /[a-zA-Z0-9-]+:[a-zA-Z0-9-\/]+on-demand-scheduled/,
+    passedTags2: [
+        {id: 'caas:events/on-demand-scheduled'},
+        {id: 'caas:events/green-eggs-and-ham'}
+    ],
+};
+/* eslint-enable */
+
 export default {
     processCards,
     getTotalPages,
@@ -561,4 +576,5 @@ export default {
     getCardsMatchingSearch,
     getUpdatedCardBookmarkData,
     getFilteredCardsThrowError,
+    hasTag,
 };
