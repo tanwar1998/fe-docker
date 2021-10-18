@@ -1,7 +1,9 @@
 import React from 'react';
 import { string } from 'prop-types';
+import classNames from 'classnames';
 
 import { RenderDisplayMsg } from '../Helpers/rendering';
+import { useConfig } from '../Helpers/hooks';
 
 const viewType = {
     description: string,
@@ -35,12 +37,25 @@ const View = (props) => {
         replaceValue,
     } = props;
 
+    const getConfig = useConfig();
+
     const displayMsg = RenderDisplayMsg(description, replaceValue);
+    const useLightText = getConfig('collection', 'useLightText');
+
+    /**
+     * Class name for the NoResultsView:
+     * whether we should apply dark or light theme
+     * @type {String}
+     */
+    const noResultsViewClass = classNames({
+        'consonant-NoResultsView': true,
+        'consonant-NoResultsView--withLightText': useLightText,
+    });
 
     return (
         <div
             data-testid="consonant-NoResultsView"
-            className="consonant-NoResultsView">
+            className={noResultsViewClass}>
             <strong
                 className="consonant-NoResultsView-title">
                 {title}

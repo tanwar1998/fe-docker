@@ -17,7 +17,7 @@ const showCardType = {
     until: string,
 };
 
-const tagsType = {
+export const tagsType = {
     id: oneOfType([string, number]),
 };
 const searchType = {};

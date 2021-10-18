@@ -9,7 +9,6 @@ import {
 } from 'prop-types';
 
 import { useConfig } from '../Helpers/hooks';
-import { trackClearSearchInput } from '../Analytics/Analytics';
 
 const searchType = {
     name: string,
@@ -99,7 +98,6 @@ const Search = ({
     const clearSearch = () => {
         onSearch('');
         focusTextInput();
-        trackClearSearchInput();
     };
 
     /**

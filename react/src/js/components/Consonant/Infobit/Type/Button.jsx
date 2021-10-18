@@ -3,6 +3,7 @@ import className from 'classnames';
 import { string } from 'prop-types';
 
 import { useConfig } from '../../Helpers/hooks';
+import { getLinkTarget } from '../../Helpers/general';
 
 const BUTTON_STYLE = {
     PRIMARY: 'primary',
@@ -83,13 +84,16 @@ const Button = ({
         'consonant-BtnInfobit-ico--last': iconPos.toLowerCase() === 'aftertext',
     });
 
+    const target = getLinkTarget(href);
+
     return (
         <a
             className={buttonClass}
+            daa-ll={text}
             data-testid="consonant-BtnInfobit"
             tabIndex="0"
             rel="noopener noreferrer"
-            target="_blank"
+            target={target}
             href={href}>
             {iconSrc &&
                 <img

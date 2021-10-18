@@ -1,4 +1,4 @@
-import React, { memo, Fragment, useState, useEffect, useRef, useCallback } from 'react';
+import React, { memo, Fragment, useState, useEffect, useRef } from 'react';
 import { string } from 'prop-types';
 import { createPortal } from 'react-dom';
 import ModalWindow from './videoModal';
@@ -14,12 +14,21 @@ const VideoButton = ({
 
     const modalElement = useRef(null);
     const [isOpen, setIsOpen] = useState(false);
+    const isAuthoredModal = /^#[a-zA-Z0-9_-]+/.test(videoURL);
 
-    const handleShowModal = useCallback(() => {
-        setIsOpen(true);
-    }, []);
+    const handleShowModal = () => {
+        if (isAuthoredModal) {
+            window.location.hash = new URL(videoURL, document.baseURI).hash;
+        } else {
+            setIsOpen(true);
+        }
+    };
 
     const handleCloseModal = () => {
+        setIsOpen(false);
+    };
+
+    const handleOverlayClose = () => {
         setIsOpen(false);
     };
 
@@ -27,7 +36,10 @@ const VideoButton = ({
         if (isOpen && modalElement && modalElement.current) {
             const videoModal = new Modal(
                 modalElement.current,
-                { buttonClose: handleCloseModal },
+                {
+                    buttonClose: handleCloseModal,
+                    overlayClose: handleOverlayClose,
+                },
             );
 
             videoModal.open();

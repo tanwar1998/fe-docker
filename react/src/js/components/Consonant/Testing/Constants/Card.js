@@ -15,6 +15,7 @@ const [{
     styles,
     contentArea,
     overlays,
+    ctaLink,
 }] = cardList;
 
 const CARD_PROPS = {
@@ -23,6 +24,7 @@ const CARD_PROPS = {
     overlays,
     badgeText,
     contentArea,
+    ctaLink,
 };
 
 export const DEFAULT_PROPS_3_2 = {
@@ -38,8 +40,6 @@ export const DEFAULT_PROPS_3_2 = {
 
 export const DEFAULT_PROPS_1_1 = {
     ...CARD_PROPS,
-
-    ctaLink: 'some_link',
 };
 
 export const DEFAULT_PROPS_FULL = {

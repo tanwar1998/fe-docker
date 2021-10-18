@@ -299,6 +299,7 @@
         }
     },
     "bookmarks": {
+        "showOnCards": true,
         "leftFilterPanel": {
             "bookmarkOnlyCollection": false,
             "showBookmarksFilter": true,
@@ -327,5 +328,6 @@
             }
         }
     },
-    "language": "en"
+    "language": "en",
+    "country": "us"
 }

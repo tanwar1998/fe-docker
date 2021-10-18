@@ -1,20 +1,15 @@
 import React from 'react';
-import {
-    oneOfType,
-    string,
-    bool,
-} from 'prop-types';
+import { string } from 'prop-types';
+import { getLinkTarget } from '../../Helpers/general';
 
 const linkType = {
     linkHint: string,
     href: string.isRequired,
     text: string.isRequired,
-    openInNewTab: oneOfType([bool, string]),
 };
 
 const defaultProps = {
     linkHint: '',
-    openInNewTab: true,
 };
 
 /**
@@ -24,7 +19,6 @@ const defaultProps = {
  * @example
  * const props= {
     href: String,
-    openInNewTab: Boolean,
     linkHint: String,
     text: String,
  * }
@@ -34,11 +28,10 @@ const defaultProps = {
  */
 const Link = ({
     href,
-    openInNewTab,
     linkHint,
     text,
 }) => {
-    const target = openInNewTab ? '_blank' : '_self';
+    const target = getLinkTarget(href);
     return (
         <a
             className="consonant-LinkInfobit"

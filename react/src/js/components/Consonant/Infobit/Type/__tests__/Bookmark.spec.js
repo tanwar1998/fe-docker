@@ -8,6 +8,10 @@ import {
 
 import Bookmark from '../Bookmark/Bookmark';
 
+beforeEach(() => {
+    window.digitalData = {};
+});
+
 const props = {
     cardId: '1',
     onClick: jest.fn(),

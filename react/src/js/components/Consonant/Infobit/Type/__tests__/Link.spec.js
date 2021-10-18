@@ -9,7 +9,6 @@ import Link from '../Link';
 
 const props = {
     href: 'https://www.someTestUrl.com/',
-    openInNewTab: false,
     linkHint: 'Some Link Hint',
     text: 'Click Here',
 };
@@ -21,14 +20,13 @@ describe('Consonant/Infobits/Type/Link', () => {
 
         const linkWithIcon = screen.getByTestId('consonant-LinkInfobit');
         expect(linkWithIcon).not.toBeNull();
-        expect(linkWithIcon.target).toBe('_self');
+        expect(linkWithIcon.target).toBe('_blank');
         expect(getByText('Click Here').innerHTML).toContain('Click Here');
 
     });
 
     test('Can be authored to open in a new tab', async () => {
         const propsToUse = props;
-        propsToUse.openInNewTab = true;
         render(<Link {...propsToUse} />);
 
         const linkWithIcon = screen.getByTestId('consonant-LinkInfobit');

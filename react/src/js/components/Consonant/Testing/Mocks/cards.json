@@ -72,7 +72,8 @@
             }
         ],
         "search": {},
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "4",
@@ -144,7 +145,8 @@
             }
         ],
         "search": {},
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "5",
@@ -206,7 +208,8 @@
                 "right": []
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "6",
@@ -257,7 +260,8 @@
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "10",
@@ -317,7 +321,8 @@
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "12",
@@ -377,7 +382,8 @@
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "N",
@@ -435,7 +441,8 @@
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "11",
@@ -492,7 +499,8 @@
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "7",
@@ -541,12 +549,14 @@
                 "right": [
                     {
                         "type": "button",
+                        "href": "https://www.some-url.com",
                         "text": "Button"
                     }
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "13",
@@ -612,7 +622,8 @@
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "14",
@@ -663,7 +674,8 @@
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "8",
@@ -720,7 +732,8 @@
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "9",
@@ -777,12 +790,14 @@
                     {
                         "type": "button",
                         "style": "call-to-action",
+                        "href": "https://www.some-url.com",
                         "text": "Button"
                     }
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "15",
@@ -829,7 +844,8 @@
                 "right": []
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "16",
@@ -906,7 +922,8 @@
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "17",
@@ -964,13 +981,15 @@
                 "right": [
                     {
                         "type": "button",
+                        "href": "https://www.some-url.com",
                         "style": "call-to-action",
                         "text": "Button"
                     }
                 ]
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "18",
@@ -1017,7 +1036,8 @@
                 "right": []
             }
         ],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "19",
@@ -1050,7 +1070,8 @@
             "dateDetailText": {}
         },
         "footer": [],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "20",
@@ -1083,7 +1104,8 @@
             "dateDetailText": {}
         },
         "footer": [],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "21",
@@ -1116,7 +1138,8 @@
             "dateDetailText": {}
         },
         "footer": [],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "22",
@@ -1149,7 +1172,8 @@
             "dateDetailText": {}
         },
         "footer": [],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     },
     {
         "id": "23",
@@ -1182,6 +1206,7 @@
             "dateDetailText": {}
         },
         "footer": [],
-        "cardDate": "2020-10-19T05:42:36.871Z"
+        "cardDate": "2020-10-19T05:42:36.871Z",
+        "ctaLink": "https://www.some-url.com"
     }
 ]

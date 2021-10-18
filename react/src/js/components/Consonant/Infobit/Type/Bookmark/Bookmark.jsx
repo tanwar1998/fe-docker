@@ -7,14 +7,12 @@ import {
 } from 'prop-types';
 
 import Tooltip from './Tooltip';
-import { trackCardSave } from '../../../Analytics/Analytics';
+import { useConfig } from '../../../Helpers/hooks';
 
 const bookmarkType = {
     isBookmarked: bool,
     saveCardIcon: string,
-    cardSaveText: string,
     unsaveCardIcon: string,
-    cardUnsaveText: string,
     onClick: func.isRequired,
     cardId: string.isRequired,
     disableBookmarkIco: bool.isRequired,
@@ -22,9 +20,7 @@ const bookmarkType = {
 
 const defaultProps = {
     saveCardIcon: '',
-    cardSaveText: '',
     unsaveCardIcon: '',
-    cardUnsaveText: '',
     isBookmarked: false,
 };
 
@@ -53,11 +49,18 @@ const Bookmark = ({
     isBookmarked,
     saveCardIcon,
     unsaveCardIcon,
-    cardSaveText,
-    cardUnsaveText,
     onClick,
     disableBookmarkIco,
 }) => {
+    const getConfig = useConfig();
+    const showOnCards = getConfig('bookmarks', 'showOnCards');
+
+    /**
+     **** Authored Configs ****
+     */
+    const saveCardText = getConfig('bookmarks', 'i18n.card.saveText');
+    const unsaveCardText = getConfig('bookmarks', 'i18n.card.unsaveText');
+
     const bookmarkInfobitClass = classNames({
         'consonant-BookmarkInfobit': true,
         'is-active': isBookmarked,
@@ -77,10 +80,9 @@ const Bookmark = ({
     const handleClick = (clickEvt) => {
         clickEvt.stopPropagation();
         onClick(cardId);
-        trackCardSave(cardId, !isBookmarked);
     };
 
-    const tooltipText = isBookmarked ? cardUnsaveText : cardSaveText;
+    const tooltipText = isBookmarked ? unsaveCardText : saveCardText;
 
     return (
         <button
@@ -90,10 +92,10 @@ const Bookmark = ({
             className={bookmarkInfobitClass}
             onClick={handleClick}
             tabIndex="0">
-            {bookmarkIcon()}
-            <Tooltip
+            {showOnCards && bookmarkIcon()}
+            {showOnCards && <Tooltip
                 data-testid="consonant-Tooltip"
-                text={tooltipText} />
+                text={tooltipText} />}
         </button>
     );
 };

@@ -94,6 +94,7 @@ const LoadMore = ({
                     <button
                         type="button"
                         data-testid="consonant-LoadMore-btn"
+                        daa-ll={loadMoreButtonText}
                         className="consonant-LoadMore-btn"
                         onClick={onClick}
                         tabIndex="0">

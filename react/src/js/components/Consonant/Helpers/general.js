@@ -434,3 +434,74 @@ export const qs = {
         return searchParams.toString();
     },
 };
+
+export const isDateWithinInterval = (currentDate, startDate, endDate) => {
+    const curr = Date.parse(currentDate);
+    const start = Date.parse(startDate);
+    const end = Date.parse(endDate);
+
+    return (start <= curr && end >= curr);
+};
+
+export const isDateBeforeInterval = (currentDate, startDate) => {
+    const curr = Date.parse(currentDate);
+    const start = Date.parse(startDate);
+
+    return curr < start;
+};
+
+let differential = 0;
+function incrementDifferential() {
+    differential += 1000;
+}
+setInterval(incrementDifferential, 1000);
+
+export const getCurrentDate = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const servertime = parseInt(urlParams.get('servertime'), 10);
+    const currDate = servertime ? new Date(servertime + differential) : new Date();
+    return currDate;
+};
+
+export const getEventBanner = function foo(startDate, endDate, bannerMap) {
+    const currDate = getCurrentDate();
+    if (isDateWithinInterval(currDate, startDate, endDate)) {
+        return bannerMap.live;
+    } else if (isDateBeforeInterval(currDate, startDate)) {
+        return bannerMap.upcoming;
+    }
+    return bannerMap.onDemand;
+};
+
+
+export function getTransitions(cardsPtr) {
+    const cards = [...cardsPtr];
+    const currentDate = getCurrentDate();
+    const transitions = new MinPriorityQueue();
+
+    /* eslint-disable no-plusplus */
+    for (let i = 0; i < cards.length; i++) {
+        const priority = Date.parse(cards[i].startDate) - currentDate;
+        if (priority && priority > 0) {
+            transitions.enqueue(cards[i], priority);
+        }
+        if (cards[i].endDate) {
+            transitions.enqueue(null, Date.parse(cards[i].endDate) - currentDate);
+        }
+    }
+    return transitions;
+}
+
+
+export const getLinkTarget = (link, domain = window.location.hostname) => {
+    let target = '_blank';
+    try {
+        const { hostname: linkHostName = '' } = new URL(link);
+        if (domain === linkHostName) {
+            target = '_self';
+        }
+    } catch (e) {
+        /* eslint-disable-line no-empty */
+    }
+    return target;
+};
