@@ -17,6 +17,7 @@ import {
     overlaysType,
 } from '../types/card';
 import VideoButton from '../Modal/videoButton';
+import { getEventBanner, getLinkTarget } from '../Helpers/general';
 
 const threeFourthCardType = {
     ctaLink: string,
@@ -26,6 +27,9 @@ const threeFourthCardType = {
     overlays: shape(overlaysType),
     contentArea: shape(contentAreaType),
     renderBorder: bool,
+    startDate: string,
+    endDate: string,
+    bannerMap: shape(Object).isRequired,
 };
 
 const defaultProps = {
@@ -35,6 +39,8 @@ const defaultProps = {
     contentArea: {},
     lh: '',
     renderBorder: true,
+    startDate: '',
+    endDate: '',
 };
 
 /**
@@ -92,15 +98,23 @@ const ThreeFourthCard = (props) => {
             },
         },
         renderBorder,
+        startDate,
+        endDate,
+        bannerMap,
     } = props;
 
-    const getConfig = useConfig();
+    let bannerBackgroundColorToUse = bannerBackgroundColor;
+    let bannerIconToUse = bannerIcon;
+    let bannerFontColorToUse = bannerFontColor;
+    let bannerDescriptionToUse = bannerDescription;
 
+    const getConfig = useConfig();
     /**
      **** Authored Configs ****
      */
     const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
+    const disableBanners = getConfig('collection', 'disableBanners');
 
     /**
      * Class name for the card:
@@ -108,6 +122,7 @@ const ThreeFourthCard = (props) => {
      * @type {String}
      */
     const cardClassName = classNames({
+        'consonant-Card': true,
         'consonant-ThreeFourthCard': true,
         'consonant-u-noBorders': !renderBorder,
     });
@@ -141,6 +156,16 @@ const ThreeFourthCard = (props) => {
      */
     const detailText = prettyDate || label;
 
+    if (startDate && endDate) {
+        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
+        bannerBackgroundColorToUse = eventBanner.backgroundColor;
+        bannerDescriptionToUse = eventBanner.description;
+        bannerFontColorToUse = eventBanner.fontColor;
+        bannerIconToUse = eventBanner.icon;
+    }
+
+    const target = getLinkTarget(ctaLink);
+
     return (
         <div
             daa-lh={lh}
@@ -152,25 +177,26 @@ const ThreeFourthCard = (props) => {
                 className="consonant-ThreeFourthCard-img"
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }}>
-                {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+                {bannerDescriptionToUse && bannerFontColorToUse && bannerBackgroundColorToUse
+                && !disableBanners &&
                     <span
                         data-testid="consonant-ThreeFourthCard-banner"
                         className="consonant-ThreeFourthCard-banner"
                         style={({
-                            backgroundColor: bannerBackgroundColor,
-                            color: bannerFontColor,
+                            backgroundColor: bannerBackgroundColorToUse,
+                            color: bannerFontColorToUse,
                         })}>
-                        {bannerIcon &&
+                        {bannerIconToUse &&
                             <div
                                 className="consonant-ThreeFourthCard-bannerIconWrapper">
                                 <img
                                     alt=""
                                     loading="lazy"
-                                    src={bannerIcon}
+                                    src={bannerIconToUse}
                                     data-testid="consonant-Card-bannerImg" />
                             </div>
                         }
-                        <span>{bannerDescription}</span>
+                        <span>{bannerDescriptionToUse}</span>
                     </span>
                 }
                 {badgeText &&
@@ -197,7 +223,7 @@ const ThreeFourthCard = (props) => {
             </div>
             <a
                 href={ctaLink}
-                target="_blank"
+                target={target}
                 rel="noopener noreferrer"
                 title="Click to open in a new tab"
                 className="consonant-ThreeFourthCard-inner"

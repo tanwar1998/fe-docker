@@ -6,7 +6,11 @@ import {
     bool,
 } from 'prop-types';
 
-import { useLazyLoading } from '../Helpers/hooks';
+import {
+    useConfig,
+    useLazyLoading,
+} from '../Helpers/hooks';
+import { getLinkTarget, getEventBanner } from '../Helpers/general';
 import {
     stylesType,
     contentAreaType,
@@ -22,6 +26,9 @@ const fullCardType = {
     overlays: shape(overlaysType),
     contentArea: shape(contentAreaType),
     renderBorder: bool,
+    startDate: string,
+    endDate: string,
+    bannerMap: shape(Object).isRequired,
 };
 
 const defaultProps = {
@@ -31,6 +38,8 @@ const defaultProps = {
     overlays: {},
     contentArea: {},
     renderBorder: true,
+    startDate: '',
+    endDate: '',
 };
 
 /**
@@ -84,7 +93,22 @@ const FullCard = (props) => {
             },
         },
         renderBorder,
+        startDate,
+        endDate,
+        bannerMap,
     } = props;
+
+    let bannerBackgroundColorToUse = bannerBackgroundColor;
+    let bannerIconToUse = bannerIcon;
+    let bannerFontColorToUse = bannerFontColor;
+    let bannerDescriptionToUse = bannerDescription;
+
+    const getConfig = useConfig();
+
+    /**
+     **** Authored Configs ****
+     */
+    const disableBanners = getConfig('collection', 'disableBanners');
 
     /**
      * Class name for the card:
@@ -92,6 +116,7 @@ const FullCard = (props) => {
      * @type {String}
      */
     const cardClassName = classNames({
+        'consonant-Card': true,
         'consonant-FullCard': true,
         'consonant-u-noBorders': !renderBorder,
     });
@@ -113,6 +138,16 @@ const FullCard = (props) => {
      */
     const [lazyLoadedImage] = useLazyLoading(imageRef, image);
 
+    if (startDate && endDate) {
+        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
+        bannerBackgroundColorToUse = eventBanner.backgroundColor;
+        bannerDescriptionToUse = eventBanner.description;
+        bannerFontColorToUse = eventBanner.fontColor;
+        bannerIconToUse = eventBanner.icon;
+    }
+
+    const target = getLinkTarget(ctaLink);
+
     return (
         <div
             daa-lh={lh}
@@ -124,25 +159,26 @@ const FullCard = (props) => {
                 className="consonant-FullCard-img"
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }}>
-                {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+                {bannerDescriptionToUse && bannerFontColorToUse && bannerBackgroundColorToUse &&
+                !disableBanners &&
                     <span
                         data-testid="consonant-FullCard-banner"
                         className="consonant-FullCard-banner"
                         style={({
-                            backgroundColor: bannerBackgroundColor,
-                            color: bannerFontColor,
+                            backgroundColor: bannerBackgroundColorToUse,
+                            color: bannerFontColorToUse,
                         })}>
-                        {bannerIcon &&
+                        {bannerIconToUse &&
                             <div
                                 className="consonant-FullCard-bannerIconWrapper">
                                 <img
                                     alt=""
                                     loading="lazy"
                                     data-testid="consonant-Card-bannerImg"
-                                    src={bannerIcon} />
+                                    src={bannerIconToUse} />
                             </div>
                         }
-                        <span>{bannerDescription}</span>
+                        <span>{bannerDescriptionToUse}</span>
                     </span>
                 }
                 {badgeText &&
@@ -170,7 +206,7 @@ const FullCard = (props) => {
             </div>
             <a
                 href={ctaLink}
-                target="_blank"
+                target={target}
                 rel="noopener noreferrer"
                 title=""
                 className="consonant-FullCard-inner"

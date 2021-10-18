@@ -12,6 +12,7 @@ import {
 import CardFooter from './CardFooter/CardFooter';
 import prettyFormatDate from '../Helpers/prettyFormat';
 import { INFOBIT_TYPE } from '../Helpers/constants';
+import { getEventBanner } from '../Helpers/general';
 import {
     useConfig,
     useLazyLoading,
@@ -36,6 +37,9 @@ const oneHalfCardType = {
     footer: arrayOf(shape(footerType)),
     contentArea: shape(contentAreaType),
     renderBorder: bool,
+    startDate: string,
+    endDate: string,
+    bannerMap: shape(Object).isRequired,
 };
 
 const defaultProps = {
@@ -48,6 +52,8 @@ const defaultProps = {
     isBookmarked: false,
     disableBookmarkIco: false,
     renderBorder: true,
+    startDate: '',
+    endDate: '',
 };
 
 /**
@@ -110,7 +116,15 @@ const OneHalfCard = (props) => {
             },
         },
         renderBorder,
+        startDate,
+        endDate,
+        bannerMap,
     } = props;
+
+    let bannerBackgroundColorToUse = bannerBackgroundColor;
+    let bannerIconToUse = bannerIcon;
+    let bannerFontColorToUse = bannerFontColor;
+    let bannerDescriptionToUse = bannerDescription;
 
     const getConfig = useConfig();
 
@@ -119,6 +133,7 @@ const OneHalfCard = (props) => {
      */
     const i18nFormat = getConfig('collection', 'i18n.prettyDateIntervalFormat');
     const locale = getConfig('language', '');
+    const disableBanners = getConfig('collection', 'disableBanners');
 
     /**
      * Class name for the card:
@@ -126,6 +141,7 @@ const OneHalfCard = (props) => {
      * @type {String}
      */
     const cardClassName = classNames({
+        'consonant-Card': true,
         'consonant-OneHalfCard': true,
         'consonant-u-noBorders': !renderBorder,
     });
@@ -187,6 +203,14 @@ const OneHalfCard = (props) => {
         });
     }
 
+    if (startDate && endDate) {
+        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
+        bannerBackgroundColorToUse = eventBanner.backgroundColor;
+        bannerDescriptionToUse = eventBanner.description;
+        bannerFontColorToUse = eventBanner.fontColor;
+        bannerIconToUse = eventBanner.icon;
+    }
+
     return (
         <div
             daa-lh={lh}
@@ -198,25 +222,26 @@ const OneHalfCard = (props) => {
                 className="consonant-OneHalfCard-img"
                 ref={imageRef}
                 style={{ backgroundImage: `url("${lazyLoadedImage}")` }}>
-                {bannerDescription && bannerFontColor && bannerBackgroundColor &&
+                {bannerDescriptionToUse && bannerFontColorToUse && bannerBackgroundColorToUse
+                && !disableBanners &&
                     <span
                         data-testid="consonant-OneHalfCard-banner"
                         className="consonant-OneHalfCard-banner"
                         style={({
-                            backgroundColor: bannerBackgroundColor,
-                            color: bannerFontColor,
+                            backgroundColor: bannerBackgroundColorToUse,
+                            color: bannerFontColorToUse,
                         })}>
-                        {bannerIcon &&
+                        {bannerIconToUse &&
                             <div
                                 className="consonant-OneHalfCard-bannerIconWrapper">
                                 <img
                                     alt=""
                                     loading="lazy"
-                                    src={bannerIcon}
+                                    src={bannerIconToUse}
                                     data-testid="consonant-Card-bannerImg" />
                             </div>
                         }
-                        <span>{bannerDescription}</span>
+                        <span>{bannerDescriptionToUse}</span>
                     </span>
                 }
                 {badgeText &&

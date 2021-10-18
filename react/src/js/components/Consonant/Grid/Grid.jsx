@@ -1,10 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 import {
-    func,
-    shape,
-    number,
     arrayOf,
+    func,
+    number,
+    shape,
+    string,
 } from 'prop-types';
 import parseHTML from 'html-react-parser';
 
@@ -23,18 +24,19 @@ import {
     GUTTER_SIZE,
 } from '../Helpers/constants';
 
-
 const cardsGridType = {
     pages: number,
     resultsPerPage: number,
     cards: arrayOf(shape(cardType)),
     onCardBookmark: func.isRequired,
+    containerType: string,
 };
 
 const defaultProps = {
     pages: 1,
     cards: [],
     resultsPerPage: DEFAULT_SHOW_ITEMS_PER_PAGE,
+    containerType: 'default',
 };
 
 /**
@@ -49,7 +51,7 @@ const defaultProps = {
     cards: [],
  * }
  * return (
- *   <CardsGrid {...props}/>
+ *   <Grid {...props}/>
  * )
  */
 const Grid = (props) => {
@@ -58,6 +60,7 @@ const Grid = (props) => {
         pages,
         onCardBookmark,
         cards,
+        containerType,
     } = props;
 
     /**
@@ -92,12 +95,39 @@ const Grid = (props) => {
         'consonant-CardsGrid--doubleWideCards': collectionStyleOverride === CARD_STYLES.DOUBLE_WIDE,
     });
 
+    const bannerMap = {
+        live: {
+            description: getConfig('collection', 'banner.live.description'),
+            backgroundColor: '#ffffff',
+            fontColor: '#d7373f',
+            icon: 'https://www.adobe.com/content/dam/cc/icons/live_banner_icon.svg',
+        },
+        upcoming: {
+            description: getConfig('collection', 'banner.upcoming.description'),
+            backgroundColor: '#FC6B35',
+            fontColor: '#ffffff',
+            icon: '',
+        },
+        onDemand: {
+            description: getConfig('collection', 'banner.onDemand.description'),
+            backgroundColor: '#2D9D78',
+            fontColor: '#ffffff',
+            icon: '',
+        },
+        register: {
+            description: getConfig('collection', 'banner.register.description'),
+            backgroundColor: '#EBC526',
+            fontColor: '#323232',
+            icon: '',
+        },
+    };
+
     /**
      * Whether the paginator component is being used
      * @type {Boolean}
      */
     const isPaginator = paginationType === 'paginator';
-    const isLoadMore = paginationType === 'loadMore';
+    const isLoadMore = paginationType === 'loadMore' || containerType === 'carousel';
 
     /**
      * Total pages to show (used if paginator component is set)
@@ -129,6 +159,8 @@ const Grid = (props) => {
         cardsToshow = cards.slice(0, resultsPerPage * pages);
     }
 
+    const cleanTitle = title => title.toString().replace(/\|/g, '-');
+
     return cardsToshow.length > 0 && (
         <div
             data-testid="consonant-CardsGrid"
@@ -136,52 +168,60 @@ const Grid = (props) => {
             {cardsToshow.map((card, index) => {
                 const cardStyleOverride = getByPath(card, 'styles.typeOverride');
                 const cardStyle = collectionStyleOverride || cardStyleOverride;
+                const { contentArea: { title = '' } = {}, id } = card;
 
-                if (cardStyle === CARD_STYLES.FULL) {
-                    return (
-                        <FullCard
-                            lh={`Card ${index} | ${card.contentArea.title}`}
-                            key={card.id}
-                            {...card}
-                            renderBorder={renderCardsBorders} />
-                    );
-                } else if (cardStyle === CARD_STYLES.SQUARE) {
-                    return (
-                        <ThreeFourthCard
-                            lh={`Card ${index} | ${card.contentArea.title}`}
-                            key={card.id}
-                            {...card}
-                            renderBorder={renderCardsBorders} />
-                    );
-                } else if (cardStyle === CARD_STYLES.HALF_HEIGHT) {
-                    return (
-                        <HalfHeightCard
-                            lh={`Card ${index} | ${card.contentArea.title}`}
-                            key={card.id}
-                            {...card}
-                            renderBorder={renderCardsBorders} />
-                    );
-                } else if (cardStyle === CARD_STYLES.DOUBLE_WIDE) {
-                    return (
-                        <DoubleWideCard
-                            lh={`Card ${index} | ${card.contentArea.title}`}
-                            key={card.id}
-                            {...card}
-                            renderBorder={renderCardsBorders} />
-                    );
-                } else if (cardStyle === CARD_STYLES.CUSTOM) {
-                    return parseHTML(customCard(card));
+                switch (cardStyle) {
+                    case CARD_STYLES.FULL:
+                        return (
+                            <FullCard
+                                lh={`Card ${index} | ${cleanTitle(title)} | ${id}`}
+                                key={card.id}
+                                {...card}
+                                bannerMap={bannerMap}
+                                renderBorder={renderCardsBorders} />
+                        );
+                    case CARD_STYLES.SQUARE:
+                        return (
+                            <ThreeFourthCard
+                                lh={`Card ${index} | ${cleanTitle(title)} | ${id}`}
+                                key={card.id}
+                                {...card}
+                                bannerMap={bannerMap}
+                                renderBorder={renderCardsBorders} />
+                        );
+                    case CARD_STYLES.HALF_HEIGHT:
+                        return (
+                            <HalfHeightCard
+                                lh={`Card ${index} | ${cleanTitle(title)} | ${id}`}
+                                key={card.id}
+                                {...card}
+                                bannerMap={bannerMap}
+                                renderBorder={renderCardsBorders} />
+                        );
+                    case CARD_STYLES.DOUBLE_WIDE:
+                        return (
+                            <DoubleWideCard
+                                lh={`Card ${index} | ${cleanTitle(title)} | ${id}`}
+                                key={card.id}
+                                {...card}
+                                bannerMap={bannerMap}
+                                renderBorder={renderCardsBorders} />
+                        );
+                    case CARD_STYLES.CUSTOM:
+                        return parseHTML(customCard(card));
+                    default:
+                        return (
+                            <OneHalfCard
+                                lh={`Card ${index} | ${cleanTitle(title)} | ${id}`}
+                                key={card.id}
+                                {...card}
+                                bannerMap={bannerMap}
+                                onClick={onCardBookmark}
+                                dateFormat={dateFormat}
+                                locale={locale}
+                                renderBorder={renderCardsBorders} />
+                        );
                 }
-                return (
-                    <OneHalfCard
-                        lh={`Card ${index} | ${card.contentArea.title}`}
-                        key={card.id}
-                        {...card}
-                        onClick={onCardBookmark}
-                        dateFormat={dateFormat}
-                        locale={locale}
-                        renderBorder={renderCardsBorders} />
-                );
             })}
         </div>
     );

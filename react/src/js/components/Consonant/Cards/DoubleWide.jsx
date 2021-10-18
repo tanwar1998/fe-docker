@@ -13,6 +13,7 @@ import {
     overlaysType,
 } from '../types/card';
 import VideoButton from '../Modal/videoButton';
+import { getEventBanner, getLinkTarget } from '../Helpers/general';
 
 const doubleWideCardType = {
     ctaLink: string,
@@ -22,6 +23,9 @@ const doubleWideCardType = {
     contentArea: shape(contentAreaType),
     overlays: shape(overlaysType),
     renderBorder: bool,
+    startDate: string,
+    endDate: string,
+    bannerMap: shape(Object).isRequired,
 };
 
 const defaultProps = {
@@ -31,6 +35,8 @@ const defaultProps = {
     contentArea: {},
     overlays: {},
     renderBorder: true,
+    startDate: '',
+    endDate: '',
 };
 
 /**
@@ -67,9 +73,23 @@ const DoubleWideCard = (props) => {
             videoButton: {
                 url: videoURL,
             },
+            banner: {
+                description: bannerDescription,
+                fontColor: bannerFontColor,
+                backgroundColor: bannerBackgroundColor,
+                icon: bannerIcon,
+            },
         },
         renderBorder,
+        startDate,
+        endDate,
+        bannerMap,
     } = props;
+
+    let bannerBackgroundColorToUse = bannerBackgroundColor;
+    let bannerIconToUse = bannerIcon;
+    let bannerFontColorToUse = bannerFontColor;
+    let bannerDescriptionToUse = bannerDescription;
 
     /**
      * Class name for the card:
@@ -78,6 +98,7 @@ const DoubleWideCard = (props) => {
      * @type {String}
      */
     const cardClassName = classNames({
+        'consonant-Card': true,
         'consonant-DoubleWideCard': true,
         'consonant-DoubleWideCard--noTextInfo': !title && !description && !label,
         'consonant-u-noBorders': !renderBorder,
@@ -100,11 +121,42 @@ const DoubleWideCard = (props) => {
      */
     const [lazyLoadedImage] = useLazyLoading(imageRef, image);
 
+    if (startDate && endDate) {
+        const eventBanner = getEventBanner(startDate, endDate, bannerMap);
+        bannerBackgroundColorToUse = eventBanner.backgroundColor;
+        bannerDescriptionToUse = eventBanner.description;
+        bannerFontColorToUse = eventBanner.fontColor;
+        bannerIconToUse = eventBanner.icon;
+    }
+
+    const target = getLinkTarget(ctaLink);
+
     return (
         <div
             className={cardClassName}
             daa-lh={lh}
             id={id}>
+            {bannerDescriptionToUse && bannerFontColorToUse && bannerBackgroundColorToUse &&
+            <span
+                data-testid="consonant-OneHalfCard-banner"
+                className="consonant-OneHalfCard-banner"
+                style={({
+                    backgroundColor: bannerBackgroundColorToUse,
+                    color: bannerFontColorToUse,
+                })}>
+                {bannerIconToUse &&
+                <div
+                    className="consonant-OneHalfCard-bannerIconWrapper">
+                    <img
+                        alt=""
+                        loading="lazy"
+                        src={bannerIconToUse}
+                        data-testid="consonant-Card-bannerImg" />
+                </div>
+                }
+                <span>{bannerDescriptionToUse}</span>
+            </span>
+            }
             <div
                 className="consonant-DoubleWideCard-img"
                 ref={imageRef}
@@ -113,7 +165,7 @@ const DoubleWideCard = (props) => {
             </div>
             <a
                 href={ctaLink}
-                target="_blank"
+                target={target}
                 rel="noopener noreferrer"
                 tabIndex="0"
                 className="consonant-DoubleWideCard-inner">

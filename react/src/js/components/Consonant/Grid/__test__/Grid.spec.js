@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 
 import Grid from '../Grid';
 
-import { DEFAULT_PROPS } from '../../Testing/Constants/Grid';
+import { DEFAULT_PROPS, GRID_ANALYTICS } from '../../Testing/Constants/Grid';
 
 import setup from '../../Testing/Utils/Settings';
 
@@ -28,5 +28,14 @@ describe('Consonant/Grid', () => {
 
         const totalCards = threeByTwoCards.length + oneByOneCards.length + fullCards.length;
         expect(totalCards).toEqual(cards.length);
+    });
+    test('should load analytics onto cards', () => {
+        const {
+            props: { cards },
+        } = renderCardsGrid({ resultsPerPage: Number.MAX_SAFE_INTEGER }, { pagination: { type: 'loadMore' } });
+        const fullCards = screen.queryAllByTestId('consonant-OneHalfCard');
+        fullCards.forEach( (card, index) => {
+            expect(card).toHaveAttribute('daa-lh', GRID_ANALYTICS[index]);
+        });
     });
 });
