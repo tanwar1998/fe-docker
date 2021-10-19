@@ -11,6 +11,7 @@ import {
     chainFromIterable,
     removeDuplicatesByKey,
 } from './general';
+import { eventTiming } from './eventSort';
 
 /**
  * Needs to be explicitly called by immer - Needed for IE 11 support
@@ -232,21 +233,13 @@ export const getTitleAscSort = cards => cards.sort((cardOne, cardTwo) => {
 export const getTitleDescSort = cards => getTitleAscSort(cards).reverse();
 
 /**
-* Returns all cards Feature sorted
-* Feature sort is Title (A-Z) sort but with all Featured Cards Injected to Front
+* Returns all cards Featured sorted
+* This just returns the original cards returned by Chimera IO
+* Chimera IO is responsible for handling featured sort
 * @param {Array} cards - All cards in the card collection
-* @returns {Array} - All cards sorted by title
+* @returns {Array} - Cards in the original order given by Chimera IO
 */
-export const getFeaturedSort = cards => getTitleAscSort(cards).sort((a, b) => {
-    if (a.isFeatured && b.isFeatured) {
-        return a.initialTitle < b.initialTitle ? -1 : 0;
-    } else if (a.isFeatured) {
-        return -1;
-    } else if (b.isFeatured) {
-        return 1;
-    }
-    return 0;
-});
+export const getFeaturedSort = cards => cards;
 
 /**
 * Returns all Cards Date Sorted (Old To New)
@@ -268,6 +261,26 @@ export const getDateAscSort = cards => cards.sort((cardOne, cardTwo) => {
 * @returns {Array} - All cards sorted by Date
 */
 export const getDateDescSort = cards => getDateAscSort(cards).reverse();
+
+/**
+ * @func getEventSort
+ * @desc This method, if needed, sets up Timing features for a collection
+ (1) Has to check each card for card.contentArea.dateDetailText.startTime
+ || endTime, if neither the card gets pushed to back of stack.
+ (2) There are six categories for consideration
+ a. Live: Current Time > Start Time && Current Time < End Time
+ b. Upcoming: Current Time < Start Time and does not have
+ "OnDemand scheduled" tag which cannot show until it is onDemand
+ c. "OnDemand scheduled": UpComing, and has "OnDemand scheduled" tag,
+ will not be seen until it is OnDemand.
+ d. OnDemand: Current Time > End Time, does not have "Live Expired" tag
+ e. Live Expired: OnDemand, has "live-expired" tag, and is no longer shown.
+ f. All other cards, not having startTime || endTime.
+ * @param {Array} cards - All cards in the card collection
+ * @param {Object} urlState - URL search/query Params.
+ * @returns {Array} visibleCards
+ */
+export const getEventSort = (cards = []) => eventTiming(cards);
 
 /**
 * Gets all cards that matches a users search query
@@ -312,4 +325,13 @@ export const getUpdatedCardBookmarkData = (cards, bookmarkedCardIds) => cards.ma
     isBookmarked: bookmarkedCardIds.some(i => i === card.id),
 }));
 
-export const getRandomSort = cards => cards.sort(() => Math.random() - 0.5);
+let randomSort = [];
+export const getRandomSort = (cards) => {
+    function randomSortCards() {
+        return [...cards.sort(() => Math.random() - 0.5)];
+    }
+    if (randomSort.length === 0) {
+        randomSort = randomSortCards();
+    }
+    return randomSort;
+};

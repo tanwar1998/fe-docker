@@ -135,7 +135,7 @@ const sortCards = [
     {
         cards: [...cardsWithoutSorting],
         sortOption: { sort: SORT_TYPES.FEATURED },
-        expectedValue: getCards([4, 5, 6, 10, 11, 12, 1, 2, 3, 7, 13, 16, 8, 14, 17, 9, 15, 18]),
+        expectedValue: [...cardsWithoutSorting],
     },
     {
         cards: [...cardsWithoutSorting],

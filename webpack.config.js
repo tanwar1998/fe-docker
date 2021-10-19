@@ -49,7 +49,7 @@ module.exports = {
             },
             {
                 test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components|\.spec\.js$)/,
+                exclude: /(node_modules|@dexter|bower_components|\.spec\.js$)/,
                 enforce: 'pre',
                 loader: 'eslint-loader',
                 options: {

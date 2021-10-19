@@ -378,6 +378,24 @@ const getFeaturedSort = [
         ],
         expectedValue: [
             {
+                id: 1,
+                isFeatured: true,
+                initialTitle: 'c title',
+                contentArea: { title: 'a title' },
+            },
+            {
+                id: 2,
+                isFeatured: true,
+                initialTitle: 'c title',
+                contentArea: { title: 'b title' },
+            },
+            {
+                id: 3,
+                isFeatured: true,
+                initialTitle: 'c title',
+                contentArea: { title: 'c title' },
+            },
+            {
                 id: 4,
                 isFeatured: true,
                 initialTitle: 'a title',
@@ -393,6 +411,24 @@ const getFeaturedSort = [
                 id: 6,
                 isFeatured: true,
                 initialTitle: 'a title',
+                contentArea: { title: 'c title' },
+            },
+            {
+                id: 7,
+                isFeatured: false,
+                initialTitle: 'c title',
+                contentArea: { title: 'a title' },
+            },
+            {
+                id: 8,
+                isFeatured: false,
+                initialTitle: 'c title',
+                contentArea: { title: 'b title' },
+            },
+            {
+                id: 9,
+                isFeatured: false,
+                initialTitle: 'c title',
                 contentArea: { title: 'c title' },
             },
             {
@@ -414,46 +450,10 @@ const getFeaturedSort = [
                 contentArea: { title: 'c title' },
             },
             {
-                id: 1,
-                isFeatured: true,
-                initialTitle: 'c title',
-                contentArea: { title: 'a title' },
-            },
-            {
-                id: 2,
-                isFeatured: true,
-                initialTitle: 'c title',
-                contentArea: { title: 'b title' },
-            },
-            {
-                id: 3,
-                isFeatured: true,
-                initialTitle: 'c title',
-                contentArea: { title: 'c title' },
-            },
-            {
-                id: 7,
-                isFeatured: false,
-                initialTitle: 'c title',
-                contentArea: { title: 'a title' },
-            },
-            {
                 id: 13,
                 isFeatured: false,
                 initialTitle: 'a title',
                 contentArea: { title: 'a title' },
-            },
-            {
-                id: 16,
-                isFeatured: false,
-                initialTitle: 'b title',
-                contentArea: { title: 'a title' },
-            },
-            {
-                id: 8,
-                isFeatured: false,
-                initialTitle: 'c title',
-                contentArea: { title: 'b title' },
             },
             {
                 id: 14,
@@ -462,22 +462,22 @@ const getFeaturedSort = [
                 contentArea: { title: 'b title' },
             },
             {
-                id: 17,
-                isFeatured: false,
-                initialTitle: 'b title',
-                contentArea: { title: 'b title' },
-            },
-            {
-                id: 9,
-                isFeatured: false,
-                initialTitle: 'c title',
-                contentArea: { title: 'c title' },
-            },
-            {
                 id: 15,
                 isFeatured: false,
                 initialTitle: 'a title',
                 contentArea: { title: 'c title' },
+            },
+            {
+                id: 16,
+                isFeatured: false,
+                initialTitle: 'b title',
+                contentArea: { title: 'a title' },
+            },
+            {
+                id: 17,
+                isFeatured: false,
+                initialTitle: 'b title',
+                contentArea: { title: 'b title' },
             },
             {
                 id: 18,
