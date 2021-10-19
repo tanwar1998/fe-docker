@@ -17,7 +17,6 @@
         &-inner {
             > *:last-of-type {
                 display: block;
-                min-height: @consonant-Wrapper-minHeight;
                 position: relative;
                 flex-grow: 1;
             }
@@ -25,6 +24,16 @@
 
         &-collection {
             background-color: transparent;
+
+            &.is-loading {
+                min-height: @consonant-Wrapper-minHeight;
+            }
+        }
+
+        &-collection:first-child {
+            .consonant-FiltersInfo:empty {
+                display: none;
+            }
         }
 
         /* Modifiers */
@@ -56,10 +65,6 @@
         }
 
         @media @consonant-tablet-up {
-            &-inner > *:last-of-type {
-                min-height: 625px;
-            }
-
             &-collection {
                 margin-top: -4px;
             }

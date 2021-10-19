@@ -1,5 +1,7 @@
 /* Available modifiers:
 - .consonant-FiltersInfo-wrapper--noLine;
+- .consonant-FiltersInfo-btn--withFilters;
+- .consonant-FiltersInfo--withLightText;
 */
 
 .consonant {
@@ -17,10 +19,6 @@
         top: 0;
         left: 0;
         background-color: transparent;
-
-        > *:last-child {
-            margin-left: auto;
-        }
 
         &-search {
             .full-width;
@@ -44,7 +42,7 @@
             .font(0.875rem, 1.875rem, 700, @consonantDarkGrey400);
 
             text-transform: capitalize;
-            background-color: transparent;
+            background-color: @consonantBaseColor;
             outline: 0;
             user-select: none;
 
@@ -110,6 +108,18 @@
             strong {
                 font-weight: 700;
             }
+        }
+
+        &--withLightText &-title {
+            color: @consonantLightGrey200;
+        }
+
+        &--withLightText &-results {
+            color: @consonantLightGrey200;
+        }
+
+        > .consonant-Select {
+            margin-left: auto;
         }
 
         @media @consonant-desktop-up {

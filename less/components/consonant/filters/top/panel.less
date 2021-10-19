@@ -1,6 +1,7 @@
 /* Available modifiers:
   - consonant-TopFilters-filters--truncated;
   - consonant-TopFilters-clearBtnWrapper--withBlur;
+  - consonant-TopFilters--withLightText;
 */
 
 .consonant {
@@ -83,7 +84,7 @@
             .font(0.875rem, 1.1875rem, 700, @consonantDarkGrey400, center);
 
             text-transform: capitalize;
-            background-color: transparent;
+            background-color: @consonantWhite;
             border: 1px solid @consonantLightGrey200;
             border-radius: 16px;
             outline: 0;
@@ -197,6 +198,22 @@
 
         &-results strong {
             font-weight: 700;
+        }
+
+        &--withLightText &-title {
+            color: @consonantWhite;
+        }
+
+        &--withLightText &-collectionTitle {
+            color: @consonantWhite;
+        }
+
+        &--withLightText &-results {
+            color: @consonantWhite;
+        }
+
+        &:empty {
+            display: none;
         }
 
         @media @consonant-tablet-up {

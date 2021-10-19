@@ -1,0 +1,268 @@
+@consonantCardsCarouselInnerPadding: 16;
+
+.consonant-Wrapper--carousel {
+    display: flex;
+    justify-content: center;
+
+    .consonant {
+        &-Wrapper {
+            &-inner {
+                padding: 0 unit(@consonantCardsCarouselInnerPadding, px);
+                max-width: @consonantDesktopMinWidth + unit(3*(@consonantCardsCarouselInnerPadding), px);
+                width: 83.3%;
+
+                @media @consonant-mobile-ceiling {
+                    padding: 0;
+                    max-width: 100%;
+                }
+            }
+
+            &-collection {
+                min-height: 100%;
+                min-width: 100%;
+
+                &.is {
+                    &-loading {
+                        min-height: 496px;
+                    }
+                }
+            }
+        }
+
+        &-Container {
+            &--carousel {
+                min-width: 100%;
+                padding: 8px;
+                overflow: hidden;
+
+                @media @consonant-mobile-ceiling {
+                    overflow: auto;
+                    padding-bottom: 24px;
+                }
+            }
+        }
+
+        &-CarouselInfo {
+            display: flex;
+            padding-left: 16px;
+            justify-content: space-between;
+
+            &-collectionTitle {
+                margin: 0;
+
+                .font(1.125rem, 1.375rem, 700, @consonantDarkGrey800);
+
+                &--withLightText {
+                    color: @consonantWhite;
+                }
+            }
+
+            &-results {
+                display: block;
+                margin-left: auto;
+                padding-left: 12px;
+
+                .font(0.875rem, 1.3125rem, 400, @consonantDarkGrey400, right);
+
+                strong {
+                    font-weight: 700;
+                }
+
+                &--withLightText {
+                    color: @consonantLightGrey200;
+                }
+            }
+        }
+
+        &-CardsGrid {
+            grid-auto-flow: column;
+            justify-content: flex-start;
+            padding: 8px;
+            width: 100%;
+
+            @media @consonant-mobile-ceiling {
+                width: @consonantDesktopMinWidth;
+            }
+
+            &:after {
+                display: block;
+                content: '';
+                height: 100%;
+            }
+
+            &--2up {
+                grid-template-columns: repeat(auto-fill, minmax(@consonant-DoubleWideCard-maxWidth, @consonant-DoubleWideCard-maxWidth));
+
+                .consonant-Card {
+                    min-width: @consonant-DoubleWideCard-maxWidth;
+                }
+
+                &:after {
+                    width: @consonant-DoubleWideCard-maxWidth;
+                }
+
+                @media @consonant-mobile-ceiling {
+                    grid-template-columns: repeat(auto-fit, minmax(@consonant-DoubleWideCard-mobileMinWidth, max-content));
+
+                    .consonant-Card {
+                        min-width: @consonant-DoubleWideCard-mobileMinWidth;
+                    }
+
+                    &:after {
+                        display: none;
+                        padding: 0;
+                        width: 0;
+                    }
+                }
+            }
+
+            &--3up {
+                grid-template-columns: repeat(auto-fill, minmax(@consonantCardMaxWidth, @consonantCardMaxWidth));
+
+                .consonant-Card {
+                    min-width: @consonantCardMaxWidth;
+                }
+
+                &:after {
+                    width: @consonantCardMaxWidth  + 32px;
+                }
+
+                @media @consonant-mobile-ceiling {
+                    grid-template-columns: repeat(auto-fit, minmax(@consonantCardMinWidth, max-content));
+
+                    .consonant-Card {
+                        min-width: @consonantCardMinWidth;
+                    }
+
+                    &:after {
+                        display: none;
+                        padding: 0;
+                        width: 0;
+                    }
+                }
+            }
+
+            &--4up {
+                grid-template-columns: repeat(auto-fill, minmax(@consonant-CardsGrid-smallerCardMaxWidth, @consonant-CardsGrid-smallerCardMaxWidth));
+
+                .consonant-Card {
+                    min-width: @consonant-CardsGrid-smallerCardMaxWidth;
+                }
+
+                &:after {
+                    width: 2*(@consonant-CardsGrid-smallerCardMaxWidth);
+                }
+
+                @media @consonant-mobile-ceiling {
+                    grid-template-columns: repeat(auto-fit, minmax(@consonant-CardsGrid-smallerCardMinWidth, max-content));
+
+                    .consonant-Card {
+                        min-width: @consonant-CardsGrid-smallerCardMinWidth;
+                    }
+
+                    &:after {
+                        display: none;
+                        padding: 0;
+                        width: 0;
+                    }
+                }
+            }
+
+            &--5up {
+                grid-template-columns: repeat(auto-fill, minmax(@consonant-CardsGrid-smallestCardMaxWidth, @consonant-CardsGrid-smallestCardMaxWidth));
+
+                .consonant-Card {
+                    min-width: @consonant-CardsGrid-smallestCardMaxWidth;
+                }
+
+                &:after {
+                    width: @consonant-CardsGrid-smallestCardMaxWidth + 32px;
+                }
+
+                @media @consonant-mobile-ceiling {
+                    grid-template-columns: repeat(auto-fit, minmax(@consonant-CardsGrid-smallestCardMinWidth, max-content));
+
+                    .consonant-Card {
+                        min-width: @consonant-CardsGrid-smallestCardMinWidth;
+                    }
+
+                    &:after {
+                        display: none;
+                        padding: 0;
+                        width: 0;
+                    }
+                }
+            }
+        }
+
+        &-Navigation {
+            &--carousel {
+                display: none;
+
+                @media screen and (min-width: (@consonantTabletMinWidth + 1)) {
+                    display: block;
+                }
+
+                button {
+                    background: @consonantLightGrey50;
+                    border-radius: 100%;
+                    display: block;
+                    height: 34px;
+                    outline: none;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    transform: translate(50%, -50%);
+                    transition: all 0.3s ease;
+                    width: 34px;
+                    z-index: 5;
+
+                    &.consonant {
+                        &-Button {
+                            &--previous {
+                                left: 0;
+                                right: auto;
+                                transform: translate(-50%, -50%) rotate(180deg);
+                            }
+                        }
+                    }
+
+                    &:before,
+                    &:after {
+                        background-color: @consonantGray800;
+                        border-bottom-left-radius: 25% 60%;
+                        border-bottom-right-radius: 25% 60%;
+                        border-top-left-radius: 25% 60%;
+                        border-top-right-radius: 25%;
+                        content: '';
+                        display: block;
+                        height: 3px;
+                        left: 17px;
+                        position: absolute;
+                        top: 14px;
+                        transform-origin: left center;
+                        transform: rotate(45deg) translate(-50%, -50%);
+                        width: 11px;
+                        z-index: 1;
+                    }
+
+                    &:after {
+                        border-bottom-left-radius: 25% 60%;
+                        border-bottom-right-radius: 25%;
+                        border-top-left-radius: 25% 60%;
+                        border-top-right-radius: 25% 60%;
+                        top: 18px;
+                        transform: rotate(-45deg) translate(-50%, 50%);
+                    }
+
+                    &:hover {
+                        &:before,
+                        &:after {
+                            background-color: rgba(0, 0, 0, 1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
