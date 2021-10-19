@@ -100,4 +100,10 @@ describe('Consonant/Left/Panel', () => {
         fireEvent.click(mobileFooterBtnElement);
         expect(onMobileFiltersToggleClick).toHaveBeenCalledTimes(2);
     });
+
+    test('should load analytics for panel', () => {
+        const { props: { filters } } = renderFilterPanel();
+        const leftFilterPanel = screen.queryByTestId('consonant-LeftFilters');
+        expect(leftFilterPanel).toHaveAttribute('daa-lh', 'Filters');
+    });
 });

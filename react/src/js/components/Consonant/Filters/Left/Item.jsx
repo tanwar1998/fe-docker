@@ -161,14 +161,22 @@ const Item = (props) => {
         'consonant-LeftFilter is-opened': isOpened,
     });
 
+    /**
+     * Impression Tracking
+     */
+    const filterName = `${name} ${isOpened ? 'Close' : 'Open'}`;
+
     return (
         <div
             data-testid="consonant-LeftFilter"
+            daa-lh={name}
             className={leftFilterClassName}>
             <div
                 className="consonant-LeftFilter-inner">
                 <h3
-                    className="consonant-LeftFilter-name">
+                    data-testid="consonant-LeftFilter-name"
+                    className="consonant-LeftFilter-name"
+                    daa-ll={filterName}>
                     {icon &&
                         <img
                             src={icon}

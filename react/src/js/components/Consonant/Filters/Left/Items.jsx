@@ -39,6 +39,7 @@ const Items = (props) => {
                 <li
                     key={item.id}
                     data-testid="consonant-LeftFilter-itemsItem"
+                    daa-ll={item.label}
                     className="consonant-LeftFilter-itemsItem">
                     <label
                         htmlFor={item.id}
@@ -47,6 +48,7 @@ const Items = (props) => {
                             data-testid="consonant-LeftFilter-itemsItemCheckbox"
                             id={item.id}
                             value={item.id}
+                            daa-im={item.label}
                             type="checkbox"
                             onChange={handleCheck}
                             checked={item.selected}

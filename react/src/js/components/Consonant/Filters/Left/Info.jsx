@@ -77,6 +77,7 @@ const Info = (props) => {
     const searchEnabled = getConfig('search', 'enabled');
     const sortEnabled = getConfig('sort', 'enabled');
     const mobileFilterBtnLabel = getConfig('filterPanel', 'i18n.leftPanel.mobile.filtersBtnLabel');
+    const useLightText = getConfig('collection', 'useLightText');
 
     /**
      **** Constants ****
@@ -119,6 +120,18 @@ const Info = (props) => {
      */
     const shouldRenderMobileInfo = NOT_DESKTOP_SCREEN_SIZE && filtersQty > 0 && enabled;
 
+    const shouldRenderInnerWrapper = title || showTotalResults;
+
+    /**
+     * Class name for the left filters info:
+     * whether the left filters info should be light or dark
+     * @type {String}
+     */
+    const filtersInfoClassName = classNames({
+        'consonant-FiltersInfo': true,
+        'consonant-FiltersInfo--withLightText': useLightText,
+    });
+
     /**
      * Class name for the left filters info inner wrapper:
      * whether the left filters info inner wrapper should display a vertical separator
@@ -133,11 +146,13 @@ const Info = (props) => {
     return (
         <aside
             data-testid="consonant-FiltersInfo"
-            className="consonant-FiltersInfo">
+            className={filtersInfoClassName}>
+            { shouldRenderSearch &&
             <div
                 className="consonant-FiltersInfo-search">
-                {shouldRenderSearch && searchComponent}
+                {searchComponent}
             </div>
+            }
             {shouldRenderMobileInfo &&
                 <MobileInfo
                     selectedFiltersQty={selectedFiltersQty}
@@ -145,6 +160,7 @@ const Info = (props) => {
                     onMobileFiltersToggleClick={onMobileFiltersToggleClick} />
             }
             {shouldRenderSortPopup && sortComponent}
+            {shouldRenderInnerWrapper &&
             <div
                 className={wrapperClassName}>
                 {title &&
@@ -162,6 +178,7 @@ const Info = (props) => {
                     </div>
                 }
             </div>
+            }
         </aside>
     );
 };

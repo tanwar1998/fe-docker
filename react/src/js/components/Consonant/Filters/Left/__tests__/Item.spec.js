@@ -6,6 +6,7 @@ import Item from '../Item';
 import {
     DEFAULT_PROPS,
     selectedAllItems,
+    ANALYTICS_ITEMS,
 } from '../../../Testing/Constants/FilterItem';
 
 import setup from '../../../Testing/Utils/Settings';
@@ -73,5 +74,24 @@ describe('Consonant/Filters/Left/Item', () => {
         fireEvent.click(badgeElement);
 
         expect(onClearAll).toBeCalled();
+    });
+
+    test('should load analytics for filter items', () => {
+        const { props: { onClick, name } } = renderItemComponent();
+
+        const leftFilterElement = screen.queryAllByTestId('consonant-LeftFilter');
+        leftFilterElement.forEach( (itemElement, index) => {
+            expect(itemElement).toHaveAttribute('daa-lh', ANALYTICS_ITEMS['leftFilter'][index]);
+        });
+
+        const leftFilterName = screen.queryAllByTestId('consonant-LeftFilter-name');
+        leftFilterName.forEach( (itemElement, index) => {
+            expect(itemElement).toHaveAttribute('daa-ll', ANALYTICS_ITEMS['leftFilter-name'][index]);
+        });
+
+        const itemItemElement = screen.queryAllByTestId('consonant-LeftFilter-itemsItem');
+        itemItemElement.forEach( (itemElement, index) => {
+            expect(itemElement).toHaveAttribute('daa-ll', ANALYTICS_ITEMS['itemsItem'][index]);
+        });
     });
 });
