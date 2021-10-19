@@ -1,0 +1,42 @@
+{
+    "extends": [
+        "airbnb",
+        "plugin:jest/recommended"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+        "babel",
+        "jest"
+    ],
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest/globals": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "react/no-unknown-property": ["warn", {"ignore" : ["class", "for", "hreflang"]}],
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
+        "react/jsx-closing-bracket-location": [1, {"selfClosing": "after-props", "nonEmpty": "after-props"}],
+        "react/jsx-filename-extension": "off",
+        "indent": ["error", 4, {"SwitchCase": 1}],
+        "class-methods-use-this": "off",
+        "prefer-destructuring": "off",
+        "no-restricted-globals": "off",
+        "no-param-reassign": ["error", { "props": false }],
+        "no-undef": "off",
+        "constructor-super": "off",
+        "jsx-a11y/anchor-is-valid": "off",
+        "jsx-a11y/label-has-for": "off",
+        "no-underscore-dangle": ["error", { "allow": ["_satellite", "_snapshot"] }]
+    }
+}

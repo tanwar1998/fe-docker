@@ -1,3 +1,5 @@
+import { MinPriorityQueue } from '@datastructures-js/priority-queue';
+
 /**
  * Saves a card to local storage
  * @param {Number} bookmarksValue - The id of the card to save

@@ -1,0 +1,119 @@
+{
+  "_args": [
+    [
+      "@dexter/dexterui-tools@0.4.2",
+      "/Users/sanrai/Documents/dexter/dexterUI/ui"
+    ]
+  ],
+  "_from": "@dexter/dexterui-tools@0.4.2",
+  "_id": "@dexter/dexterui-tools@0.4.2",
+  "_inBundle": false,
+  "_integrity": "sha1-3QHLdZXRVFcsoGKBeHV2cm7bLIA=",
+  "_location": "/@dexter/dexterui-tools",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "@dexter/dexterui-tools@0.4.2",
+    "name": "@dexter/dexterui-tools",
+    "escapedName": "@dexter%2fdexterui-tools",
+    "scope": "@dexter",
+    "rawSpec": "0.4.2",
+    "saveSpec": null,
+    "fetchSpec": "0.4.2"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-dexter-release/@dexter/dexterui-tools/-/@dexter/dexterui-tools-0.4.2.tgz",
+  "_spec": "0.4.2",
+  "_where": "/Users/sanrai/Documents/dexter/dexterUI/ui",
+  "contributors": [
+    {
+      "name": "Jim O'Harra-Sutton",
+      "url": "https://git.corp.adobe.com/jisutton"
+    },
+    {
+      "name": "Chris Peyer",
+      "url": "https://git.corp.adobe.com/cpeyer"
+    }
+  ],
+  "dependencies": {
+    "url-polyfill": "^1.1.7",
+    "url-search-params-polyfill": "^4.0.1"
+  },
+  "description": "A set of Front End tools for Dexter",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^22.4.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-jest": "^22.4.4",
+    "cross-env": "^5.1.6",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-plugin-babel": "^5.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jest": "^21.15.2",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.8.2",
+    "jest": "^22.4.4",
+    "jest-environment-jsdom": "^22.4.3",
+    "jest-environment-jsdom-global": "^1.0.3",
+    "jest-raw-loader": "^1.0.1",
+    "regenerator-runtime": "^0.11.1"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/target/",
+      "<rootDir>/lib/"
+    ],
+    "testEnvironment": "jest-environment-jsdom-global",
+    "testPathIgnorePatterns": [
+      "node_modules"
+    ],
+    "transform": {
+      "\\.html$": "jest-raw-loader",
+      "^.+\\.jsx?$": "babel-jest"
+    }
+  },
+  "keywords": [
+    "DexterUI",
+    "Tools"
+  ],
+  "license": "ISC",
+  "main": "lib/index.js",
+  "name": "@dexter/dexterui-tools",
+  "publishConfig": {
+    "registry": "https://artifactory.corp.adobe.com/artifactory/api/npm/npm-dexter-release-local/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.corp.adobe.com/Dexter/dexterUI-tools"
+  },
+  "scripts": {
+    "build": "cross-env npm run test && cross-env babel --ignore *.spec.js,*.test.js -d lib/ src/",
+    "bump": "cross-env ./scripts/bump.sh",
+    "lint": "eslint src",
+    "prepublishOnly": "cross-env npm run build",
+    "release": "cross-env ./scripts/npm-release.sh",
+    "test": "jest 2>&1",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "update": "cross-env ./scripts/update.sh"
+  },
+  "version": "0.4.2"
+}
