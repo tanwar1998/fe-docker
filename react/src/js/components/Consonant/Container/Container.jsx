@@ -14,8 +14,10 @@ import {
     getByPath,
     saveBookmarksToLocalStorage,
     readBookmarksFromLocalStorage,
+    getTransitions,
 } from '../Helpers/general';
 import { configType } from '../types/config';
+import CardsCarousel from '../CardsCarousel/CardsCarousel';
 import NoResultsView from '../NoResults/View';
 import LoadMore from '../Pagination/LoadMore';
 import Bookmarks from '../Bookmarks/Bookmarks';
@@ -38,6 +40,7 @@ import {
     SORT_POPUP_LOCATION,
     THEME_TYPE,
     LAYOUT_CONTAINER,
+    ONE_SECOND_DELAY,
 } from '../Helpers/constants';
 import {
     ConfigContext,
@@ -56,15 +59,6 @@ import {
     getActiveFilterIds,
     getUpdatedCardBookmarkData,
 } from '../Helpers/Helpers';
-import {
-    trackClearAllClicked,
-    trackAllCardsLoaded,
-    trackFilterClicked,
-    trackFavoritesSelected,
-    trackPageChange,
-    trackSortChange,
-    trackSearchInputChange,
-} from '../Analytics/Analytics';
 
 /**
  * Consonant Card Collection
@@ -101,11 +95,11 @@ const Container = (props) => {
     const onlyShowBookmarks = getConfig('bookmarks', 'leftFilterPanel.bookmarkOnlyCollection');
     const authoredFilters = getConfig('filterPanel', 'filters');
     const filterLogic = getConfig('filterPanel', 'filterLogic').toLowerCase().trim();
-    const collectionEndpoint = getConfig('collection', 'endpoint');
     const totalCardLimit = getConfig('collection', 'totalCardsToShow');
     const searchFields = getConfig('search', 'searchFields');
     const sortOptions = getConfig('sort', 'options');
-    const defaultSortOption = getDefaultSortOption(config, getConfig('sort', 'defaultSort'));
+    const defaultSort = getConfig('sort', 'defaultSort');
+    const defaultSortOption = getDefaultSortOption(config, defaultSort);
     const featuredCards = getConfig('featuredCards', '');
     const leftPanelSearchPlaceholder = getConfig('search', 'i18n.leftFilterPanel.searchPlaceholderText');
     const topPanelSearchPlaceholder = getConfig('search', 'i18n.topFilterPanel.searchPlaceholderText');
@@ -116,6 +110,7 @@ const Container = (props) => {
     const apiFailureDescription = getConfig('collection', 'i18n.onErrorDescription');
     const trackImpressions = getConfig('analytics', 'trackImpressions');
     const collectionIdentifier = getConfig('analytics', 'collectionIdentifier');
+    const targetEnabled = getConfig('target', 'enabled');
     const authoredMode = getConfig('collection', 'mode');
     const authoredLayoutContainer = getConfig('collection', 'layout.container');
     const showEmptyFilters = getConfig('filterPanel', 'showEmptyFilters');
@@ -125,11 +120,35 @@ const Container = (props) => {
      */
     const DESKTOP_SCREEN_SIZE = window.innerWidth >= DESKTOP_MIN_WIDTH;
     const isXorFilter = filterLogic.toLowerCase().trim() === FILTER_TYPES.XOR;
-
+    const isCarouselContainer = authoredLayoutContainer === LAYOUT_CONTAINER.CAROUSEL;
+    const isStandardContainer = authoredLayoutContainer !== LAYOUT_CONTAINER.CAROUSEL;
     /**
          **** Hooks ****
      */
+    /**
+     * @typedef {Array} timedCollection - result of Timed Event Sort
+     * @description — As an alternative/iteration on filtered cards for timed
+     * collections
+     * @typedef {Function} setTimedCollection
+     * @description - Sets timedCollection after setTimeout triggers
+     *
+     * @type {[Array, Function]} timedCollection
+     */
+    /* eslint-disable no-unused-vars */
+    const [timedCollection, setTimedCollection] = useState([]);
+    /**
+     * @typedef {Number} transition - MS to next transition
+     * @description —  set by eventSort, from cardFilteret.nextTransitionMs
+     * @typedef {Function} setTransition
+     * @description - next Transition trigger
+     *
+     * @type {[Number, Function]} transition
+     */
+    /* eslint-disable no-unused-vars */
+    const [transition, setTransition] = useState(0);
 
+    const [, updateState] = React.useState();
+    const nextTransition = React.useCallback(() => updateState({}), []);
     /**
      * @typedef {Object} urlState
      * @description — object with url query values
@@ -344,7 +363,11 @@ const Container = (props) => {
             return allFiltersClearedState;
         });
 
+        const urlParams = new URLSearchParams(window.location.search);
+        const servertime = urlParams.get('servertime');
+
         clearUrlState();
+        setUrlState('servertime', servertime);
     };
 
     /**
@@ -352,7 +375,6 @@ const Container = (props) => {
     * @returns {Void} - an updated state
     */
     const resetFiltersSearchAndBookmarks = () => {
-        trackClearAllClicked();
         clearAllFilters();
         setSearchQuery('');
         setShowBookmarks(false);
@@ -371,7 +393,6 @@ const Container = (props) => {
     const onLoadMoreClick = () => {
         setCurrentPage(prevState => prevState + 1);
         window.scrollTo(0, window.pageYOffset);
-        trackPageChange(currentPage);
     };
 
     /**
@@ -383,7 +404,6 @@ const Container = (props) => {
     const handleSortChange = (option) => {
         setSortOption(option);
         setSortOpened(false);
-        trackSortChange(option);
     };
 
     /**
@@ -396,7 +416,6 @@ const Container = (props) => {
     const handleSearchInputChange = (val) => {
         clearAllFilters();
         setSearchQuery(val);
-        trackSearchInputChange(val);
     };
 
     /**
@@ -433,7 +452,10 @@ const Container = (props) => {
         const { group, items } = filters.find(({ id }) => id === filterId);
         const { label } = items.find(({ id }) => id === itemId);
 
-        const urlStateValue = urlState[group] || [];
+        let urlStateValue = urlState[group] || [];
+        if (typeof urlStateValue === 'string') {
+            urlStateValue = urlStateValue.split(',');
+        }
         const value = isChecked
             ? [...urlStateValue, label]
             : urlStateValue.filter(item => item !== label);
@@ -449,7 +471,6 @@ const Container = (props) => {
      * @listens CheckboxClickEvent
      */
     const handleCheckBoxChange = (filterId, itemId, isChecked) => {
-        trackFilterClicked(isChecked, itemId, filters);
         if (isXorFilter && isChecked) {
             clearAllFilters();
         }
@@ -465,7 +486,6 @@ const Container = (props) => {
                 })),
             };
         }));
-
         changeUrlState(filterId, itemId, isChecked);
     };
 
@@ -502,7 +522,6 @@ const Container = (props) => {
      */
     const handleShowBookmarksFilterClick = (e) => {
         e.stopPropagation();
-        trackFavoritesSelected(showBookmarks);
         setShowBookmarks(prev => !prev);
         setCurrentPage(1);
     };
@@ -580,32 +599,149 @@ const Container = (props) => {
     };
 
     /**
-    * Fetches cards from authored API endpoint
-    * @returns {Void} - an updated state
-    */
+     * This handles getting Cards, there are some conditions:
+     * - If target is not enabled a simple request is made without mods or delay.
+     * - If target is enabled & tVisitor API is present add values from Visitor
+     * - If target is enabled & the Visitor API is not present setTimeout with
+     * counter to recheck for the Visitor API. If 20 attempts are made w/o
+     * success fail the request.
+     * @returns {Void} - an updated state
+     */
     useEffect(() => {
+        const { __satelliteLoadedPromise: visitorPromise } = window;
+
+        let collectionEndpoint = getConfig('collection', 'endpoint');
+
         setLoading(true);
-        window.fetch(collectionEndpoint)
-            .then(resp => resp.json())
-            .then((payload) => {
-                setLoading(false);
-                if (!getByPath(payload, 'cards.length')) return;
 
-                const jsonProcessor = new JsonProcessor(payload.cards);
-                const { processedCards } = jsonProcessor
-                    .addFeaturedCards(featuredCards)
-                    .removeDuplicateCards()
-                    .addCardMetaData(TRUNCATE_TEXT_QTY, onlyShowBookmarks, bookmarkedCardIds);
+        /**
+         * @func getCards
+         * @desc wraps fetch with function to make it reusable
+         *
+         * @param {String} endPoint, URL with params for card request
+         * @returns {Void} - an updated state
+         */
+        function getCards(endPoint = collectionEndpoint) {
+            return window.fetch(endPoint)
+                .then((resp) => {
+                    const {
+                        ok,
+                        status,
+                        statusText,
+                        url,
+                    } = resp;
 
-                setCards(processedCards);
-                trackAllCardsLoaded(processedCards);
-                if (!showEmptyFilters) {
-                    setFilters(prevFilters => removeEmptyFilters(prevFilters, processedCards));
-                }
-            }).catch(() => {
-                setLoading(false);
-                setApiFailure(true);
+                    if (ok) {
+                        return resp.json().then((json) => {
+                            const validData = !!Object.keys(json).length;
+
+                            if (validData) return json;
+
+                            return Promise.reject(new Error('no valid reponse data'));
+                        });
+                    }
+
+                    return Promise.reject(new Error(`${status}: ${statusText}, failure for call to ${url}`));
+                })
+                .then((payload) => {
+                    setLoading(false);
+                    if (!getByPath(payload, 'cards.length')) return;
+
+                    const { processedCards = [] } = new JsonProcessor(payload.cards)
+                        .addFeaturedCards(featuredCards)
+                        .removeDuplicateCards()
+                        .addCardMetaData(TRUNCATE_TEXT_QTY, onlyShowBookmarks, bookmarkedCardIds);
+
+                    const transitions = getTransitions(processedCards);
+                    if (sortOption.sort.toLowerCase() === 'eventsort') {
+                        while (transitions.size() > 0) {
+                            setTimeout(() => {
+                                nextTransition();
+                            }, transitions.dequeue().priority + ONE_SECOND_DELAY);
+                        }
+                    }
+
+                    setCards(processedCards);
+                    if (!showEmptyFilters) {
+                        setFilters(prevFilters => removeEmptyFilters(prevFilters, processedCards));
+                    }
+                }).catch(() => {
+                    setLoading(false);
+                    setApiFailure(true);
+                });
+        }
+        /**
+         * @func getVisitorData
+         * @desc wraps fetching Visitor API data in a function for reuse
+         *
+         * @param {Promise} visitorApi, window.__satelliteLoadedPromise when accessed
+         * @returns {Void} - an updated state, thru calling getCards
+         */
+        function getVisitorData(visitorApi) {
+            const collectionURI = new URL(collectionEndpoint);
+
+            visitorApi.then((result) => {
+                const visitor = result.getVisitorId();
+
+                collectionURI.searchParams.set('mcgvid', visitor.getMarketingCloudVisitorID());
+                collectionURI.searchParams.set('sdid', visitor.getSupplementalDataID());
+                collectionURI.searchParams.set('mboxAAMB', visitor.getAudienceManagerBlob());
+                collectionURI.searchParams.set('mboxMCGLH', visitor.getAudienceManagerLocationHint());
+
+                collectionEndpoint = collectionURI.toString();
+
+                getCards(collectionEndpoint);
             });
+        }
+        /**
+         * @func visitorRetry
+         * @desc Visitor API is late loading often, this sets a recursive call
+         * in a setTimeout to run 20 times, and then fail the request.
+         *
+         * @returns {Void} - an updated state, thru calling getVisitorData which
+         * calls getCards
+         */
+        function visitorRetry() {
+            let retryCount = 0;
+
+            const timedRetry = () => {
+                setTimeout(() => {
+                    if (retryCount >= 20) {
+                        setLoading(false);
+
+                        setApiFailure(true);
+
+                        return;
+                    }
+
+                    const { __satelliteLoadedPromise: visitorPromiseRetry } = window;
+
+                    if (visitorPromiseRetry) {
+                        getVisitorData(visitorPromiseRetry);
+                    }
+
+                    if (!visitorPromiseRetry && retryCount < 20) {
+                        timedRetry();
+                    }
+
+                    retryCount += 1;
+                }, 100);
+            };
+
+            timedRetry();
+        }
+
+        if (targetEnabled && visitorPromise) {
+            getVisitorData(visitorPromise);
+        }
+
+        if (targetEnabled && !visitorPromise) {
+            visitorRetry();
+        }
+
+        if (!targetEnabled) {
+            getCards();
+        }
     }, []);
 
     /**
@@ -638,7 +774,6 @@ const Container = (props) => {
      * @type {Array}
      */
     const activeFilterIds = getActiveFilterIds(filters);
-
     /**
      * Instance of CardFilterer class that handles returning subset of cards
      * based off user interactions
@@ -646,24 +781,31 @@ const Container = (props) => {
      * @type {Object}
      */
     const cardFilterer = new CardFilterer(cards);
-
     /**
-     * Filtered cards based off current state of page
-     * @type {Array}
-     */
-    const { filteredCards } = cardFilterer
-        .keepBookmarkedCardsOnly(onlyShowBookmarks, bookmarkedCardIds, showBookmarks)
-        .filterCards(activeFilterIds, filterLogic, FILTER_TYPES)
+     * @type {Function} getFilteredCollection
+     * @desc Closure around CardFilterer for reuse within context
+     * @returns {Object}
+     * */
+    const getFilteredCollection = () => cardFilterer
         .sortCards(sortOption)
+        .keepBookmarkedCardsOnly(onlyShowBookmarks, bookmarkedCardIds, showBookmarks)
         .keepCardsWithinDateRange()
+        .filterCards(activeFilterIds, filterLogic, FILTER_TYPES)
         .truncateList(totalCardLimit)
         .searchCards(searchQuery, searchFields);
+
+    /**
+     * @type {Array} filteredCards: Filtered cards based off current state of page
+     * @type {Number} nextTransitionMs: Number for timed event sort transition
+     */
+    /* eslint-disable no-unused-vars */
+    const { filteredCards = [], nextTransitionMs = 0 } = getFilteredCollection();
 
     /**
      * Subset of cards to show the user
      * @type {Array}
      */
-    const gridCards = filteredCards;
+    const gridCards = timedCollection.length ? timedCollection : filteredCards;
 
     /**
      * Total pages (used by Paginator Component)
@@ -741,6 +883,13 @@ const Container = (props) => {
      */
     const isLeftFilterPanel = filterPanelType === FILTER_PANEL.LEFT;
 
+    let filterNames = '';
+    filters.forEach((el) => {
+        el.items.filter(item => item.selected).forEach((item) => {
+            filterNames += `${item.label}, `;
+        });
+    });
+
     /**
      **** Class names ****
      */
@@ -756,6 +905,8 @@ const Container = (props) => {
         'consonant-u-themeDarkest': authoredMode === THEME_TYPE.DARKEST,
     });
 
+    const collectionAnalytics = `${collectionIdentifier} | Filters: ${selectedFiltersItemsQty === 0 ? 'No Filters' : filterNames} | Search Query: ${searchQuery === '' ? 'None' : searchQuery}`;
+
     /**
      * Class name for the consonant wrapper:
      * whether consonant wrapper contains left filter;
@@ -767,6 +918,7 @@ const Container = (props) => {
         'consonant-Wrapper--83PercentContainier': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_83_VW,
         'consonant-Wrapper--1200MaxWidth': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_1200_PX,
         'consonant-Wrapper--1600MaxWidth': authoredLayoutContainer === LAYOUT_CONTAINER.SIZE_1600_PX,
+        'consonant-Wrapper--carousel': isCarouselContainer,
         'consonant-Wrapper--withLeftFilter': filterPanelEnabled && isLeftFilterPanel,
     });
 
@@ -777,12 +929,12 @@ const Container = (props) => {
                 {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions,jsx-a11y/click-events-have-key-events */}
                 <section
                     role="group"
-                    daa-lh={collectionIdentifier}
+                    daa-lh={collectionAnalytics}
                     daa-im={String(trackImpressions)}
                     onClick={handleWindowClick}
                     className={`${wrapperClass} ${themeClass}`}>
                     <div className="consonant-Wrapper-inner">
-                        {displayLeftFilterPanel && (
+                        { displayLeftFilterPanel && isStandardContainer &&
                             <div className="consonant-Wrapper-leftFilterWrapper">
                                 <LeftFilterPanel
                                     filters={filters}
@@ -796,25 +948,24 @@ const Container = (props) => {
                                     onSelectedFilterClick={handleCheckBoxChange}
                                     showMobileFilters={showMobileFilters}
                                     resQty={gridCards.length}
-                                    bookmarkComponent={(
+                                    bookmarkComponent={
                                         <Bookmarks
                                             showBookmarks={showBookmarks}
                                             onClick={handleShowBookmarksFilterClick}
                                             savedCardsCount={bookmarkedCardIds.length} />
-                                    )}
-                                    searchComponent={(
+                                    }
+                                    searchComponent={
                                         <Search
                                             placeholderText={leftPanelSearchPlaceholder}
                                             name="filtersSideSearch"
                                             value={searchQuery}
                                             autofocus={false}
                                             onSearch={handleSearchInputChange} />
-                                    )} />
+                                    } />
                             </div>
-                        )}
-                        <div className="consonant-Wrapper-collection">
-                            {
-                                isTopFilterPanel &&
+                        }
+                        <div className={`consonant-Wrapper-collection${isLoading ? ' is-loading' : ''}`}>
+                            { isTopFilterPanel && isStandardContainer &&
                                 <FiltersPanelTop
                                     filterPanelEnabled={filterPanelEnabled}
                                     filters={filters}
@@ -825,15 +976,15 @@ const Container = (props) => {
                                     onClearFilterItems={clearFilterItem}
                                     onClearAllFilters={resetFiltersSearchAndBookmarks}
                                     showLimitedFiltersQty={showLimitedFiltersQty}
-                                    searchComponent={(
+                                    searchComponent={
                                         <Search
                                             placeholderText={topPanelSearchPlaceholder}
                                             name="filtersTopSearch"
                                             value={searchQuery}
                                             autofocus={DESKTOP_SCREEN_SIZE}
                                             onSearch={handleSearchInputChange} />
-                                    )}
-                                    sortComponent={(
+                                    }
+                                    sortComponent={
                                         <Popup
                                             opened={sortOpened}
                                             id="sort"
@@ -843,10 +994,10 @@ const Container = (props) => {
                                             name="filtersTopSelect"
                                             autoWidth
                                             optionsAlignment={topPanelSortPopupLocation} />
-                                    )}
+                                    }
                                     onShowAllClick={handleShowAllTopFilters} />
                             }
-                            {isLeftFilterPanel &&
+                            { isLeftFilterPanel && isStandardContainer &&
                                 <LeftInfo
                                     enabled={filterPanelEnabled}
                                     filtersQty={filters.length}
@@ -863,7 +1014,7 @@ const Container = (props) => {
                                             autofocus={false}
                                             onSearch={handleSearchInputChange} />
                                     )}
-                                    sortComponent={(
+                                    sortComponent={
                                         <Popup
                                             opened={sortOpened}
                                             id="sort"
@@ -872,22 +1023,22 @@ const Container = (props) => {
                                             onSelect={handleSortChange}
                                             autoWidth={false}
                                             optionsAlignment="right" />
-                                    )}
+                                    }
                                     sortOptions={sortOptions} />
                             }
-                            {atLeastOneCard ?
+                            { atLeastOneCard && isStandardContainer &&
                                 <Fragment>
                                     <Grid
                                         resultsPerPage={resultsPerPage}
                                         pages={currentPage}
                                         cards={gridCards}
                                         onCardBookmark={handleCardBookmarking} />
-                                    {displayLoadMore && (
+                                    {displayLoadMore &&
                                         <LoadMore
                                             onClick={onLoadMoreClick}
                                             show={numCardsToShow}
                                             total={gridCards.length} />
-                                    )}
+                                    }
                                     {displayPaginator &&
                                         <Paginator
                                             pageCount={paginatorCount}
@@ -897,14 +1048,18 @@ const Container = (props) => {
                                             totalResults={gridCards.length}
                                             onClick={setCurrentPage} />
                                     }
-                                </Fragment> : (
-                                    isLoading && (
-                                        <Loader
-                                            size={LOADER_SIZE.BIG}
-                                            hidden={!totalCardLimit}
-                                            absolute />
-                                    )
-                                )
+                                </Fragment>}
+                            { atLeastOneCard && isCarouselContainer &&
+                                <CardsCarousel
+                                    resQty={gridCards.length}
+                                    cards={gridCards}
+                                    onCardBookmark={handleCardBookmarking} />
+                            }
+                            { isLoading && !atLeastOneCard &&
+                            <Loader
+                                size={LOADER_SIZE.BIG}
+                                hidden={!totalCardLimit}
+                                absolute />
                             }
                             {!isApiFailure && !atLeastOneCard && !isLoading &&
                                 <NoResultsView
