@@ -19,8 +19,16 @@ const TABLET_MIN_WIDTH = 768;
 
 global.fetch = jest.fn(() =>
     Promise.resolve({
+        ok: 'ok',
+        status: 200,
+        statusText: 'success',
+        url: 'test.html',
         json: () => Promise.resolve({ cards }),
     }));
+
+beforeEach(() => {
+    window.digitalData = {};
+});
 
 
 window.scrollTo = () => { };
@@ -169,4 +177,3 @@ describe('Consonant/Left Filter/Selected Filter Pills', () => {
         expect(selectedFilter).not.toBeNull();
     });
 });
-

@@ -14,6 +14,10 @@ import cards from '../../Testing/Mocks/cards.json';
 
 global.fetch = jest.fn(() =>
     Promise.resolve({
+        ok: 'ok',
+        status: 200,
+        statusText: 'success',
+        url: 'test.html',
         json: () => Promise.resolve({ cards }),
     }));
 
@@ -51,8 +55,8 @@ describe('Consonant/Container/Card Styles', () => {
         configToUse.totalCardsToShow = Number.MAX_SAFE_INTEGER;
 
         // this config render a mixed card collection
-        config.collection.cardStyle = ''; 
-        
+        config.collection.cardStyle = '';
+
         const { featuredCards } = config;
         await act(async () => render(<Container config={configToUse} />));
         const totalCards = cards.length + featuredCards.length;

@@ -15,8 +15,16 @@ import setupIntersectionObserverMock from '../../Testing/Mocks/intersectionObser
 
 global.fetch = jest.fn(() =>
     Promise.resolve({
+        ok: 'ok',
+        status: 200,
+        statusText: 'success',
+        url: 'test.html',
         json: () => Promise.resolve({ cards }),
     }));
+
+beforeEach(() => {
+    window.digitalData = {};
+});
 
 setupIntersectionObserverMock();
 

@@ -28,13 +28,21 @@ const { filterPanel: { filters } } = config;
 
 global.fetch = jest.fn(() =>
     Promise.resolve({
+        ok: 'ok',
+        status: 200,
+        statusText: 'success',
+        url: 'test.html',
         json: () => Promise.resolve({ cards }),
     }));
+
+beforeEach(() => {
+    window.digitalData = {};
+});
 
 
 /**
  * This method more than 2 filters with different ids
-  * @type {{id: string}[]}
+ * @type {{id: string}[]}
  */
 const multipleFilters = [...filters, ...filters]
     .map((item, index) => ({ ...item, id: `${item}_${index}` }));
@@ -335,4 +343,3 @@ describe('Consonant/Top Filters/Desktop', () => {
         expect(screen.queryByTestId('consonant-TopFilters-results')).not.toBeNull();
     });
 });
-

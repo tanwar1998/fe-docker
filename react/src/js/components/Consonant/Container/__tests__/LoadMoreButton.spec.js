@@ -17,8 +17,13 @@ import cards from '../../Testing/Mocks/cards.json';
 
 window.scrollTo = () => { };
 
+
 global.fetch = jest.fn(() =>
     Promise.resolve({
+        ok: 'ok',
+        status: 200,
+        statusText: 'success',
+        url: 'test.html',
         json: () => Promise.resolve({ cards }),
     }));
 
@@ -41,6 +46,7 @@ describe('Consonant/Container/Load More Button', () => {
 
     test('should be able to show all cards', async () => {
         const configToUse = config;
+        window.digitalData = {};
         config.pagination.type = 'loadMore';
         await act(async () => render(<Container config={configToUse} />));
 

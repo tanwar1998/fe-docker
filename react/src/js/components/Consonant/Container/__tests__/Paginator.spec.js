@@ -19,6 +19,10 @@ const filteredCards = cards.filter(({ appliesTo }) => Boolean(appliesTo));
 
 global.fetch = jest.fn(() =>
     Promise.resolve({
+        ok: 'ok',
+        status: 200,
+        statusText: 'success',
+        url: 'test.html',
         json: () => Promise.resolve({ cards }),
     }));
 
