@@ -4,8 +4,9 @@ import {
     useEffect,
     useState,
 } from 'react';
+import debounce from '../../@dexter/dexterui-tools/lib/utils/fp/debounce';
 
-import { debounce, qs } from './general';
+import { qs, getByPath } from './general';
 import { makeConfigGetter } from './consonant';
 import {
     ConfigContext,
@@ -159,4 +160,43 @@ export const useURLState = () => {
     }, [urlState]);
 
     return [urlState, handleSetQuery, handleClearQuery];
+};
+
+export const useRegistered = () => {
+    const [registered, setRegistered] = useState(false);
+
+    function isRegisteredForEvent() {
+        const fedsData = getByPath(window, 'feds.data', null);
+        const eventName = getByPath(fedsData, 'eventName', null);
+        const eventData = eventName && fedsData[eventName] ? fedsData[eventName] : null;
+        const isUserRegistered = eventData ? eventData.isRegistered : null;
+
+        const isRegisteredForMax = getByPath(fedsData, 'isRegisteredForMax', null);
+
+        return !!((isUserRegistered || isRegisteredForMax));
+    }
+
+    useEffect(() => {
+        if (!registered) {
+            const fedsUtilities = getByPath(window, 'feds.utilities', null);
+            const getEventData = fedsUtilities ? fedsUtilities.getEventData : null;
+            if (getEventData) {
+                getEventData()
+                    .then((response = {}) => {
+                        const { isRegistered } = response;
+                        if (isRegistered) {
+                            setRegistered(true);
+                        }
+                    })
+                    .catch(() => {
+                        const newIsRegistered = isRegisteredForEvent();
+                        if (newIsRegistered) {
+                            setRegistered(newIsRegistered);
+                        }
+                    });
+            }
+        }
+    }, [registered]);
+
+    return registered;
 };
