@@ -161,12 +161,10 @@ export const parseToPrimitive = (value) => {
         return mapObject(value, parseToPrimitive);
     } else if (Array.isArray(value)) {
         return value.map(parseToPrimitive);
-    } else if (typeof value !== 'string') {
-        return value;
     }
 
     try {
-        return JSON.parse(value);
+        return parseToPrimitive(JSON.parse(value));
     } catch (e) {
         return value;
     }
@@ -392,7 +390,7 @@ export const mergeDeep = (target, ...sources) => {
 };
 
 /**
- * methods to create/parse queryString
+ * Methods to create/parse queryString
  */
 export const qs = {
     parse: (string) => {
@@ -405,12 +403,12 @@ export const qs = {
                 if (value.length === 1) {
                     const [firstItem] = value;
 
-                    if (firstItem.includes(',')) {
-                        value = firstItem.split(',');
+                    if (firstItem.includes('|')) {
+                        value = firstItem.split('|');
                     }
                 }
 
-                accumulator[key] = value;
+                accumulator[key] = decodeURIComponent(value);
             }
 
             return accumulator;
@@ -418,18 +416,15 @@ export const qs = {
     },
     stringify: (obj, { array } = {}) => {
         const searchParams = new URLSearchParams();
-
         Object.entries(obj).forEach(([key, value]) => {
             if (Array.isArray(value)) {
                 if (array === 'comma') {
-                    searchParams.append(key, value);
+                    searchParams.append(key, encodeURIComponent(value));
                 } else {
-                    value.forEach((valueItem) => {
-                        searchParams.append(key, valueItem);
-                    });
+                    searchParams.append(key, encodeURIComponent(value.join('|')));
                 }
             } else {
-                searchParams.append(key, value);
+                searchParams.append(key, encodeURIComponent(value));
             }
         });
 
