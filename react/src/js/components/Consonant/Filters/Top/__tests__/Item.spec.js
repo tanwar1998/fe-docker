@@ -9,6 +9,7 @@ import setup from '../../../Testing/Utils/Settings';
 import {
     DEFAULT_PROPS,
     selectedAllItems,
+    ANALYTICS_ITEMS,
 } from '../../../Testing/Constants/FilterItem';
 
 const renderTopFilterItem = setup(Item, DEFAULT_PROPS);
@@ -56,5 +57,13 @@ describe('Consonant/Filters/Top/Item', () => {
 
         fireEvent.click(clearBtn);
         expect(onClearAll).toBeCalled();
+    });
+
+    test('should be able to render analytics on filter items', () => {
+        const { props: { onCheck } } = renderTopFilterItem();
+        const topFilterItems = screen.queryAllByTestId('consonant-TopFilter-item');
+        topFilterItems.forEach( (item, index) => {
+            expect(item).toHaveAttribute('daa-ll', ANALYTICS_ITEMS['itemsItem'][index]);
+        });
     });
 });

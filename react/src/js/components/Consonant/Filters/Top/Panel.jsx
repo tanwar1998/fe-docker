@@ -104,6 +104,7 @@ const FiltersPanelTop = (props) => {
     const filterGroupLabel = getConfig('filterPanel', 'i18n.topPanel.groupLabel');
     const moreFiltersBtnText = getConfig('filterPanel', 'i18n.topPanel.moreFiltersBtnText');
     const title = getConfig('collection', 'i18n.title');
+    const useLightText = getConfig('collection', 'useLightText');
 
     /**
      * Top search bar identifier
@@ -202,6 +203,16 @@ const FiltersPanelTop = (props) => {
 
     /**
      * Class name for the top filters:
+     * whether we should apply dark or light theme
+     * @type {String}
+     */
+    const topFiltersClass = classNames({
+        'consonant-TopFilters': true,
+        'consonant-TopFilters--withLightText': useLightText,
+    });
+
+    /**
+     * Class name for the top filters:
      * whether we should hide all filters after quantity defined in MAX_TRUNCATED_FILTERS constant
      * @type {String}
      */
@@ -226,10 +237,14 @@ const FiltersPanelTop = (props) => {
      */
     const shouldShowSearchBar = openExpandable === searchId;
 
+    const shouldRenderInnerWrapper = shouldDisplayFilters
+        || searchEnabled || shouldDisplaySortComponent || shouldDisplayCollectionInfo;
+
     return (
         <div
             data-testid="consonant-TopFilters"
-            className="consonant-TopFilters">
+            daa-lh="Filters"
+            className={topFiltersClass}>
             {shouldDisplaySearchBar &&
                 <div
                     data-testid="consonant-TopFilters-searchWrapper"
@@ -237,6 +252,7 @@ const FiltersPanelTop = (props) => {
                     {searchComponent}
                 </div>
             }
+            { shouldRenderInnerWrapper &&
             <div
                 className="consonant-TopFilters-inner">
                 {shouldDisplayFilters &&
@@ -331,6 +347,7 @@ const FiltersPanelTop = (props) => {
                     </div>
                 }
             </div>
+            }
         </div>
     );
 };

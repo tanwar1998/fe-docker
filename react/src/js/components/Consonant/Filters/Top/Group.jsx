@@ -190,9 +190,15 @@ const Group = (props) => {
         'is-selected': atleastOneFilterSelected && filterGroupNotOpened,
     });
 
+    /**
+     * Impression Tracking
+     */
+    const filterName = `${name} ${isOpened ? 'Close' : 'Open'}`;
+
     return (
         <div
             data-testid="consonant-TopFilter"
+            daa-lh={filterName}
             className={containerClassname}>
             <div
                 className="consonant-TopFilter-inner">

@@ -11,6 +11,7 @@ import Search from '../../../Search/Search';
 import setup from '../../../Testing/Utils/Settings';
 import { DEFAULT_PROPS as SEARCH_DEFAULT_PROPS } from '../../../Testing/Constants/Search';
 import { DEFAULT_PROPS as SELECT_DEFAULT_PROPS } from '../../../Testing/Constants/Select';
+import { ANALYTICS_ITEMS } from '../../../Testing/Constants/Panel';
 import {
     DEFAULT_PROPS,
     TABLET_MIN_WIDTH,
@@ -125,5 +126,19 @@ describe('Consonant/Filters/Top/Panel', () => {
 
         fireEvent.click(clearButtonElement);
         expect(onClearAllFilters).toBeCalled();
+    });
+
+    test('should load analytics onto the filter panel', () => {
+        const { props: { filters } } = renderTopFilterPanel({
+            filterPanelEnabled: true,
+            filters: selectedAllFilters,
+        });
+        const topFilterPanel = screen.queryByTestId('consonant-TopFilters');
+        expect(topFilterPanel).toHaveAttribute('daa-lh', 'Filters');
+
+        const topFilterItem = screen.queryAllByTestId('consonant-TopFilter');
+        topFilterItem.forEach( (filterItem, index) => {
+            expect(filterItem).toHaveAttribute('daa-lh', ANALYTICS_ITEMS[index]);
+        });
     });
 });

@@ -67,6 +67,7 @@ const Items = (props) => {
                 <li
                     key={item.id}
                     data-testid="consonant-TopFilter-item"
+                    daa-ll={item.label}
                     className="consonant-TopFilter-item">
                     {/* eslint-disable-next-line max-len */}
                     {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
