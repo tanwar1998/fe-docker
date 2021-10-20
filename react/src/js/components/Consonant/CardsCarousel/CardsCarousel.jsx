@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState, useLayoutEffect } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import slice from '../../@dexter/dexterui-tools/lib/utils/dom/slice';
@@ -47,6 +47,7 @@ function CardsCarousel({
     const showTotalResultsText = getConfig('collection', 'i18n.totalResultsText');
     const useLightText = getConfig('collection', 'useLightText');
     const isPaged = carouselAnimationStyle === ANIMATION_PAGED;
+    const windowWidth = useWindowSize();
     // Properties derived from Config Values
     /*
       Ties pageSize to layout instead of cardsPerPage, making sure pageSize
@@ -116,6 +117,26 @@ function CardsCarousel({
 
         return { adjustedPageSize, pageSizeMod };
     }
+
+
+    /**
+      * @param {Function} useWindowSize: setter for windowWidth
+      * @description - gets the width of window, currently opened.
+    */
+
+    function useWindowSize() {
+        const [size, setSize] = useState(0);
+        useLayoutEffect(() => {
+          function updateSize() {
+            setSize(window.innerWidth);
+          }
+          window.addEventListener('resize', updateSize);
+          updateSize();
+          return () => window.removeEventListener('resize', updateSize);
+        }, []);
+        return size;
+      }
+
     /**
      * @func getCurrentZero
      * @desc really the engine of the interaction meets "State" with
@@ -305,7 +326,6 @@ function CardsCarousel({
 
     useEffect(() => {
         updateControls();
-
         scroller(
             scrollElementRef.current,
             scrollValue,
@@ -313,7 +333,7 @@ function CardsCarousel({
                 duration: isPaged ? 500 : 200,
             },
         );
-    }, [scrollValue]);
+    }, [scrollValue, windowWidth]);
 
     useEffect(() => {
         if (cards.length) {
