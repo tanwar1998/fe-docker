@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -8,9 +9,9 @@ import Grid from '../Grid/Grid';
 import { RenderTotalResults } from '../Helpers/rendering';
 
 const ANIMATION_PAGED = 'paged';
-const MIN_INCREMENT = 8;
+const MIN_INCREMENT = 1;
 const NEXT_BUTTON_NAME = 'next';
-const PAGE_INCREMENT_VAL = 2;
+const PAGE_INCREMENT_VAL = 1;
 const PREV_BUTTON_NAME = 'previous';
 
 function CardsCarousel({
@@ -32,7 +33,8 @@ function CardsCarousel({
       Ties pageSize to layout instead of cardsPerPage, making sure pageSize
       does not get out of sync which causes calculation errors
     */
-    const cardsPerPage = parseInt(cardsUp, 10);
+    const cardsPerPage = 55;
+    window.cards = cards;
     const gutterSize = parseInt(cardsGridGutter, 10) * MIN_INCREMENT;
     // State Stuff
     /**
@@ -45,7 +47,7 @@ function CardsCarousel({
     */
     const [controlsStatus, setControlsStatus] = useState({
         previous: true,
-        next: true,
+        next: false,
     });
     /**
       * @typedef {Number} pages
@@ -80,6 +82,7 @@ function CardsCarousel({
     */
     const [zeroItemIndex, setZeroItemIndex] = useState(0);
     const scrollElementRef = useRef(null);
+    const nextButtonRef = useRef(null);
 
     function getCurrentPageSize(cardWidth) {
         const {
@@ -172,6 +175,7 @@ function CardsCarousel({
         };
     }
 
+    let doNotShowNextButton;
     /**
      * @func updateControls
      * @desc updates visbility of controls based on zeroItemIndex,
@@ -193,7 +197,6 @@ function CardsCarousel({
         } = zeroItemEl;
 
         let pageSizeAdjustOverFlow;
-        let doNotShowNextButton;
         /*
          This accounts for layouts which essentially fill the viewer minus the
          gutterWidth
@@ -218,10 +221,10 @@ function CardsCarousel({
                 zeroItemIndex + pageSizeAdjustOverFlow >= cards.length;
         }
 
-        setControlsStatus({
-            previous: zeroItemIndex >= 1,
-            next: !(doNotShowNextButton),
-        });
+        // setControlsStatus({
+        //     previous: zeroItemIndex >= 1,
+        //     next: !(doNotShowNextButton),
+        // });
     }
     /**
      * @func handlePositionChange
@@ -237,28 +240,48 @@ function CardsCarousel({
      pages with setPages
      scrollValue with setScrollValue
     */
+    let i = 0;
+
     function handlePositionChange({
         target: {
             name: direction = '',
         },
     } = {}) {
-        const {
-            getMorePages,
-            nextIndex,
-            nextLeftVal,
-            nextLeftEl,
-        } = getCurrentZero(direction);
+        // const {
+        //     getMorePages,
+        //     nextIndex,
+        //     nextLeftVal,
+        //     nextLeftEl,
+        // } = getCurrentZero(direction);
+        //
+        // setZeroItemEl(nextLeftEl);
+        //
+        // setZeroItemIndex(nextIndex);
+        //
+        // if (getMorePages) setPages(lastState => lastState + PAGE_INCREMENT_VAL);
+        debugger;
+        if(direction === 'next'){
+            i++;
+        } else {
+            i--;
+        }
 
-        setZeroItemEl(nextLeftEl);
+        if(i < 0){
+            i = 0;
+        }
 
-        setZeroItemIndex(nextIndex);
+        const totalCardsToShow = 3;
+        if(i < totalCardsToShow){
+            i = totalCardsToShow;
+        }
 
-        if (getMorePages) setPages(lastState => lastState + PAGE_INCREMENT_VAL);
+
+        let nextLeftVal = (376 + 32) * i;
         /*
             The 8px adjustment is a min increment and allows for hover effects
             to be visible on the outer edges of the visible area.
         */
-        setScrollValue(nextLeftVal - MIN_INCREMENT);
+        setScrollValue(nextLeftVal);
     }
 
     const carouselTitleClass = classNames({
@@ -272,6 +295,12 @@ function CardsCarousel({
     });
 
     const totalResultsHtml = RenderTotalResults(showTotalResultsText, resQty);
+
+    window.foo = {
+        scroller,
+        current: scrollElementRef.current,
+        value: scrollValue,
+    };
 
     useEffect(() => {
         updateControls();
@@ -296,7 +325,31 @@ function CardsCarousel({
             setZeroItemEl(slice(renderedCards)[0]);
             updateControls();
         }
+
     }, []);
+
+    window.addEventListener('resize', handleResize);
+
+    function handleResize() {
+        const flag = true;
+        if (flag) {
+            try {
+                debugger;
+                let lastCardPosL = scrollElementRef.current.querySelector(".consonant-CardsGrid")
+                    .lastChild
+                    .getBoundingClientRect().left;
+                let containerR = scrollElementRef.current.getBoundingClientRect().right;
+
+                if (containerR - lastCardPosL < 378 && containerR - lastCardPosL > 0) {
+                    setControlsStatus({
+                        previous: zeroItemIndex >= 1,
+                        next: true,
+                    });
+                }
+            } catch (e) {
+            }
+        }
+    }
 
     return (
         <Fragment>
@@ -312,6 +365,7 @@ function CardsCarousel({
                     type="button" />}
                 {controlsStatus.next &&
                 <button
+                    ref={nextButtonRef}
                     aria-label="Next button"
                     className="consonant-Button--next"
                     daa-ll="Next"
