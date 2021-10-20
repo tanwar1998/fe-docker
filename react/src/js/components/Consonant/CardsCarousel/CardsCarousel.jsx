@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Fragment, useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
@@ -8,10 +9,29 @@ import Grid from '../Grid/Grid';
 import { RenderTotalResults } from '../Helpers/rendering';
 
 const ANIMATION_PAGED = 'paged';
-const MIN_INCREMENT = 8;
+const MIN_INCREMENT = 20;
 const NEXT_BUTTON_NAME = 'next';
 const PAGE_INCREMENT_VAL = 2;
 const PREV_BUTTON_NAME = 'previous';
+
+const cardTypeList = [
+    {
+        type: '2up',
+        width: 584
+    },
+    {
+        type: '3up',
+        width: 378
+    },
+    {
+        type: '4up',
+        width: 276
+    },
+    {
+        type: '5up',
+        width: 228
+    },
+]
 
 function CardsCarousel({
     cards,
@@ -216,8 +236,18 @@ function CardsCarousel({
 
             doNotShowNextButton = zeroItemIndex !== 0 &&
                 zeroItemIndex + pageSizeAdjustOverFlow >= cards.length;
-        }
 
+            const cardWidth = cardTypeList.find((card)=>card.type === cardsUp);
+            if(cardWidth && cards.length < 5){
+                const totalCardWidth = (cards.length * cardWidth.width) + ((cards.length - 1) + 32 )
+                if(totalCardWidth < offsetWidth){
+                    doNotShowNextButton = true;
+                }else{
+                    doNotShowNextButton = false;
+                }
+            }
+        }
+            
         setControlsStatus({
             previous: zeroItemIndex >= 1,
             next: !(doNotShowNextButton),
